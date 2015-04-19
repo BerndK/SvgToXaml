@@ -1,8 +1,9 @@
 ﻿<Application x:Class="SvgToXaml.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:infrastructure="clr-namespace:SvgToXaml.Infrastructure"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
+        <infrastructure:InvertableBooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Application.Resources>
 </Application>

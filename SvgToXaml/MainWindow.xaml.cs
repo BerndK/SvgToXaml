@@ -18,8 +18,6 @@ using SvgToXaml.ViewModels;
 
 namespace SvgToXaml
 {
-    //todo: Png, bmp, jpg Dateien anzeigen
-	//todo: Ausgabe von Xaml für Ordner ermöglichen
 	//todo: github oder codeplex anlegen
 	//todo: Fehlerbehandlung beim Laden
 
@@ -61,7 +59,7 @@ namespace SvgToXaml
                     {
                         if (File.Exists(path))
                         {
-                            SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage(path));
+                            SvgImageViewModel.OpenDetailWindow(new SvgImageViewModel(path));
                         }
                     }
                 }

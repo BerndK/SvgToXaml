@@ -82,7 +82,12 @@ namespace SvgConverter
             return xamlClean;
         }
 
-        internal static string SvgDirToXaml(string folder, string xamlName, WpfDrawingSettings wpfDrawingSettings = null)
+        public static string SvgDirToXaml(string folder, string xamlName)
+        {
+            return SvgDirToXaml(folder, xamlName, null);
+        }
+
+        public static string SvgDirToXaml(string folder, string xamlName, WpfDrawingSettings wpfDrawingSettings)
         {
             var files = SvgFilesFromFolder(folder);
             var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings);

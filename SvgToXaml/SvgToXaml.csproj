@@ -74,13 +74,16 @@
     <Compile Include="DetailWindow.xaml.cs">
       <DependentUpon>DetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\InvertableBooleanToVisibilityConverter.cs" />
     <Compile Include="Infrastructure\HConsoleHelper.cs" />
     <Compile Include="Infrastructure\DispatcherExtensions.cs" />
     <Compile Include="Infrastructure\ObservableCollectionSafe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="TextViewer\XmlViewer.cs" />
     <Compile Include="ViewModels\BindableBase.cs" />
-    <Compile Include="ViewModels\SvgConvertedImage.cs" />
+    <Compile Include="ViewModels\GraphicImageViewModel.cs" />
+    <Compile Include="ViewModels\ImageBaseViewModel.cs" />
+    <Compile Include="ViewModels\SvgImageViewModel.cs" />
     <Compile Include="ViewModels\SvgImages.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="WrapPanel\VirtualizingWrapPanel.cs" />

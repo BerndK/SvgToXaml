@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -17,14 +18,15 @@ namespace SvgToXaml.ViewModels
     public class SvgImages : ViewModelBase
     {
         private string _currentDir;
-        private ObservableCollectionSafe<SvgConvertedImage> _images;
-        private SvgConvertedImage _selectedItem;
+        private ObservableCollectionSafe<ImageBaseViewModel> _images;
+        private ImageBaseViewModel _selectedItem;
 
         public SvgImages()
         {
-            _images = new ObservableCollectionSafe<SvgConvertedImage>();
+            _images = new ObservableCollectionSafe<ImageBaseViewModel>();
             OpenFileCommand = new DelegateCommand(OpenFileExecute);
             OpenFolderCommand = new DelegateCommand(OpenFolderExecute);
+            ExportDirCommand = new DelegateCommand(ExportDirExecute);
             InfoCommand = new DelegateCommand(InfoExecute);
 
             ContextMenuCommands = new ObservableCollection<Tuple<object, ICommand>>();
@@ -43,7 +45,19 @@ namespace SvgToXaml.ViewModels
             var openDlg = new OpenFileDialog { CheckFileExists = true, Filter = "Svg-Files|*.svg*", Multiselect = false };
             if (openDlg.ShowDialog().GetValueOrDefault())
             {
-                SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage(openDlg.FileName));
+                SvgImageViewModel.OpenDetailWindow(new SvgImageViewModel(openDlg.FileName));
+            }
+        }
+
+        private void ExportDirExecute()
+        {
+            string outFileName = CurrentDir + Path.GetFileNameWithoutExtension(CurrentDir) + ".xaml"; 
+            var saveDlg = new SaveFileDialog {AddExtension = true, DefaultExt = ".xaml", Filter = "Xaml-File|*.xaml", FileName = outFileName};
+            if (saveDlg.ShowDialog() == DialogResult.OK)
+            {
+                outFileName = saveDlg.FileName;
+                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, Path.GetFileNameWithoutExtension(outFileName)));
+                MessageBox.Show(outFileName + "\nhas been written");
             }
         }
 
@@ -61,8 +75,8 @@ namespace SvgToXaml.ViewModels
             get
             {
                 var result = new SvgImages();
-                result.Images.Add(SvgConvertedImage.DesignInstance);
-                result.Images.Add(SvgConvertedImage.DesignInstance);
+                result.Images.Add(SvgImageViewModel.DesignInstance);
+                result.Images.Add(SvgImageViewModel.DesignInstance);
                 return result;
             }
         }
@@ -77,13 +91,13 @@ namespace SvgToXaml.ViewModels
             }
         }
 
-        public SvgConvertedImage SelectedItem
+        public ImageBaseViewModel SelectedItem
         {
             get { return _selectedItem; }
             set { SetProperty(ref _selectedItem, value); }
         }
 
-        public ObservableCollectionSafe<SvgConvertedImage> Images
+        public ObservableCollectionSafe<ImageBaseViewModel> Images
         {
             get { return _images; }
             set { SetProperty(ref _images, value); }
@@ -91,6 +105,7 @@ namespace SvgToXaml.ViewModels
 
         public ICommand OpenFolderCommand { get; set; }
         public ICommand OpenFileCommand { get; set; }
+        public ICommand ExportDirCommand { get; set; }
         public ICommand InfoCommand { get; set; }
 
         public ObservableCollection<Tuple<object, ICommand>> ContextMenuCommands { get; set; }
@@ -98,13 +113,20 @@ namespace SvgToXaml.ViewModels
         private void ReadImagesFromDir(string folder)
         {
             Images.Clear();
-            var files = ConverterLogic.SvgFilesFromFolder(folder);
-            //foreach (var file in files)
-            //{
-            //    var convertedSvgData = ConverterLogic.ConvertSvg(file, ResultMode.DrawingImage);
-            //    Images.Add(new SvgConvertedImage(this, convertedSvgData));
-            //}
-            Images.AddRange(files.Select(f => new SvgConvertedImage(f)));
+            var svgFiles = ConverterLogic.SvgFilesFromFolder(folder);
+            var svgImages = svgFiles.Select(f => new SvgImageViewModel(f));
+
+            var graphicFiles = GetFilesMulti(folder, GraphicImageViewModel.SupportedFormats);
+            var graphicImages = graphicFiles.Select(f => new GraphicImageViewModel(f));
+            
+            var allImages = svgImages.Concat<ImageBaseViewModel>(graphicImages).OrderBy(e=>e.Filepath);
+            
+            Images.AddRange(allImages);
+        }
+
+        private static string[] GetFilesMulti(string sourceFolder, string filters, System.IO.SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            return filters.Split('|').SelectMany(filter => System.IO.Directory.GetFiles(sourceFolder, filter, searchOption)).ToArray();
         }
     }
 }

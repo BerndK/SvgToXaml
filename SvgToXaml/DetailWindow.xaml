@@ -8,7 +8,7 @@
         xmlns:textViewer="clr-namespace:SvgToXaml.TextViewer"
         mc:Ignorable="d" 
         Title="{Binding Filename}" Height="375" Width="300"
-        d:DataContext="{x:Static viewModels:SvgConvertedImage.DesignInstance}">
+        d:DataContext="{x:Static viewModels:SvgImageViewModel.DesignInstance}">
     <Grid>
         <TabControl TabStripPlacement="Bottom">
             <TabItem Header="View Image">
@@ -56,7 +56,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem  Header="Xaml">
+            <TabItem Header="Xaml" Visibility="{Binding HasXaml, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -71,7 +71,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Svg">
+            <TabItem Header="Svg" Visibility="{Binding HasSvg, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <textViewer:XmlViewer FontFamily="Consolas" FontSize="10pt" Text="{Binding Svg}"/>
             </TabItem>
         </TabControl>

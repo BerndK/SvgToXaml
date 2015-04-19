@@ -31,7 +31,6 @@ namespace SvgToXaml.Explorer
             set { SetValue(CurrentFolderProperty, value); }
         }
         private readonly object _dummyNode = null;
-        private ObservableCollection<Tuple<object, ICommand>> _contextMenuCommands;
 
         public FolderTree()
         {

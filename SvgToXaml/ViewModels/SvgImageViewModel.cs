@@ -14,70 +14,57 @@ using SvgConverter;
 
 namespace SvgToXaml.ViewModels
 {
-    public class SvgConvertedImage : ViewModelBase
+    public class SvgImageViewModel : ImageBaseViewModel
     {
         private ConvertedSvgData _convertedSvgData;
-        private string _filepath;
 
 
-        public SvgConvertedImage(string filepath)
+        public SvgImageViewModel(string filepath) : base(filepath)
         {
-            _filepath = filepath;
-            OpenDetailCommand = new DelegateCommand(OpenDetailExecute);
-            OpenFileCommand = new DelegateCommand(OpenFileExecute);
         }
 
-        public SvgConvertedImage(ConvertedSvgData convertedSvgData)
+        public SvgImageViewModel(ConvertedSvgData convertedSvgData)
             : this(convertedSvgData.Filepath)
         {
             _convertedSvgData = convertedSvgData;
         }
 
-        public static SvgConvertedImage DesignInstance
+        public static SvgImageViewModel DesignInstance
         {
             get
             {
                 var imageSource = new DrawingImage(new GeometryDrawing(Brushes.Black, null, new RectangleGeometry(new Rect(new Size(10, 10)), 1, 1)));
                 var data = new ConvertedSvgData { ConvertedObj = imageSource, Filepath = "FilePath", Svg = "<svg/>", Xaml = "<xaml/>" };
-                return new SvgConvertedImage(data);
+                return new SvgImageViewModel(data);
             }
         }
 
-        public string Filepath { get { return _filepath; } }
-
-        public string Filename { get { return Path.GetFileName(_filepath); } }
-
-        public ImageSource PreviewSource { get { return GetImageSource(); } }
-
-        protected virtual ImageSource GetImageSource()
+        protected override ImageSource GetImageSource()
         {
             return SvgData != null ? SvgData.ConvertedObj as ImageSource : null;
         }
 
-        public string SvgDesignInfo
+        protected override string GetSvgDesignInfo()
         {
-            get
+            if (PreviewSource != null && PreviewSource is DrawingImage)
             {
-                if (PreviewSource != null && PreviewSource is DrawingImage)
+                var di = (DrawingImage) PreviewSource;
+                if (di.Drawing is DrawingGroup)
                 {
-                    var di = (DrawingImage)PreviewSource;
-                    if (di.Drawing is DrawingGroup)
-                    {
-                        var dg = (DrawingGroup)di.Drawing;
-                        var bounds = (dg.ClipGeometry != null) ? dg.ClipGeometry.Bounds : dg.Bounds;
-                        return string.Format("{0}x{1}", bounds.Width, bounds.Height);
-                    }
+                    var dg = (DrawingGroup) di.Drawing;
+                    var bounds = (dg.ClipGeometry != null) ? dg.ClipGeometry.Bounds : dg.Bounds;
+                    return string.Format("{0}x{1}", bounds.Width, bounds.Height);
                 }
-                return null;
             }
+            return null;
         }
+
+        public override bool HasXaml { get { return true; } }
+        public override bool HasSvg { get { return true; } }
 
         public string Svg { get { return SvgData != null ? SvgData.Svg : null; } }
 
         public string Xaml { get { return SvgData != null ? SvgData.Xaml : null; } }
-
-        public ICommand OpenDetailCommand { get; set; }
-        public ICommand OpenFileCommand { get; set; }
 
 
         public ConvertedSvgData SvgData
@@ -97,21 +84,6 @@ namespace SvgToXaml.ViewModels
                 }
                 return _convertedSvgData;
             }
-        }
-
-        private void OpenDetailExecute()
-        {
-            OpenDetailWindow(this);
-        }
-
-        public static void OpenDetailWindow(SvgConvertedImage convertedImage)
-        {
-            new DetailWindow { DataContext = convertedImage }.Show();
-        }
-
-        private void OpenFileExecute()
-        {
-            Process.Start(_filepath);
         }
     }
 }
