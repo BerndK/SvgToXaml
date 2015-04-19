@@ -53,7 +53,7 @@ namespace SvgToXaml.ViewModels
                 {
                     var dg = (DrawingGroup) di.Drawing;
                     var bounds = (dg.ClipGeometry != null) ? dg.ClipGeometry.Bounds : dg.Bounds;
-                    return string.Format("{0}x{1}", bounds.Width, bounds.Height);
+                    return string.Format("{0:#.##}x{1:#.##}", bounds.Width, bounds.Height);
                 }
             }
             return null;
@@ -73,7 +73,15 @@ namespace SvgToXaml.ViewModels
             {
                 if (_convertedSvgData == null)
                 {
-                    _convertedSvgData = ConverterLogic.ConvertSvg(_filepath, ResultMode.DrawingImage);
+                    try
+                    {
+                        _convertedSvgData = ConverterLogic.ConvertSvg(_filepath, ResultMode.DrawingImage);
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+                    
                     //verzögertes Laden: ist scheiß lahm
                     //InUi(DispatcherPriority.Loaded, () =>
                     //{

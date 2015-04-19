@@ -265,21 +265,35 @@ namespace SvgConverter
             if (wpfDrawingSettings == null) //use defaults if null
                 wpfDrawingSettings = new WpfDrawingSettings { IncludeRuntime = false, TextAsGeometry = false, OptimizePath = true };
             var reader = new FileSvgReader(wpfDrawingSettings);
-            using (var stream = File.OpenRead(Path.GetFullPath(filepath)))
-            {
-                //workaround: error when Id starts with a number
-                var doc = XDocument.Load(stream);
-                ReplaceIdsWithNumbers(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
-                using (var xmlReader = doc.CreateReader())
-                {
-                    reader.Read(xmlReader);
-                    return reader.Drawing;
-                }
-            }
 
+            //this is straight forward, but in this version of the dlls there is an error when name starts with a digit
             //var uri = new Uri(Path.GetFullPath(filepath));
             //reader.Read(uri); //accessing using the filename results is problems with the uri (if the dlls are packed in ressources)
             //return reader.Drawing;
+
+            //this should be faster, but using CreateReader will loose text items like "JOG" ?!
+            //using (var stream = File.OpenRead(Path.GetFullPath(filepath)))
+            //{
+            //    //workaround: error when Id starts with a number
+            //    var doc = XDocument.Load(stream);
+            //    ReplaceIdsWithNumbers(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
+            //    using (var xmlReader = doc.CreateReader())
+            //    {
+            //        reader.Read(xmlReader);
+            //        return reader.Drawing;
+            //    }
+            //}
+
+            //workaround: error when Id starts with a number
+            var doc = XDocument.Load(Path.GetFullPath(filepath));
+            ReplaceIdsWithNumbers(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
+            using (var ms = new MemoryStream())
+            {
+                doc.Save(ms);
+                ms.Position = 0;
+                reader.Read(ms);
+                return reader.Drawing;
+            }
         }
 
         private static void ReplaceIdsWithNumbers(XElement root)
