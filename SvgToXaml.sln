@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgConverter", "SvgConverter\SvgConverter.csproj", "{D1B291FE-A21B-4C27-930D-39CC2C963E13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgConverterTest", "SvgConverterTest\SvgConverterTest.csproj", "{B4508A49-AE03-4427-980F-15FAF7B0CC8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgToXaml", "SvgToXaml\SvgToXaml.csproj", "{0CAF3717-683D-45D3-94A1-CFA4828EF67B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1B291FE-A21B-4C27-930D-39CC2C963E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B291FE-A21B-4C27-930D-39CC2C963E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B291FE-A21B-4C27-930D-39CC2C963E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B291FE-A21B-4C27-930D-39CC2C963E13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4508A49-AE03-4427-980F-15FAF7B0CC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4508A49-AE03-4427-980F-15FAF7B0CC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4508A49-AE03-4427-980F-15FAF7B0CC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4508A49-AE03-4427-980F-15FAF7B0CC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CAF3717-683D-45D3-94A1-CFA4828EF67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CAF3717-683D-45D3-94A1-CFA4828EF67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CAF3717-683D-45D3-94A1-CFA4828EF67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CAF3717-683D-45D3-94A1-CFA4828EF67B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
