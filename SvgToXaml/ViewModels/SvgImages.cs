@@ -43,7 +43,7 @@ namespace SvgToXaml.ViewModels
             var openDlg = new OpenFileDialog { CheckFileExists = true, Filter = "Svg-Files|*.svg*", Multiselect = false };
             if (openDlg.ShowDialog().GetValueOrDefault())
             {
-                SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage(this, openDlg.FileName));
+                SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage(openDlg.FileName));
             }
         }
 
@@ -104,7 +104,7 @@ namespace SvgToXaml.ViewModels
             //    var convertedSvgData = ConverterLogic.ConvertSvg(file, ResultMode.DrawingImage);
             //    Images.Add(new SvgConvertedImage(this, convertedSvgData));
             //}
-            Images.AddRange(files.Select(f => new SvgConvertedImage(this, f)));
+            Images.AddRange(files.Select(f => new SvgConvertedImage(f)));
         }
     }
 }

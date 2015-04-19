@@ -61,7 +61,7 @@ namespace SvgToXaml
                     {
                         if (File.Exists(path))
                         {
-                            SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage((DataContext as SvgImages), path));
+                            SvgConvertedImage.OpenDetailWindow(new SvgConvertedImage(path));
                         }
                     }
                 }

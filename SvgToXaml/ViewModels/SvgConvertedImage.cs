@@ -16,21 +16,19 @@ namespace SvgToXaml.ViewModels
 {
     public class SvgConvertedImage : ViewModelBase
     {
-        private readonly SvgImages _parent;
         private ConvertedSvgData _convertedSvgData;
         private string _filepath;
 
 
-        public SvgConvertedImage(SvgImages parent, string filepath)
+        public SvgConvertedImage(string filepath)
         {
-            _parent = parent;
             _filepath = filepath;
             OpenDetailCommand = new DelegateCommand(OpenDetailExecute);
             OpenFileCommand = new DelegateCommand(OpenFileExecute);
         }
 
-        public SvgConvertedImage(SvgImages parent, ConvertedSvgData convertedSvgData)
-            : this(parent, convertedSvgData.Filepath)
+        public SvgConvertedImage(ConvertedSvgData convertedSvgData)
+            : this(convertedSvgData.Filepath)
         {
             _convertedSvgData = convertedSvgData;
         }
@@ -41,7 +39,7 @@ namespace SvgToXaml.ViewModels
             {
                 var imageSource = new DrawingImage(new GeometryDrawing(Brushes.Black, null, new RectangleGeometry(new Rect(new Size(10, 10)), 1, 1)));
                 var data = new ConvertedSvgData { ConvertedObj = imageSource, Filepath = "FilePath", Svg = "<svg/>", Xaml = "<xaml/>" };
-                return new SvgConvertedImage(null, data);
+                return new SvgConvertedImage(data);
             }
         }
 
@@ -49,7 +47,12 @@ namespace SvgToXaml.ViewModels
 
         public string Filename { get { return Path.GetFileName(_filepath); } }
 
-        public ImageSource PreviewSource { get { return SvgData != null ? SvgData.ConvertedObj as ImageSource : null; } }
+        public ImageSource PreviewSource { get { return GetImageSource(); } }
+
+        protected virtual ImageSource GetImageSource()
+        {
+            return SvgData != null ? SvgData.ConvertedObj as ImageSource : null;
+        }
 
         public string SvgDesignInfo
         {
