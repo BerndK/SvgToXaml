@@ -9,7 +9,7 @@
         mc:Ignorable="d" 
         Title="SvgToXaml   © 2015 Bernd Klaiber" Height="350" Width="525"
         AllowDrop="True"
-        Drop="MainWindow_OnDropp"
+        Drop="MainWindow_OnDrop"
         Icon="icon.ico"
         d:DataContext="{x:Static viewModels:SvgImages.DesignInstance}">
     <Grid>
@@ -29,7 +29,7 @@
             <Button DockPanel.Dock="Right" Width="20" Margin="1,3" Command="{Binding OpenFolderCommand}" TabIndex="2" ToolTip="Open Folder">...</Button>
             <TextBox Margin="3" Text="{Binding CurrentDir, Mode=TwoWay}" TabIndex="1"/>
         </DockPanel>
-        <explorer:FolderTree x:Name="FolderTree" Grid.Row="1" CurrentFolder="{Binding CurrentDir, Mode=TwoWay}" TabIndex="3"></explorer:FolderTree>
+        <explorer:FolderTree x:Name="FolderTree" Grid.Row="1" CurrentFolder="{Binding CurrentDir, Mode=TwoWay}" TabIndex="3" ContextMenuCommands="{Binding ContextMenuCommands}"></explorer:FolderTree>
         <GridSplitter Grid.Column="1" Grid.Row="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" Width="3"></GridSplitter>
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -68,6 +68,16 @@
                                     <MouseBinding Gesture="LeftDoubleClick" Command="{Binding OpenDetailCommand}" />
                                 </Image.InputBindings>
                             </Image>
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <ContextMenu.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Background="{x:Static SystemColors.MenuBarBrush}"/>
+                                        </ItemsPanelTemplate>
+                                    </ContextMenu.ItemsPanel>
+                                    <MenuItem Header="Open File" Command="{Binding OpenFileCommand}" Padding="-20,2,-15,2"/>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

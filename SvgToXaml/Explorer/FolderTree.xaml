@@ -31,6 +31,25 @@
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu ItemsSource="{Binding ContextMenuCommands}">
+                                <ContextMenu.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Background="{x:Static SystemColors.MenuBarBrush}"/>
+                                    </ItemsPanelTemplate>
+                                </ContextMenu.ItemsPanel>
+                                <ContextMenu.Resources>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Header" Value="{Binding Item1}"></Setter>
+                                        <Setter Property="Command" Value="{Binding Item2}"></Setter>
+                                        <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path='Tag'}"></Setter>
+                                        <Setter Property="Padding" Value="-20,2,-15,2"></Setter>
+                                    </Style>
+                                </ContextMenu.Resources>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </TreeView.Resources>
         </TreeView>    

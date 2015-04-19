@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace SvgToXaml.ViewModels
             _parent = parent;
             _filepath = filepath;
             OpenDetailCommand = new DelegateCommand(OpenDetailExecute);
+            OpenFileCommand = new DelegateCommand(OpenFileExecute);
         }
 
         public SvgConvertedImage(SvgImages parent, ConvertedSvgData convertedSvgData)
@@ -72,6 +74,8 @@ namespace SvgToXaml.ViewModels
         public string Xaml { get { return SvgData != null ? SvgData.Xaml : null; } }
 
         public ICommand OpenDetailCommand { get; set; }
+        public ICommand OpenFileCommand { get; set; }
+
 
         public ConvertedSvgData SvgData
         {
@@ -100,6 +104,11 @@ namespace SvgToXaml.ViewModels
         public static void OpenDetailWindow(SvgConvertedImage convertedImage)
         {
             new DetailWindow { DataContext = convertedImage }.Show();
+        }
+
+        private void OpenFileExecute()
+        {
+            Process.Start(_filepath);
         }
     }
 }

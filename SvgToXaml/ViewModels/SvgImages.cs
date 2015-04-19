@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -24,6 +26,9 @@ namespace SvgToXaml.ViewModels
             OpenFileCommand = new DelegateCommand(OpenFileExecute);
             OpenFolderCommand = new DelegateCommand(OpenFolderExecute);
             InfoCommand = new DelegateCommand(InfoExecute);
+
+            ContextMenuCommands = new ObservableCollection<Tuple<object, ICommand>>();
+            ContextMenuCommands.Add(new Tuple<object, ICommand>("Open Explorer", new DelegateCommand<string>(OpenExplorerExecute))); 
         }
 
         private void OpenFolderExecute()
@@ -45,6 +50,10 @@ namespace SvgToXaml.ViewModels
         private void InfoExecute()
         {
             MessageBox.Show("SvgToXaml © 2015 Bernd Klaiber\n\nPowered by sharpvectors.codeplex.com", "Info");
+        }
+        private void OpenExplorerExecute(string path)
+        {
+            Process.Start(path);
         }
 
         public static SvgImages DesignInstance
@@ -83,6 +92,8 @@ namespace SvgToXaml.ViewModels
         public ICommand OpenFolderCommand { get; set; }
         public ICommand OpenFileCommand { get; set; }
         public ICommand InfoCommand { get; set; }
+
+        public ObservableCollection<Tuple<object, ICommand>> ContextMenuCommands { get; set; }
 
         private void ReadImagesFromDir(string folder)
         {

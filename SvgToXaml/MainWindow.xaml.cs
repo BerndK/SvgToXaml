@@ -18,8 +18,6 @@ using SvgToXaml.ViewModels;
 
 namespace SvgToXaml
 {
-    //todo: Datail Contextmenu Anwendung starten (Inkscape)
-    //todo: Baum Contextmenu Ordner öffnen
     //todo: Png, bmp, jpg Dateien anzeigen
 	//todo: Ausgabe von Xaml für Ordner ermöglichen
 	//todo: github oder codeplex anlegen
@@ -47,7 +45,7 @@ namespace SvgToXaml
             base.OnClosing(e);
         }
 
-        private void MainWindow_OnDropp(object sender, DragEventArgs e)
+        private void MainWindow_OnDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {

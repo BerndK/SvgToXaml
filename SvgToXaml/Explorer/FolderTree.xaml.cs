@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SvgToXaml.Explorer
 {
@@ -29,12 +31,22 @@ namespace SvgToXaml.Explorer
             set { SetValue(CurrentFolderProperty, value); }
         }
         private readonly object _dummyNode = null;
+        private ObservableCollection<Tuple<object, ICommand>> _contextMenuCommands;
 
         public FolderTree()
         {
             InitializeComponent();
             FillRootLevel();
             foldersTree.SelectedItemChanged += FoldersTreeOnSelectedItemChanged;
+        }
+
+        public static readonly DependencyProperty ContextMenuCommandsProperty = DependencyProperty.Register(
+            "ContextMenuCommands", typeof (ObservableCollection<Tuple<object, ICommand>>), typeof (FolderTree), new PropertyMetadata(default(ObservableCollection<Tuple<object, ICommand>>)));
+
+        public ObservableCollection<Tuple<object, ICommand>> ContextMenuCommands
+        {
+            get { return (ObservableCollection<Tuple<object, ICommand>>) GetValue(ContextMenuCommandsProperty); }
+            set { SetValue(ContextMenuCommandsProperty, value); }
         }
 
         private void FoldersTreeOnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> routedPropertyChangedEventArgs)
