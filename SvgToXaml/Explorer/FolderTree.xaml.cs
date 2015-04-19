@@ -33,7 +33,7 @@ namespace SvgToXaml.Explorer
         public FolderTree()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
+            FillRootLevel();
             foldersTree.SelectedItemChanged += FoldersTreeOnSelectedItemChanged;
         }
 
@@ -43,7 +43,7 @@ namespace SvgToXaml.Explorer
                 CurrentFolder = (string)((routedPropertyChangedEventArgs.NewValue as TreeViewItem).Tag);
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        private void FillRootLevel()
         {
             foreach (var drive in Directory.GetLogicalDrives())
             {

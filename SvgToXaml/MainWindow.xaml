@@ -75,7 +75,6 @@
             <DockPanel Grid.Row="2">
                 <Grid DockPanel.Dock="Bottom">
                     <DockPanel Grid.Row="0">
-                        <Button Click="Button_Click" DockPanel.Dock="Right" Content="Default" Margin="2,3" Visibility="Collapsed"/>
                         <Button DockPanel.Dock="Right" Width="20" Margin="1,3" Command="{Binding OpenFileCommand}" ToolTip="Open File">...</Button>
                         <TextBox IsReadOnly="True" Margin="2,3" Text="{Binding SelectedItem.Filepath, Mode=OneWay}"></TextBox>
                     </DockPanel>

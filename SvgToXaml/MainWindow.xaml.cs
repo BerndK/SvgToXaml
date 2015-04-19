@@ -18,13 +18,13 @@ using SvgToXaml.ViewModels;
 
 namespace SvgToXaml
 {
-	//todo: git anlegen
-    //todo: Baum beim Start ausklappen
     //todo: Datail Contextmenu Anwendung starten (Inkscape)
     //todo: Baum Contextmenu Ordner öffnen
     //todo: Png, bmp, jpg Dateien anzeigen
 	//todo: Ausgabe von Xaml für Ordner ermöglichen
 	//todo: github oder codeplex anlegen
+	//todo: Fehlerbehandlung beim Laden
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -37,11 +37,7 @@ namespace SvgToXaml
             (DataContext as SvgImages).CurrentDir = Settings.Default.LastDir;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.FolderTree.CurrentFolder = @"D:\Projects\Logging\Logging\LogInspector\Gui\Images\Svg";
-        }
-
+       
         protected override void OnClosing(CancelEventArgs e)
         {
             //Save current Dir for next Start
