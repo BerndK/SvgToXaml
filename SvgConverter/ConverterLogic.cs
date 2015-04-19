@@ -43,11 +43,15 @@ namespace SvgConverter
 
         public static ConvertedSvgData ConvertSvg(string filepath, ResultMode resultMode)
         {
-            string name;
-            var obj = ConvertSvgToObject(filepath, resultMode, null, out name) as DependencyObject;
-            var xaml = SvgObjectToXaml(obj, false, name);
-            var svg = File.ReadAllText(filepath);
-            return new ConvertedSvgData { ConvertedObj = obj, Filepath = filepath, Svg = svg, Xaml = xaml };
+            //Lazy Loading: all these elements are loaded if someone accesses the getter
+            //string name;
+            //var obj = ConvertSvgToObject(filepath, resultMode, null, out name) as DependencyObject;
+            //var xaml = SvgObjectToXaml(obj, false, name);
+            //var svg = File.ReadAllText(filepath);
+           
+            return new ConvertedSvgData { Filepath = filepath
+            //, ConvertedObj = obj, Svg = svg, Xaml = xaml 
+            };
         }
 
         public static object ConvertSvgToObject(string filepath, ResultMode resultMode, WpfDrawingSettings wpfDrawingSettings, out string name)
@@ -256,9 +260,33 @@ namespace SvgConverter
             if (wpfDrawingSettings == null) //use defaults if null
                 wpfDrawingSettings = new WpfDrawingSettings { IncludeRuntime = false, TextAsGeometry = false, OptimizePath = true };
             var reader = new FileSvgReader(wpfDrawingSettings);
-            var uri = new Uri(Path.GetFullPath(filepath));
-            reader.Read(uri); //accessing using the filename results is problems with the uri (if the dlls are packed in ressources)
-            return reader.Drawing;
+            using (var stream = File.OpenRead(Path.GetFullPath(filepath)))
+            {
+                //workaround: error when Id starts with a number
+                var doc = XDocument.Load(stream);
+                ReplaceIdsWithNumbers(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
+                using (var xmlReader = doc.CreateReader())
+                {
+                    reader.Read(xmlReader);
+                    return reader.Drawing;
+                }
+            }
+
+            //var uri = new Uri(Path.GetFullPath(filepath));
+            //reader.Read(uri); //accessing using the filename results is problems with the uri (if the dlls are packed in ressources)
+            //return reader.Drawing;
+        }
+
+        private static void ReplaceIdsWithNumbers(XElement root)
+        {
+            var idAttributesStartingWithDigit = root.DescendantsAndSelf()
+                .SelectMany(d=>d.Attributes())
+                .Where(a=>string.Equals(a.Name.LocalName, "Id", StringComparison.InvariantCultureIgnoreCase))
+                .Where(a=>char.IsDigit(a.Value.FirstOrDefault()));
+            foreach (var attr in idAttributesStartingWithDigit)
+            {
+                attr.Value = "_" + attr.Value;
+            }
         }
 
         internal static DrawingImage DrawingToImage(Drawing drawing)
