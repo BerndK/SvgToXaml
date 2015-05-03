@@ -32,9 +32,9 @@ namespace WpfDemoApp
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SolidColorBrush)(FindResource("JOG_BrushColor1"))).Color = Colors.SlateGray;
-            ((SolidColorBrush)(FindResource("JOG_BrushColor2"))).Color = Colors.Red;
-            ((SolidColorBrush)(FindResource("JOG_BrushColor4"))).Color = Colors.Yellow;
+            ((SolidColorBrush)(FindResource("JOGBrushColor1"))).Color = Colors.SlateGray;
+            ((SolidColorBrush)(FindResource("JOGBrushColor2"))).Color = Colors.Red;
+            ((SolidColorBrush)(FindResource("JOGBrushColor4"))).Color = Colors.Yellow;
         }
     }
 

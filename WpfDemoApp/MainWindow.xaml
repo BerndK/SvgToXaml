@@ -10,10 +10,10 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" >
-            <Image Source="{StaticResource cloud_3_icon_DrawingImage}"></Image>
+            <Image Source="{StaticResource cloud_3_iconDrawingImage}"></Image>
         </Button>
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="1">
-            <Image Source="{StaticResource JOG_DrawingImage}"/>
+            <Image Source="{StaticResource JOGDrawingImage}"/>
         </Button>
         <Button  Content="Change Base Color" Click="ChangeBaseColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
         <Button Content="Change Single Colors" Click="ChangeSingleColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Grid.Row="1"/>

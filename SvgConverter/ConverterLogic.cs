@@ -99,6 +99,7 @@ namespace SvgConverter
             foreach (var drawingGroupElement in drawingGroupElements)
             {
                 BeautifyDrawingElement(drawingGroupElement, null);
+                ExtractGeometries(drawingGroupElement);
             }
             ReplaceBrushesInDrawingGroups(doc.Root, xamlName);
             AddDrawingImagesToDrawingGroups(doc.Root);
@@ -355,7 +356,7 @@ namespace SvgConverter
             InlineClipping(drawingElement);
             RemoveCascadedDrawingGroup(drawingElement);
             CollapsePathGeometries(drawingElement);
-            SetDrawingElementxName(drawingElement, name);
+            SetDrawingElementxKey(drawingElement, name);
         }
 
         private static void InlineClipping(XElement drawingElement)
@@ -431,13 +432,40 @@ namespace SvgConverter
             }
         }
 
-        private static void SetDrawingElementxName(XElement drawingElement, string name)
+        private static void SetDrawingElementxKey(XElement drawingElement, string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 return;
             var attributes = drawingElement.Attributes().ToList();
             attributes.Insert(0, new XAttribute(nsx + "Key", name)); //place in first position
             drawingElement.ReplaceAttributes(attributes);
+        }
+
+        private static void ExtractGeometries(XElement drawingGroupElement)
+        {
+            //get Name of DrawingGroup
+            var nameDg = drawingGroupElement.Attribute(nsx + "Key").Value;
+            var name = nameDg.Replace("DrawingGroup", "");
+
+            //find this: <GeometryDrawing Brush="{DynamicResource _3d_view_icon_BrushColor}" Geometry="F1 M512,512z M0,0z M436.631,207.445L436.631,298.319z" />
+            //var geos = drawingGroupElement.XPathSelectElements(".//defns:GeometryDrawing/@defns:Geometry", _nsManager).ToList();
+            var geos = drawingGroupElement.Descendants()
+                .Where(e => e.Name.LocalName == "GeometryDrawing")
+                .SelectMany(e => e.Attributes())
+                .Where(a => a.Name.LocalName == "Geometry")
+                .ToList();
+            foreach (var geo in geos)
+            {
+                //build resourcename
+                var localName = geos.Count > 1
+                    ? string.Format("{0}Geometry{1}", name, geos.IndexOf(geo) + 1)
+                    : string.Format("{0}Geometry", name); //dont add number if only one Geometry
+                //Add this: <Geometry x:Key="cloud_3_iconGeometry">F1 M512,512z M0,0z M409.338,216.254C398.922,351.523z</Geometry>
+                drawingGroupElement.AddBeforeSelf(new XElement(nsDef+"Geometry",
+                    new XAttribute(nsx + "Key", localName),
+                    geo.Value));
+                geo.Value = string.Format("{{StaticResource {0}}}", localName);
+            }
         }
 
         public static string RemoveNamespaceDeclarations(String xml)
@@ -463,12 +491,12 @@ namespace SvgConverter
 
         internal static string BuildDrawingGroupName(string filename)
         {
-            var rawName = Path.GetFileNameWithoutExtension(filename) + "_DrawingGroup";
+            var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingGroup";
             return ValidateName(rawName);
         }
         internal static string BuildDrawingImageName(string filename)
         {
-            var rawName = Path.GetFileNameWithoutExtension(filename) + "_DrawingImage";
+            var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingImage";
             return ValidateName(rawName);
         }
         internal static string ValidateName(string name)
