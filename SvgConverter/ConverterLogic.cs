@@ -119,18 +119,38 @@ namespace SvgConverter
 
         private static void ReplaceBrushesInDrawingGroups(XElement rootElement, string xamlName)
         {
+            //three steps of colouring: 1. global Color, 2, global ColorBrush, 3. local ColorBrush
+            //<Color x:Key="ImagesColor1">#FF000000</Color>
+            //<SolidColorBrush x:Key="ImagesColorBrush1" Color="{DynamicResource ImagesColor1}" />
+            //<SolidColorBrush x:Key="JOG_BrushColor1" Color="{Binding Color, Source={StaticResource ImagesColorBrush1}}" />
+
+            var firstChar = Char.ToUpper(xamlName[0]);
+            xamlName = firstChar + xamlName.Remove(0, 1);
+
             var allBrushes = CollectBrushAttributesWithColor(rootElement)
                 .Select(a => a.Value)
                 .Distinct(StringComparer.InvariantCultureIgnoreCase) //same Color only once
-                .Select((s, i) => new { ResKey= string.Format("{0}_Color_{1}", xamlName, i + 1), Color=s}); //add numbers
-            
-            //building Elements like: <SolidColorBrush x:Key="bla" Color="#FF000000"/>
+                .Select((s, i) => new
+                {
+                    ResKey1 = string.Format("{0}Color{1}", xamlName, i + 1), 
+                    ResKey2 = string.Format("{0}ColorBrush{1}", xamlName, i + 1), 
+                    Color = s
+                }) //add numbers
+                .ToList();
+
+            //building Elements like: <SolidColorBrush x:Key="ImagesColorBrush1" Color="{DynamicResource ImagesColor1}" />
             rootElement.AddFirst(allBrushes
                 .Select(brush => new XElement(nsDef + "SolidColorBrush", 
-                    new XAttribute(nsx + "Key", brush.ResKey), 
-                    new XAttribute("Color", brush.Color) )));
+                    new XAttribute(nsx + "Key", brush.ResKey2),
+                    new XAttribute("Color", string.Format("{{DynamicResource {0}}}", brush.ResKey1)))));
 
-            var colorKeys = allBrushes.ToDictionary(brush => brush.Color, brush => brush.ResKey);
+            //building Elements like: <Color x:Key="ImagesColor1">#FF000000</Color>
+            rootElement.AddFirst(allBrushes
+                .Select(brush => new XElement(nsDef + "Color", 
+                    new XAttribute(nsx + "Key", brush.ResKey1),
+                    brush.Color)));
+
+            var colorKeys = allBrushes.ToDictionary(brush => brush.Color, brush => brush.ResKey2);
 
             var drawingGroups = rootElement.Elements(nsDef + "DrawingGroup").ToList();
             foreach (var node in drawingGroups)
@@ -150,12 +170,12 @@ namespace SvgConverter
                         
                         //build resourcename
                         var localName = brushAttributes.Count > 1
-                            ? string.Format("{0}_Color_{1}", nameBrushBase, brushAttributes.IndexOf(brushAttribute) + 1)
-                            : string.Format("{0}_Color", nameBrushBase); //dont add number if only one color
+                            ? string.Format("{0}Color{1}", nameBrushBase, brushAttributes.IndexOf(brushAttribute) + 1)
+                            : string.Format("{0}Color", nameBrushBase); //dont add number if only one color
                         node.AddBeforeSelf(new XElement(nsDef + "SolidColorBrush", 
                             new XAttribute(nsx + "Key", localName), 
-                            new XAttribute("Color", "{DynamicResource="+resKey+"}") ));
-                        brushAttribute.Value = "{DynamicResource=" + localName + "}";
+                            new XAttribute("Color", string.Format("{{Binding Color, Source={{StaticResource {0}}}}}", resKey)) ));
+                        brushAttribute.Value = "{DynamicResource " + localName + "}";
                     }
                 }
             }

@@ -20,12 +20,12 @@ namespace SvgConverter
 {
     public class IconResBuilder : SimpleBaseTarget
     {
-        [ArgumentCommand(LongDesc = "Creates the output-file for the translator")]
+        [ArgumentCommand(LongDesc = "Creates a ResourceDictionary with the svg-Images of a folder")]
         public int BuildDict(
             [ArgumentParam(Aliases = "i", Desc = "dir to the SVGs", LongDesc = "specify folder of the graphic files to process")]
             string inputdir,
             [ArgumentParam(Aliases = "o", LongDesc = "Name for the xaml outputfile")]
-            string outname,
+            string outputname,
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "folder for the xaml-Output, optional, default: folder of svgs")]
             string outputdir = null,
             [ArgumentParam(LongDesc = "Builds a htmlfile to browse the svgs, optional, default true")]
@@ -35,19 +35,19 @@ namespace SvgConverter
 
             string outFileName;
             if (outputdir != null)
-                outFileName = Path.Combine(outputdir, outname);
+                outFileName = Path.Combine(outputdir, outputname);
             else
-                outFileName = Path.Combine(inputdir, outname);
+                outFileName = Path.Combine(inputdir, outputname);
             if (!Path.HasExtension(outFileName))
                 outFileName = Path.ChangeExtension(outFileName, ".xaml");
 
-            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, Path.GetFileNameWithoutExtension(outname)));
+            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, Path.GetFileNameWithoutExtension(outputname)));
             Console.WriteLine("xaml written to: {0}", outFileName);
 
             if (buildhtmlfile)
             {
                 var htmlFilePath = System.IO.Path.Combine(inputdir,
-                    System.IO.Path.GetFileNameWithoutExtension(outname));
+                    System.IO.Path.GetFileNameWithoutExtension(outputname));
                 var files = ConverterLogic.SvgFilesFromFolder(inputdir);
                 BuildHtmlBrowseFile(files, htmlFilePath);
             }
