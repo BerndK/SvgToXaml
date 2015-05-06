@@ -15,13 +15,13 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace SvgToXaml.ViewModels
 {
-    public class SvgImages : ViewModelBase
+    public class SvgImagesViewModel : ViewModelBase
     {
         private string _currentDir;
         private ObservableCollectionSafe<ImageBaseViewModel> _images;
         private ImageBaseViewModel _selectedItem;
 
-        public SvgImages()
+        public SvgImagesViewModel()
         {
             _images = new ObservableCollectionSafe<ImageBaseViewModel>();
             OpenFileCommand = new DelegateCommand(OpenFileExecute);
@@ -51,7 +51,7 @@ namespace SvgToXaml.ViewModels
 
         private void ExportDirExecute()
         {
-            string outFileName = CurrentDir + Path.GetFileNameWithoutExtension(CurrentDir) + ".xaml"; 
+            string outFileName = Path.Combine(CurrentDir, Path.GetFileNameWithoutExtension(CurrentDir) + ".xaml"); 
             var saveDlg = new SaveFileDialog {AddExtension = true, DefaultExt = ".xaml", Filter = "Xaml-File|*.xaml", FileName = outFileName};
             if (saveDlg.ShowDialog() == DialogResult.OK)
             {
@@ -70,11 +70,11 @@ namespace SvgToXaml.ViewModels
             Process.Start(path);
         }
 
-        public static SvgImages DesignInstance
+        public static SvgImagesViewModel DesignInstance
         {
             get
             {
-                var result = new SvgImages();
+                var result = new SvgImagesViewModel();
                 result.Images.Add(SvgImageViewModel.DesignInstance);
                 result.Images.Add(SvgImageViewModel.DesignInstance);
                 return result;

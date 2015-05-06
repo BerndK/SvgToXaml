@@ -84,7 +84,7 @@
     <Compile Include="ViewModels\GraphicImageViewModel.cs" />
     <Compile Include="ViewModels\ImageBaseViewModel.cs" />
     <Compile Include="ViewModels\SvgImageViewModel.cs" />
-    <Compile Include="ViewModels\SvgImages.cs" />
+    <Compile Include="ViewModels\SvgImagesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="WrapPanel\VirtualizingWrapPanel.cs" />
     <Page Include="DetailWindow.xaml">

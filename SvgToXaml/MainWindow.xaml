@@ -11,7 +11,7 @@
         AllowDrop="True"
         Drop="MainWindow_OnDrop"
         Icon="icon.ico"
-        d:DataContext="{x:Static viewModels:SvgImages.DesignInstance}">
+        d:DataContext="{x:Static viewModels:SvgImagesViewModel.DesignInstance}">
     <Window.Resources>
         <DrawingImage x:Key="SaveDrawingImage">
             <DrawingImage.Drawing>

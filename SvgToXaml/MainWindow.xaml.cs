@@ -29,15 +29,15 @@ namespace SvgToXaml
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new SvgImages();
-            (DataContext as SvgImages).CurrentDir = Settings.Default.LastDir;
+            DataContext = new SvgImagesViewModel();
+            (DataContext as SvgImagesViewModel).CurrentDir = Settings.Default.LastDir;
         }
 
        
         protected override void OnClosing(CancelEventArgs e)
         {
             //Save current Dir for next Start
-            Settings.Default.LastDir = (DataContext as SvgImages).CurrentDir;
+            Settings.Default.LastDir = (DataContext as SvgImagesViewModel).CurrentDir;
             Settings.Default.Save();
 
             base.OnClosing(e);
@@ -53,7 +53,7 @@ namespace SvgToXaml
                 {
                     if (Directory.Exists(path))
                     {
-                        (DataContext as SvgImages).CurrentDir = path;
+                        (DataContext as SvgImagesViewModel).CurrentDir = path;
                     }
                     else
                     {
