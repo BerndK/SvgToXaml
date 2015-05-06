@@ -12,7 +12,6 @@ namespace SvgConverterTest
     public class ConverterTests
     {
         [TestCase("..\\..\\TestFiles\\cloud-3-icon.svg")]
-        [TestCase("..\\..\\TestFiles\\cloud-4-icon.svg")]
         [TestCase("..\\..\\TestFiles\\3d-view-icon.svg")]
         [TestCase("..\\..\\TestFiles\\JOG.svg")]
         public void ConvertFileToDrawingGroup(string filename)
@@ -29,7 +28,6 @@ namespace SvgConverterTest
         }
 
         [TestCase("..\\..\\TestFiles\\cloud-3-icon.svg")]
-        [TestCase("..\\..\\TestFiles\\cloud-4-icon.svg")]
         [TestCase("..\\..\\TestFiles\\3d-view-icon.svg")]
         [TestCase("..\\..\\TestFiles\\JOG.svg")]
         public void ConvertFileToDrawingImage(string filename)
