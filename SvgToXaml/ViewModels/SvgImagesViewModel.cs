@@ -126,7 +126,16 @@ namespace SvgToXaml.ViewModels
 
         private static string[] GetFilesMulti(string sourceFolder, string filters, System.IO.SearchOption searchOption = SearchOption.TopDirectoryOnly)
         {
-            return filters.Split('|').SelectMany(filter => System.IO.Directory.GetFiles(sourceFolder, filter, searchOption)).ToArray();
+            try
+            {
+                if (!Directory.Exists(sourceFolder))
+                    return new string[0];
+                return filters.Split('|').SelectMany(filter => Directory.GetFiles(sourceFolder, filter, searchOption)).ToArray();
+            }
+            catch (Exception)
+            {
+                return new string[0];
+            }
         }
     }
 }
