@@ -6,6 +6,7 @@ Convert svg-file to xaml
 Batch conversion of many svg-files
 # View
 Just start SvgToXaml and drag a folder into the view, this folder will open and you'll see a list of all the svgs located in that folder. Sure there is a button to open also a "open folder" dialog. Double click a icon see the detail view.
+
 ![Main View](/Doc/MainView.PNG)
 
 Just drag a file into the view and the detail view will open.
