@@ -26,26 +26,15 @@ namespace WpfDemoApp
 
         private void ChangeBaseColor_OnClick(object sender, RoutedEventArgs e)
         {
-            var baseColor = (SolidColorBrush)FindResource("ImagesColorBrush1");
+            var baseColor = (SolidColorBrush) FindResource("ImagesColorBrush1");
             baseColor.Color = Colors.Brown;
         }
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SolidColorBrush)(FindResource("JOGBrushColor1"))).Color = Colors.SlateGray;
-            ((SolidColorBrush)(FindResource("JOGBrushColor2"))).Color = Colors.Red;
-            ((SolidColorBrush)(FindResource("JOGBrushColor4"))).Color = Colors.Yellow;
-        }
-    }
-
-    public static class ColorHelper
-    {
-        public static void SetFromColor(this Color destColor, Color sourceColor)
-        {
-            destColor.R = sourceColor.R;
-            destColor.G = sourceColor.G;
-            destColor.B = sourceColor.B;
-            destColor.A = sourceColor.A;
+            ((SolidColorBrush) (FindResource("JOGBrushColor1"))).Color = Colors.SlateGray;
+            ((SolidColorBrush) (FindResource("JOGBrushColor4"))).Color = Colors.Red;
+            ((SolidColorBrush) (FindResource("JOGBrushColor2"))).Color = Colors.Yellow;
         }
     }
 }
