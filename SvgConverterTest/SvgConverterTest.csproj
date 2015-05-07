@@ -98,7 +98,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommandLineTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConverterTests.cs" />
   </ItemGroup>

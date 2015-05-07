@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using FluentAssertions;
 using NUnit.Framework;
 using SharpVectors.Converters;
 using SharpVectors.Renderers.Wpf;
@@ -20,11 +22,25 @@ namespace SvgConverterTest
             {
                 IncludeRuntime = false,
                 TextAsGeometry = false,
-                //WriteAsRoot = false,
                 OptimizePath = true,
             };
             var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup , settings);
             Console.WriteLine(xaml);
+        }
+
+        [Test]
+        public void ConvertFileToDrawingGroup2()
+        {
+            var settings = new WpfDrawingSettings
+            {
+                IncludeRuntime = false,
+                TextAsGeometry = false,
+                OptimizePath = true,
+            };
+            var xaml = ConverterLogic.SvgFileToXaml("..\\..\\TestFiles\\3d-view-icon.svg", ResultMode.DrawingGroup , settings);
+            Console.WriteLine(xaml);
+            string expected = File.ReadAllText("..\\..\\TestFiles\\3d-view-icon_expected.txt");
+            xaml.Should().Be(expected);
         }
 
         [TestCase("..\\..\\TestFiles\\cloud-3-icon.svg")]
@@ -36,7 +52,6 @@ namespace SvgConverterTest
             {
                 IncludeRuntime = false,
                 TextAsGeometry = false,
-                //WriteAsRoot = false,
                 OptimizePath = true,
             };
             var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingImage , settings);
@@ -51,7 +66,6 @@ namespace SvgConverterTest
             {
                 IncludeRuntime = true,
                 TextAsGeometry = false,
-                //WriteAsRoot = false,
                 OptimizePath = true,
             };
             var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup, settings);
@@ -65,7 +79,6 @@ namespace SvgConverterTest
             {
                 IncludeRuntime = false,
                 TextAsGeometry = false,
-                //WriteAsRoot = false,
                 OptimizePath = true,
             };
             var xaml = ConverterLogic.SvgDirToXaml("..\\..\\TestFiles\\", "Test", settings);
@@ -80,65 +93,35 @@ namespace SvgConverterTest
         }
 
         [Test, STAThread]
-        public void Handwheel() //n.i.O
+        public void Handwheel() //Full integrated with all optimizations
         {
-            var settings = new WpfDrawingSettings
-            {
-                //IncludeRuntime = false,
-                //TextAsGeometry = false,
-                //WriteAsRoot = false,
-                //OptimizePath = true,
-            };
-
-            var xaml = ConverterLogic.SvgFileToXaml("..\\..\\TestFiles\\Handwheel.svg", ResultMode.DrawingGroup, settings);
+            var xaml = ConverterLogic.SvgFileToXaml("..\\..\\TestFiles\\Handwheel.svg", ResultMode.DrawingGroup, null);
             Console.WriteLine(xaml);
             Clipboard.SetText(xaml);
         }
         [Test, STAThread]
-        public void Handwheel1() //i.O
+        public void Handwheel1() //pure svg# without any modifications
         {
-            var settings = new WpfDrawingSettings
-            {
-                //IncludeRuntime = false,
-                //TextAsGeometry = false,
-                //WriteAsRoot = false,
-                //OptimizePath = true,
-            };
-            var fileReader = new FileSvgReader(settings);
+            var fileReader = new FileSvgReader(null);
             DrawingGroup drawing = fileReader.Read("..\\..\\TestFiles\\Handwheel.svg");
-            XmlXamlWriter writer = new XmlXamlWriter(settings);
+            XmlXamlWriter writer = new XmlXamlWriter(null);
             var xaml = writer.Save(drawing);
             Console.WriteLine(xaml);
             Clipboard.SetText(xaml);
         }
         [Test, STAThread]
-        public void Handwheel2() //i.O.
+        public void Handwheel2() //integrated conversion, manual writing
         {
-            var settings = new WpfDrawingSettings
-            {
-                //IncludeRuntime = false,
-                //TextAsGeometry = false,
-                //WriteAsRoot = false,
-                //OptimizePath = true,
-            };
-            var drawing = SvgConverter.ConverterLogic.SvgFileToWpfObject("..\\..\\TestFiles\\Handwheel.svg", settings);
-            XmlXamlWriter writer = new XmlXamlWriter(settings);
+            var drawing = SvgConverter.ConverterLogic.SvgFileToWpfObject("..\\..\\TestFiles\\Handwheel.svg", null);
+            XmlXamlWriter writer = new XmlXamlWriter(null);
             var xaml = writer.Save(drawing);
             Console.WriteLine(xaml);
             Clipboard.SetText(xaml);
         }
         [Test, STAThread]
-        public void Handwheel3() //i.O.
+        public void Handwheel3() //integrated conversion, integrated writing
         {
-            var settings = new WpfDrawingSettings
-            {
-                //IncludeRuntime = false,
-                //TextAsGeometry = false,
-                //WriteAsRoot = false,
-                //OptimizePath = true,
-            };
-            var drawing = ConverterLogic.SvgFileToWpfObject("..\\..\\TestFiles\\Handwheel.svg", settings);
-
+            var drawing = ConverterLogic.SvgFileToWpfObject("..\\..\\TestFiles\\Handwheel.svg", null);
             var xaml = ConverterLogic.SvgObjectToXaml(drawing, true, "Test");
             Console.WriteLine(xaml);
             Clipboard.SetText(xaml);

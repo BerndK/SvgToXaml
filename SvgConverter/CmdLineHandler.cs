@@ -8,10 +8,10 @@ namespace SvgConverter
 {
     public static class CmdLineHandler
     {
-        public static void HandleCommandLine(string arg)
+        public static int HandleCommandLine(string arg)
         {
-            string[] args = arg != null ? arg.Split(' ') : null;
-            HandleCommandLine(args);
+            string[] args = arg != null ? arg.Split(' ') : new string[0];
+            return HandleCommandLine(args);
         }
         public static int HandleCommandLine(string[] args)
         {
@@ -20,7 +20,6 @@ namespace SvgConverter
             clp.Target = new IconResBuilder();
             clp.Header = "SvgToXaml - Tool to convert SVGs to a Dictionary\r\n(c) 2015 Bernd Klaiber";
             clp.LogErrorsToConsole = true;
-
             try
             {
                 return clp.ParseArgs(args, true);

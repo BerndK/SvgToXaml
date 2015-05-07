@@ -63,7 +63,7 @@ namespace SvgToXaml.ViewModels
 
         private void InfoExecute()
         {
-            MessageBox.Show("SvgToXaml © 2015 Bernd Klaiber\n\nPowered by sharpvectors.codeplex.com", "Info");
+            MessageBox.Show("SvgToXaml © 2015 Bernd Klaiber\n\nPowered by\nsharpvectors.codeplex.com (Svg-Support),\nicsharpcode (AvalonEdit)", "Info");
         }
         private void OpenExplorerExecute(string path)
         {

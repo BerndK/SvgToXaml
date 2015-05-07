@@ -1,5 +1,5 @@
 # SvgToXaml
-Smart Tool to view svg-files and convert them to xaml for use in .NET
+Smart tool to view svg-files and convert them to xaml for use in .NET
 There are 3 major use cases:
 View many svg-files, examine single files closer (see additional Info, svg sources, xaml code)
 Convert svg-file to xaml
@@ -14,12 +14,12 @@ Just drag a file into the view and the detail view will open.
 ![Detail View](/Doc/DetailView.PNG)
 
 # Convert
-You can open the detail view by dobleclicking an icon. Here you can inspect the icon closer and can also see the converted xaml-code.
+You can open the detail view by double-clicking an icon. Here you can inspect the icon closer and can also see the converted xaml-code.
 
 ![Detail View Xaml](/Doc/DetailViewXaml.PNG)
 # Batch conversion
-The idea is that you collect som svgs and want to use them in your .net app. So just put them in a folder and use SvgToXaml to batch convert them into one xaml-file.
-The SvgToXaml exe file is designed as a "hybrid" app. Just call it without params and it will start as a WPF App, when you specify params, it will change to a console app. Provide "/?" to see the help, there is only one command rigth now: "BuildDict"
+The idea is that you collect some svgs and want to use them in your .net app. So just put them in a folder and use SvgToXaml to batch convert them into one xaml-file.
+The SvgToXaml exe file is designed as a "hybrid" app. Just call it without params and it will start as a WPF app, when you specify params, it will change to a console app. Provide "/?" to see the help, there is only one command rigth now: "BuildDict"
 ```
 >SvgToXaml.exe /? BuildDict
 SvgToXaml - Tool to convert SVGs to a Dictionary
@@ -42,5 +42,5 @@ That's it, after that, include the file "images.xaml" into your app, merge it in
 </Button>
 ```
 after adding more new icons, just run the command again and the new icons will appear in the updated xaml-file.
-For each Icon the colors, paths, drawingimage are created (with keys) so you can use them as you like.
-You can change the color of all icons at once (like theming your app) or you can change all the color of the icons seperately (see the sample App included in the sources).
+For each Icon the colors, paths, a drawingimage are created (with resource-keys) so you can use them as you like.
+You can change the color of all icons at once (like theming your app) or you can change all the color of the icons separately (see the sample app included in the sources).
