@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using LocalizationControl.Command;
@@ -51,13 +52,42 @@ namespace SvgToXaml.ViewModels
 
         private void ExportDirExecute()
         {
-            string outFileName = Path.Combine(CurrentDir, Path.GetFileNameWithoutExtension(CurrentDir) + ".xaml"); 
-            var saveDlg = new SaveFileDialog {AddExtension = true, DefaultExt = ".xaml", Filter = "Xaml-File|*.xaml", FileName = outFileName};
+            string outFileName = Path.GetFileNameWithoutExtension(CurrentDir) + ".xaml"; 
+            var saveDlg = new SaveFileDialog {AddExtension = true, DefaultExt = ".xaml", Filter = "Xaml-File|*.xaml", InitialDirectory = CurrentDir, FileName = outFileName};
             if (saveDlg.ShowDialog() == DialogResult.OK)
             {
-                outFileName = saveDlg.FileName;
-                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, Path.GetFileNameWithoutExtension(outFileName)));
-                MessageBox.Show(outFileName + "\nhas been written");
+                var namePrefix = Microsoft.VisualBasic.Interaction.InputBox("Enter a namePrefix (or leave empty to not use it)", "Name Prefix");
+                if (string.IsNullOrWhiteSpace(namePrefix))
+                    namePrefix = null;
+                outFileName = Path.GetFullPath(saveDlg.FileName);
+                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, Path.GetFileNameWithoutExtension(outFileName), namePrefix));
+                if (MessageBox.Show(outFileName + "\nhas been written\nCreate a BatchFile to automate next time?", 
+                    null, MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                {
+                    var outputname = Path.GetFileNameWithoutExtension(outFileName);
+                    var outputdir = Path.GetDirectoryName(outFileName);
+                    var batchText = string.Format("SvgToXaml BuildDict /inputdir \"{0}\" /outputdir \"{1}\" /outputname {2}", CurrentDir, outputdir, outputname);
+
+                    if (!string.IsNullOrWhiteSpace(namePrefix))
+                    {
+                        batchText += " /nameprefix \"" + namePrefix + "\"";
+                    }
+
+                    batchText += "\r\npause";
+
+                    File.WriteAllText(Path.Combine(CurrentDir, "Update.cmd"), batchText);
+
+                    //Copy ExeFile
+                    var srcFile = Environment.GetCommandLineArgs().First();
+                    var destFile = Path.Combine(CurrentDir, Path.GetFileName(srcFile));
+                    Console.WriteLine("srcFile:", srcFile);
+                    Console.WriteLine("destFile:", destFile);
+                    if (!string.Equals(srcFile, destFile, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("Copying file...");
+                        File.Copy(srcFile, destFile, true);
+                    }
+                }
             }
         }
 

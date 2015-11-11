@@ -21,6 +21,8 @@ namespace SvgConverter
     }
     public static class ConverterLogic
     {
+        private const char C_PrefixSeparator = '_';
+
         static ConverterLogic()
         {
             //bringt leider nix? _nsManager.AddNamespace("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
@@ -32,12 +34,10 @@ namespace SvgConverter
         internal static XNamespace nsDef = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         internal static XmlNamespaceManager _nsManager = new XmlNamespaceManager(new NameTable());
 
-        public static string SvgFileToXaml(string filepath,
-            ResultMode resultMode,
-            WpfDrawingSettings wpfDrawingSettings = null)
+        public static string SvgFileToXaml(string filepath, ResultMode resultMode, string namePrefix, WpfDrawingSettings wpfDrawingSettings = null)
         {
             string name;
-            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out name);
+            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out name, namePrefix);
             return SvgObjectToXaml(obj, wpfDrawingSettings != null ? wpfDrawingSettings.IncludeRuntime : false, name);
         }
 
@@ -54,16 +54,16 @@ namespace SvgConverter
             };
         }
 
-        public static object ConvertSvgToObject(string filepath, ResultMode resultMode, WpfDrawingSettings wpfDrawingSettings, out string name)
+        public static object ConvertSvgToObject(string filepath, ResultMode resultMode, WpfDrawingSettings wpfDrawingSettings, out string name, string namePrefix)
         {
             var dg = ConvertFileToDrawingGroup(filepath, wpfDrawingSettings);
             switch (resultMode)
             {
                 case ResultMode.DrawingGroup:
-                    name = BuildDrawingGroupName(filepath);
+                    name = BuildDrawingGroupName(filepath, namePrefix);
                     return dg;
                 case ResultMode.DrawingImage:
-                    name = BuildDrawingImageName(filepath);
+                    name = BuildDrawingImageName(filepath, namePrefix);
                     return DrawingToImage(dg);
                 default:
                     throw new ArgumentOutOfRangeException("resultMode");
@@ -82,15 +82,15 @@ namespace SvgConverter
             return xamlClean;
         }
 
-        public static string SvgDirToXaml(string folder, string xamlName)
+        public static string SvgDirToXaml(string folder, string xamlName, string namePrefix)
         {
-            return SvgDirToXaml(folder, xamlName, null);
+            return SvgDirToXaml(folder, xamlName, namePrefix, null);
         }
 
-        public static string SvgDirToXaml(string folder, string xamlName, WpfDrawingSettings wpfDrawingSettings)
+        public static string SvgDirToXaml(string folder, string xamlName, string namePrefix, WpfDrawingSettings wpfDrawingSettings)
         {
             var files = SvgFilesFromFolder(folder);
-            var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings);
+            var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings, namePrefix);
             var xamlUntidy = WpfObjToXaml(dict, wpfDrawingSettings != null ? wpfDrawingSettings.IncludeRuntime : false);
 
             var doc = XDocument.Parse(xamlUntidy);
@@ -99,9 +99,9 @@ namespace SvgConverter
             foreach (var drawingGroupElement in drawingGroupElements)
             {
                 BeautifyDrawingElement(drawingGroupElement, null);
-                ExtractGeometries(drawingGroupElement);
+                ExtractGeometries(drawingGroupElement, namePrefix);
             }
-            ReplaceBrushesInDrawingGroups(doc.Root, xamlName);
+            ReplaceBrushesInDrawingGroups(doc.Root, xamlName, namePrefix);
             AddDrawingImagesToDrawingGroups(doc.Root);
             return doc.ToString();
         }
@@ -118,7 +118,7 @@ namespace SvgConverter
             }
         }
 
-        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, string xamlName)
+        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, string xamlName, string namePrefix)
         {
             //three steps of colouring: 1. global Color, 2, global ColorBrush, 3. local ColorBrush
             //<Color x:Key="ImagesColor1">#FF000000</Color>
@@ -133,8 +133,8 @@ namespace SvgConverter
                 .Distinct(StringComparer.InvariantCultureIgnoreCase) //same Color only once
                 .Select((s, i) => new
                 {
-                    ResKey1 = string.Format("{0}Color{1}", xamlName, i + 1), 
-                    ResKey2 = string.Format("{0}ColorBrush{1}", xamlName, i + 1), 
+                    ResKey1 = BuildColorName(i+1, namePrefix??xamlName), 
+                    ResKey2 = BuildColorBrushName(i + 1, namePrefix ?? xamlName), 
                     Color = s
                 }) //add numbers
                 .ToList();
@@ -207,13 +207,13 @@ namespace SvgConverter
             }
         }
 
-        internal static ResourceDictionary ConvertFilesToResourceDictionary(IEnumerable<string> files, WpfDrawingSettings wpfDrawingSettings)
+        internal static ResourceDictionary ConvertFilesToResourceDictionary(IEnumerable<string> files, WpfDrawingSettings wpfDrawingSettings, string namePrefix)
         {
             var dict = new ResourceDictionary();
             foreach (var file in files)
             {
                 var drawingGroup = ConvertFileToDrawingGroup(file, wpfDrawingSettings);
-                var keyDg = BuildDrawingGroupName(file);
+                var keyDg = BuildDrawingGroupName(file, namePrefix);
                 dict[keyDg] = drawingGroup;
             }
             return dict;
@@ -441,11 +441,12 @@ namespace SvgConverter
             drawingElement.ReplaceAttributes(attributes);
         }
 
-        private static void ExtractGeometries(XElement drawingGroupElement)
+        private static void ExtractGeometries(XElement drawingGroupElement, string namePrefix)
         {
             //get Name of DrawingGroup
             var nameDg = drawingGroupElement.Attribute(nsx + "Key").Value;
             var name = nameDg.Replace("DrawingGroup", "");
+            name = RemoveNamePrefix(name, namePrefix);
 
             //find this: <GeometryDrawing Brush="{DynamicResource _3d_view_icon_BrushColor}" Geometry="F1 M512,512z M0,0z M436.631,207.445L436.631,298.319z" />
             //var geos = drawingGroupElement.XPathSelectElements(".//defns:GeometryDrawing/@defns:Geometry", _nsManager).ToList();
@@ -457,9 +458,10 @@ namespace SvgConverter
             foreach (var geo in geos)
             {
                 //build resourcename
-                var localName = geos.Count > 1
-                    ? string.Format("{0}Geometry{1}", name, geos.IndexOf(geo) + 1)
-                    : string.Format("{0}Geometry", name); //dont add number if only one Geometry
+                int? no = geos.Count > 1
+                    ? geos.IndexOf(geo) + 1
+                    : (int?)null;
+                var localName = BuildGeometryName(name, no, namePrefix);
                 //Add this: <Geometry x:Key="cloud_3_iconGeometry">F1 M512,512z M0,0z M409.338,216.254C398.922,351.523z</Geometry>
                 drawingGroupElement.AddBeforeSelf(new XElement(nsDef+"Geometry",
                     new XAttribute(nsx + "Key", localName),
@@ -468,7 +470,7 @@ namespace SvgConverter
             }
         }
 
-        public static string RemoveNamespaceDeclarations(String xml)
+        public static string RemoveNamespaceDeclarations(string xml)
         {
             //hier wird nur die Deklaration des NS rausgeschmissen (rein auf StringBasis), so dass man den Kram pasten kann
             xml = xml.Replace(" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"", "");
@@ -489,16 +491,58 @@ namespace SvgConverter
             }
         }
 
-        internal static string BuildDrawingGroupName(string filename)
+        internal static string BuildDrawingGroupName(string filename, string namePrefix)
         {
             var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingGroup";
+            rawName = AddNamePrefix(rawName, namePrefix);
             return ValidateName(rawName);
         }
-        internal static string BuildDrawingImageName(string filename)
+        internal static string BuildDrawingImageName(string filename, string namePrefix)
         {
             var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingImage";
+            rawName = AddNamePrefix(rawName, namePrefix);
             return ValidateName(rawName);
         }
+
+        internal static string BuildGeometryName(string name, int? no, string namePrefix)
+        {
+            var rawName = no.HasValue
+                ? string.Format("{0}Geometry{1}", name, no.Value)
+                : string.Format("{0}Geometry", name); //dont add number if only one Geometry
+            rawName = AddNamePrefix(rawName, namePrefix);
+            return ValidateName(rawName);
+        }
+
+        internal static string BuildColorName(int no, string namePrefix)
+        {
+            var rawName = string.Format("Color{0}", no);
+            rawName = AddNamePrefix(rawName, namePrefix);
+            return ValidateName(rawName);
+        }
+        internal static string BuildColorBrushName(int no, string namePrefix)
+        {
+            var rawName = string.Format("ColorBrush{0}", no);
+            rawName = AddNamePrefix(rawName, namePrefix);
+            return ValidateName(rawName);
+        }
+
+        internal static string AddNamePrefix(string name, string namePrefix)
+        {
+            if (namePrefix == null)
+                return name;
+            return namePrefix + C_PrefixSeparator + name;
+        }
+
+        internal static string RemoveNamePrefix(string name, string namePrefix)
+        {
+            if (namePrefix == null)
+                return name;
+            var prefixWithSeparator = namePrefix + C_PrefixSeparator;
+            if (name.StartsWith(namePrefix + C_PrefixSeparator, StringComparison.OrdinalIgnoreCase))
+                name = name.Remove(0, prefixWithSeparator.Length);
+            return name;
+        }
+
         internal static string ValidateName(string name)
         {
             var result = Regex.Replace(name, @"[^[0-9a-zA-Z]]*", "_");

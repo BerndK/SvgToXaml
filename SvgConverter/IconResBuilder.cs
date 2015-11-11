@@ -29,7 +29,9 @@ namespace SvgConverter
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "folder for the xaml-Output, optional, default: folder of svgs")]
             string outputdir = null,
             [ArgumentParam(LongDesc = "Builds a htmlfile to browse the svgs, optional, default true")]
-            bool buildhtmlfile = true)
+            bool buildhtmlfile = true,
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Prefix to name alll items of this file, optional, default: no prefix")]
+            string nameprefix = null)
         {
             Console.WriteLine("Building resource dictionary...");
 
@@ -41,7 +43,7 @@ namespace SvgConverter
             if (!Path.HasExtension(outFileName))
                 outFileName = Path.ChangeExtension(outFileName, ".xaml");
 
-            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, Path.GetFileNameWithoutExtension(outputname)));
+            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, Path.GetFileNameWithoutExtension(outputname), nameprefix, null));
             Console.WriteLine("xaml written to: {0}", outFileName);
 
             if (buildhtmlfile)
