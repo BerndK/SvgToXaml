@@ -58,6 +58,7 @@ namespace <#= nameSpace #>
         var keys = doc.Root.Elements().Attributes(xamlNs + "Key").Select(a => a.Value).ToArray();
         //keys have this form: { x: Static NameSpaceName:XamlName.Color1}
 
+		//get Prefix
         prefix = "unknownPrefix";
         var first = keys.FirstOrDefault();
         if (first != null)
@@ -68,6 +69,7 @@ namespace <#= nameSpace #>
                 prefix = first.Substring(p1 + 1, p2 - p1 - 1).Split('.').FirstOrDefault();
         }
 
+		//keynames
         return keys.Select(key =>
         {
             var p1 = key.LastIndexOf(".");

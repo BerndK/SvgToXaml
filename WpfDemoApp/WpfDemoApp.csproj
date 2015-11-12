@@ -74,11 +74,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ImagesC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ImagesC\Template1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Template1.tt</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -114,13 +109,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImagesC.cs</LastGenOutput>
     </Content>
-    <Content Include="ImagesC\Template1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Template1.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ImagesC\Svg\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,125 +7,125 @@ namespace WpfDemoApp.ImagesC
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class ImagesC
     {
-        private static readonly ComponentResourceKey Color1CompResKey = MakeKey("ImagesC.Color1");
+        private static readonly ComponentResourceKey Color1KeyCompResKey = MakeKey("ImagesC.Color1Key");
 
-        public static ResourceKey Color1
+        public static ResourceKey Color1Key
         {
-            get { return Color1CompResKey; }
+            get { return Color1KeyCompResKey; }
         }
-        private static readonly ComponentResourceKey Color2CompResKey = MakeKey("ImagesC.Color2");
+        private static readonly ComponentResourceKey Color2KeyCompResKey = MakeKey("ImagesC.Color2Key");
 
-        public static ResourceKey Color2
+        public static ResourceKey Color2Key
         {
-            get { return Color2CompResKey; }
+            get { return Color2KeyCompResKey; }
         }
-        private static readonly ComponentResourceKey Color1BrushCompResKey = MakeKey("ImagesC.Color1Brush");
+        private static readonly ComponentResourceKey Color1BrushKeyCompResKey = MakeKey("ImagesC.Color1BrushKey");
 
-        public static ResourceKey Color1Brush
+        public static ResourceKey Color1BrushKey
         {
-            get { return Color1BrushCompResKey; }
+            get { return Color1BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey Color2BrushCompResKey = MakeKey("ImagesC.Color2Brush");
+        private static readonly ComponentResourceKey Color2BrushKeyCompResKey = MakeKey("ImagesC.Color2BrushKey");
 
-        public static ResourceKey Color2Brush
+        public static ResourceKey Color2BrushKey
         {
-            get { return Color2BrushCompResKey; }
+            get { return Color2BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey _3d_view_iconGeometryCompResKey = MakeKey("ImagesC._3d_view_iconGeometry");
+        private static readonly ComponentResourceKey cloud_3_iconKeyGeometryKeyCompResKey = MakeKey("ImagesC.cloud_3_iconKeyGeometryKey");
 
-        public static ResourceKey _3d_view_iconGeometry
+        public static ResourceKey cloud_3_iconKeyGeometryKey
         {
-            get { return _3d_view_iconGeometryCompResKey; }
+            get { return cloud_3_iconKeyGeometryKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey _3d_view_iconColorBrushCompResKey = MakeKey("ImagesC._3d_view_iconColorBrush");
+        private static readonly ComponentResourceKey cloud_3_iconKeyColorBrushKeyCompResKey = MakeKey("ImagesC.cloud_3_iconKeyColorBrushKey");
 
-        public static ResourceKey _3d_view_iconColorBrush
+        public static ResourceKey cloud_3_iconKeyColorBrushKey
         {
-            get { return _3d_view_iconColorBrushCompResKey; }
+            get { return cloud_3_iconKeyColorBrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey _3d_view_iconDrawingGroupCompResKey = MakeKey("ImagesC._3d_view_iconDrawingGroup");
+        private static readonly ComponentResourceKey cloud_3_iconDrawingGroupKeyCompResKey = MakeKey("ImagesC.cloud_3_iconDrawingGroupKey");
 
-        public static ResourceKey _3d_view_iconDrawingGroup
+        public static ResourceKey cloud_3_iconDrawingGroupKey
         {
-            get { return _3d_view_iconDrawingGroupCompResKey; }
+            get { return cloud_3_iconDrawingGroupKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey _3d_view_iconDrawingImageCompResKey = MakeKey("ImagesC._3d_view_iconDrawingImage");
+        private static readonly ComponentResourceKey cloud_3_iconDrawingImageKeyCompResKey = MakeKey("ImagesC.cloud_3_iconDrawingImageKey");
 
-        public static ResourceKey _3d_view_iconDrawingImage
+        public static ResourceKey cloud_3_iconDrawingImageKey
         {
-            get { return _3d_view_iconDrawingImageCompResKey; }
+            get { return cloud_3_iconDrawingImageKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey cloud_3_iconGeometryCompResKey = MakeKey("ImagesC.cloud_3_iconGeometry");
+        private static readonly ComponentResourceKey JOGKeyGeometry1KeyCompResKey = MakeKey("ImagesC.JOGKeyGeometry1Key");
 
-        public static ResourceKey cloud_3_iconGeometry
+        public static ResourceKey JOGKeyGeometry1Key
         {
-            get { return cloud_3_iconGeometryCompResKey; }
+            get { return JOGKeyGeometry1KeyCompResKey; }
         }
-        private static readonly ComponentResourceKey cloud_3_iconColorBrushCompResKey = MakeKey("ImagesC.cloud_3_iconColorBrush");
+        private static readonly ComponentResourceKey JOGKeyGeometry2KeyCompResKey = MakeKey("ImagesC.JOGKeyGeometry2Key");
 
-        public static ResourceKey cloud_3_iconColorBrush
+        public static ResourceKey JOGKeyGeometry2Key
         {
-            get { return cloud_3_iconColorBrushCompResKey; }
+            get { return JOGKeyGeometry2KeyCompResKey; }
         }
-        private static readonly ComponentResourceKey cloud_3_iconDrawingGroupCompResKey = MakeKey("ImagesC.cloud_3_iconDrawingGroup");
+        private static readonly ComponentResourceKey JOGKeyColor1BrushKeyCompResKey = MakeKey("ImagesC.JOGKeyColor1BrushKey");
 
-        public static ResourceKey cloud_3_iconDrawingGroup
+        public static ResourceKey JOGKeyColor1BrushKey
         {
-            get { return cloud_3_iconDrawingGroupCompResKey; }
+            get { return JOGKeyColor1BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey cloud_3_iconDrawingImageCompResKey = MakeKey("ImagesC.cloud_3_iconDrawingImage");
+        private static readonly ComponentResourceKey JOGKeyColor2BrushKeyCompResKey = MakeKey("ImagesC.JOGKeyColor2BrushKey");
 
-        public static ResourceKey cloud_3_iconDrawingImage
+        public static ResourceKey JOGKeyColor2BrushKey
         {
-            get { return cloud_3_iconDrawingImageCompResKey; }
+            get { return JOGKeyColor2BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGGeometry1CompResKey = MakeKey("ImagesC.JOGGeometry1");
+        private static readonly ComponentResourceKey JOGKeyColor3BrushKeyCompResKey = MakeKey("ImagesC.JOGKeyColor3BrushKey");
 
-        public static ResourceKey JOGGeometry1
+        public static ResourceKey JOGKeyColor3BrushKey
         {
-            get { return JOGGeometry1CompResKey; }
+            get { return JOGKeyColor3BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGGeometry2CompResKey = MakeKey("ImagesC.JOGGeometry2");
+        private static readonly ComponentResourceKey JOGKeyColor4BrushKeyCompResKey = MakeKey("ImagesC.JOGKeyColor4BrushKey");
 
-        public static ResourceKey JOGGeometry2
+        public static ResourceKey JOGKeyColor4BrushKey
         {
-            get { return JOGGeometry2CompResKey; }
+            get { return JOGKeyColor4BrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGColor1BrushCompResKey = MakeKey("ImagesC.JOGColor1Brush");
+        private static readonly ComponentResourceKey JOGDrawingGroupKeyCompResKey = MakeKey("ImagesC.JOGDrawingGroupKey");
 
-        public static ResourceKey JOGColor1Brush
+        public static ResourceKey JOGDrawingGroupKey
         {
-            get { return JOGColor1BrushCompResKey; }
+            get { return JOGDrawingGroupKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGColor2BrushCompResKey = MakeKey("ImagesC.JOGColor2Brush");
+        private static readonly ComponentResourceKey JOGDrawingImageKeyCompResKey = MakeKey("ImagesC.JOGDrawingImageKey");
 
-        public static ResourceKey JOGColor2Brush
+        public static ResourceKey JOGDrawingImageKey
         {
-            get { return JOGColor2BrushCompResKey; }
+            get { return JOGDrawingImageKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGColor3BrushCompResKey = MakeKey("ImagesC.JOGColor3Brush");
+        private static readonly ComponentResourceKey _3d_view_iconKeyGeometryKeyCompResKey = MakeKey("ImagesC._3d_view_iconKeyGeometryKey");
 
-        public static ResourceKey JOGColor3Brush
+        public static ResourceKey _3d_view_iconKeyGeometryKey
         {
-            get { return JOGColor3BrushCompResKey; }
+            get { return _3d_view_iconKeyGeometryKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGColor4BrushCompResKey = MakeKey("ImagesC.JOGColor4Brush");
+        private static readonly ComponentResourceKey _3d_view_iconKeyColorBrushKeyCompResKey = MakeKey("ImagesC._3d_view_iconKeyColorBrushKey");
 
-        public static ResourceKey JOGColor4Brush
+        public static ResourceKey _3d_view_iconKeyColorBrushKey
         {
-            get { return JOGColor4BrushCompResKey; }
+            get { return _3d_view_iconKeyColorBrushKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGDrawingGroupCompResKey = MakeKey("ImagesC.JOGDrawingGroup");
+        private static readonly ComponentResourceKey _3d_view_iconDrawingGroupKeyCompResKey = MakeKey("ImagesC._3d_view_iconDrawingGroupKey");
 
-        public static ResourceKey JOGDrawingGroup
+        public static ResourceKey _3d_view_iconDrawingGroupKey
         {
-            get { return JOGDrawingGroupCompResKey; }
+            get { return _3d_view_iconDrawingGroupKeyCompResKey; }
         }
-        private static readonly ComponentResourceKey JOGDrawingImageCompResKey = MakeKey("ImagesC.JOGDrawingImage");
+        private static readonly ComponentResourceKey _3d_view_iconDrawingImageKeyCompResKey = MakeKey("ImagesC._3d_view_iconDrawingImageKey");
 
-        public static ResourceKey JOGDrawingImage
+        public static ResourceKey _3d_view_iconDrawingImageKey
         {
-            get { return JOGDrawingImageCompResKey; }
+            get { return _3d_view_iconDrawingImageKeyCompResKey; }
         }
         private static ComponentResourceKey MakeKey(object id)
         {

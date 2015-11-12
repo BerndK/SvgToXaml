@@ -28,8 +28,7 @@ namespace WpfDemoApp
         {
             var baseColor = (SolidColorBrush) FindResource("Color1Brush");
             baseColor.Color = Colors.Brown;
-            var test = FindResource(ImagesC.ImagesC.cloud_3_iconDrawingImage);
-            var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1Brush);
+            var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1BrushKey);
             baseColorC.Color = Colors.Brown;
         }
 

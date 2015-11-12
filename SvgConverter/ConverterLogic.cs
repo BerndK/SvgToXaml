@@ -545,7 +545,7 @@ namespace SvgConverter
         {
             if (resKeyInfo.UseComponentResKeys)
             {
-                return $"{{x:Static {resKeyInfo.NameSpaceName}:{resKeyInfo.XamlName}.{ValidateName(name)}}}";
+                return $"{{x:Static {resKeyInfo.NameSpaceName}:{resKeyInfo.XamlName}.{ValidateName(name)}Key}}";
             }
             string result = name;
             if (resKeyInfo.Prefix != null)

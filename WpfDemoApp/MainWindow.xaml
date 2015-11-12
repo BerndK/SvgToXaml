@@ -22,7 +22,7 @@
         <Path Data="{StaticResource cloud_3_iconGeometry}" Fill="#FF60A1FA" Stretch="Uniform" Margin="25,2,0,2" Grid.Row="2" HorizontalAlignment="Left"></Path>
         <TextBlock Margin="87,15,351,6" Grid.Row="2">Just a Path</TextBlock>
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="3">
-            <Image Source="{StaticResource {x:Static imagesC:ImagesC.cloud_3_iconDrawingImage}}"/>
+            <Image Source="{StaticResource {x:Static imagesC:ImagesC.cloud_3_iconDrawingImageKey}}"/>
         </Button>
     </Grid>
 </Window>
