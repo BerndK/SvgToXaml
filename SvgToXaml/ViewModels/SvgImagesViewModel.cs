@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Xaml;
 using LocalizationControl.Command;
 using SvgConverter;
 using SvgToXaml.Infrastructure;
@@ -56,11 +57,37 @@ namespace SvgToXaml.ViewModels
             var saveDlg = new SaveFileDialog {AddExtension = true, DefaultExt = ".xaml", Filter = "Xaml-File|*.xaml", InitialDirectory = CurrentDir, FileName = outFileName};
             if (saveDlg.ShowDialog() == DialogResult.OK)
             {
-                var namePrefix = Microsoft.VisualBasic.Interaction.InputBox("Enter a namePrefix (or leave empty to not use it)", "Name Prefix");
-                if (string.IsNullOrWhiteSpace(namePrefix))
-                    namePrefix = null;
+                string namePrefix = null;
+
+                bool useComponentResKeys = false;
+                string nameSpaceName = null;
+                var nameSpace = Microsoft.VisualBasic.Interaction.InputBox("Enter a NameSpace for using static ComponentResKeys (or leave empty to not use it)", "NameSpace");
+                if (!string.IsNullOrWhiteSpace(nameSpace))
+                {
+                    useComponentResKeys = true;
+                    nameSpaceName =
+                        Microsoft.VisualBasic.Interaction.InputBox(
+                            "Enter a Name of NameSpace for using static ComponentResKeys", "NamespaceName");
+                }
+                else
+                {
+                    namePrefix = Microsoft.VisualBasic.Interaction.InputBox("Enter a namePrefix (or leave empty to not use it)", "Name Prefix");
+                    if (string.IsNullOrWhiteSpace(namePrefix))
+                        namePrefix = null;
+
+                }
+
                 outFileName = Path.GetFullPath(saveDlg.FileName);
-                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, Path.GetFileNameWithoutExtension(outFileName), namePrefix));
+                var resKeyInfo = new ResKeyInfo
+                {
+                    XamlName = Path.GetFileNameWithoutExtension(outFileName),
+                    Prefix = namePrefix,
+                    UseComponentResKeys = useComponentResKeys,
+                    NameSpace = nameSpace,
+                    NameSpaceName = nameSpaceName,
+
+                };
+                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo));
                 if (MessageBox.Show(outFileName + "\nhas been written\nCreate a BatchFile to automate next time?", 
                     null, MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
                 {
@@ -68,9 +95,16 @@ namespace SvgToXaml.ViewModels
                     var outputdir = Path.GetDirectoryName(outFileName);
                     var batchText = string.Format("SvgToXaml BuildDict /inputdir \"{0}\" /outputdir \"{1}\" /outputname {2}", CurrentDir, outputdir, outputname);
 
-                    if (!string.IsNullOrWhiteSpace(namePrefix))
+                    if (useComponentResKeys)
                     {
-                        batchText += " /nameprefix \"" + namePrefix + "\"";
+                        batchText += $" /useComponentResKeys=true /compResKeyNSName={nameSpaceName} /compResKeyNS={nameSpace}";
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrWhiteSpace(namePrefix))
+                        {
+                            batchText += " /nameprefix \"" + namePrefix + "\"";
+                        }
                     }
 
                     batchText += "\r\npause";

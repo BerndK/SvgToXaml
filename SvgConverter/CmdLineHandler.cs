@@ -17,7 +17,7 @@ namespace SvgConverter
         {
             var clp = new CommandLineParser { SkipCommandsWhenHelpRequested = true };
 
-            clp.Target = new IconResBuilder();
+            clp.Target = new CmdLineTarget();
             clp.Header = "SvgToXaml - Tool to convert SVGs to a Dictionary\r\n(c) 2015 Bernd Klaiber";
             clp.LogErrorsToConsole = true;
             try

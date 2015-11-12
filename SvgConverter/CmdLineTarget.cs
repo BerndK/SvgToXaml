@@ -18,7 +18,7 @@ using SharpVectors.Renderers.Wpf;
 
 namespace SvgConverter
 {
-    public class IconResBuilder : SimpleBaseTarget
+    public class CmdLineTarget : SimpleBaseTarget
     {
         [ArgumentCommand(LongDesc = "Creates a ResourceDictionary with the svg-Images of a folder")]
         public int BuildDict(
@@ -31,7 +31,14 @@ namespace SvgConverter
             [ArgumentParam(LongDesc = "Builds a htmlfile to browse the svgs, optional, default true")]
             bool buildhtmlfile = true,
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Prefix to name alll items of this file, optional, default: no prefix")]
-            string nameprefix = null)
+            string nameprefix = null,
+            [ArgumentParam(DefaultValue = false, ExplicitNeeded = false, LongDesc = "If true, es explicit ResourceKey File is created, default: false", ExplicitWantedArguments = "resKeyNS,resKeyNSName")]
+            bool useComponentResKeys = false,
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Namespace to use with UseResKey")]
+            string compResKeyNS = null,
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "name of Namespace to use with UseResKey" )]
+            string compResKeyNSName = null
+            )
         {
             Console.WriteLine("Building resource dictionary...");
 
@@ -43,7 +50,17 @@ namespace SvgConverter
             if (!Path.HasExtension(outFileName))
                 outFileName = Path.ChangeExtension(outFileName, ".xaml");
 
-            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, Path.GetFileNameWithoutExtension(outputname), nameprefix, null));
+            var resKeyInfo = new ResKeyInfo
+            {
+                Name = null,
+                XamlName = Path.GetFileNameWithoutExtension(outputname),
+                Prefix = nameprefix,
+                UseComponentResKeys = useComponentResKeys,
+                NameSpace = compResKeyNS,
+                NameSpaceName = compResKeyNSName,
+            };
+
+            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null));
             Console.WriteLine("xaml written to: {0}", outFileName);
 
             if (buildhtmlfile)

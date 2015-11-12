@@ -51,7 +51,7 @@ namespace SvgConverter
             {
                 if (_convertedObj == null)
                 {
-                    _convertedObj = ConverterLogic.ConvertSvgToObject(_filepath, ResultMode.DrawingImage, null, out _objectName, null) as DependencyObject;
+                    _convertedObj = ConverterLogic.ConvertSvgToObject(_filepath, ResultMode.DrawingImage, null, out _objectName, new ResKeyInfo()) as DependencyObject;
                 }
                 return _convertedObj;
             }

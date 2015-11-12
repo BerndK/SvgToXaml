@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
+using System.Xaml;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -34,10 +35,10 @@ namespace SvgConverter
         internal static XNamespace nsDef = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         internal static XmlNamespaceManager _nsManager = new XmlNamespaceManager(new NameTable());
 
-        public static string SvgFileToXaml(string filepath, ResultMode resultMode, string namePrefix, WpfDrawingSettings wpfDrawingSettings = null)
+        public static string SvgFileToXaml(string filepath, ResultMode resultMode, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings = null)
         {
             string name;
-            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out name, namePrefix);
+            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out name, resKeyInfo);
             return SvgObjectToXaml(obj, wpfDrawingSettings != null ? wpfDrawingSettings.IncludeRuntime : false, name);
         }
 
@@ -54,16 +55,17 @@ namespace SvgConverter
             };
         }
 
-        public static object ConvertSvgToObject(string filepath, ResultMode resultMode, WpfDrawingSettings wpfDrawingSettings, out string name, string namePrefix)
+        public static object ConvertSvgToObject(string filepath, ResultMode resultMode, WpfDrawingSettings wpfDrawingSettings, out string name, ResKeyInfo resKeyInfo)
         {
             var dg = ConvertFileToDrawingGroup(filepath, wpfDrawingSettings);
+            var elementName = Path.GetFileNameWithoutExtension(filepath);
             switch (resultMode)
             {
                 case ResultMode.DrawingGroup:
-                    name = BuildDrawingGroupName(filepath, namePrefix);
+                    name = BuildDrawingGroupName(elementName, resKeyInfo);
                     return dg;
                 case ResultMode.DrawingImage:
-                    name = BuildDrawingImageName(filepath, namePrefix);
+                    name = BuildDrawingImageName(elementName, resKeyInfo);
                     return DrawingToImage(dg);
                 default:
                     throw new ArgumentOutOfRangeException("resultMode");
@@ -82,15 +84,20 @@ namespace SvgConverter
             return xamlClean;
         }
 
-        public static string SvgDirToXaml(string folder, string xamlName, string namePrefix)
+        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo)
         {
-            return SvgDirToXaml(folder, xamlName, namePrefix, null);
+            return SvgDirToXaml(folder, resKeyInfo, null);
         }
 
-        public static string SvgDirToXaml(string folder, string xamlName, string namePrefix, WpfDrawingSettings wpfDrawingSettings)
+        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings)
         {
+            //firstChar Upper
+            var firstChar = Char.ToUpper(resKeyInfo.XamlName[0]);
+            resKeyInfo.XamlName = firstChar + resKeyInfo.XamlName.Remove(0, 1);
+
+
             var files = SvgFilesFromFolder(folder);
-            var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings, namePrefix);
+            var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings, resKeyInfo);
             var xamlUntidy = WpfObjToXaml(dict, wpfDrawingSettings != null ? wpfDrawingSettings.IncludeRuntime : false);
 
             var doc = XDocument.Parse(xamlUntidy);
@@ -99,9 +106,11 @@ namespace SvgConverter
             foreach (var drawingGroupElement in drawingGroupElements)
             {
                 BeautifyDrawingElement(drawingGroupElement, null);
-                ExtractGeometries(drawingGroupElement, namePrefix);
+                ExtractGeometries(drawingGroupElement, resKeyInfo);
             }
-            ReplaceBrushesInDrawingGroups(doc.Root, xamlName, namePrefix);
+
+            AddNameSpaceDef(doc.Root, resKeyInfo);
+            ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
             AddDrawingImagesToDrawingGroups(doc.Root);
             return doc.ToString();
         }
@@ -118,34 +127,39 @@ namespace SvgConverter
             }
         }
 
-        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, string xamlName, string namePrefix)
+        private static void AddNameSpaceDef(XElement root, ResKeyInfo resKeyInfo)
+        {
+            if (resKeyInfo.UseComponentResKeys)
+            {
+                root.Add(new XAttribute(XNamespace.Xmlns + resKeyInfo.NameSpaceName, resKeyInfo.NameSpace));
+            }
+        }
+
+        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, ResKeyInfo resKeyInfo)
         {
             //three steps of colouring: 1. global Color, 2, global ColorBrush, 3. local ColorBrush
             //<Color x:Key="ImagesColor1">#FF000000</Color>
             //<SolidColorBrush x:Key="ImagesColorBrush1" Color="{DynamicResource ImagesColor1}" />
             //<SolidColorBrush x:Key="JOG_BrushColor1" Color="{Binding Color, Source={StaticResource ImagesColorBrush1}}" />
 
-            var firstChar = Char.ToUpper(xamlName[0]);
-            xamlName = firstChar + xamlName.Remove(0, 1);
-
             var allBrushes = CollectBrushAttributesWithColor(rootElement)
                 .Select(a => a.Value)
                 .Distinct(StringComparer.InvariantCultureIgnoreCase) //same Color only once
                 .Select((s, i) => new
                 {
-                    ResKey1 = BuildColorName(i+1, namePrefix??xamlName), 
-                    ResKey2 = BuildColorBrushName(i + 1, namePrefix ?? xamlName), 
+                    ResKey1 = BuildColorName(i+1, resKeyInfo), 
+                    ResKey2 = BuildColorBrushName(i + 1, resKeyInfo), 
                     Color = s
                 }) //add numbers
                 .ToList();
 
-            //building Elements like: <SolidColorBrush x:Key="ImagesColorBrush1" Color="{DynamicResource ImagesColor1}" />
+            //building global Elements like: <SolidColorBrush x:Key="ImagesColorBrush1" Color="{DynamicResource ImagesColor1}" />
             rootElement.AddFirst(allBrushes
                 .Select(brush => new XElement(nsDef + "SolidColorBrush", 
                     new XAttribute(nsx + "Key", brush.ResKey2),
-                    new XAttribute("Color", string.Format("{{DynamicResource {0}}}", brush.ResKey1)))));
+                    new XAttribute("Color", $"{{DynamicResource {brush.ResKey1}}}"))));
 
-            //building Elements like: <Color x:Key="ImagesColor1">#FF000000</Color>
+            //building global Elements like: <Color x:Key="ImagesColor1">#FF000000</Color>
             rootElement.AddFirst(allBrushes
                 .Select(brush => new XElement(nsDef + "Color", 
                     new XAttribute(nsx + "Key", brush.ResKey1),
@@ -153,30 +167,35 @@ namespace SvgConverter
 
             var colorKeys = allBrushes.ToDictionary(brush => brush.Color, brush => brush.ResKey2);
 
+            //building local Elements
             var drawingGroups = rootElement.Elements(nsDef + "DrawingGroup").ToList();
             foreach (var node in drawingGroups)
             {
                 //get Name of DrawingGroup
-                var nameDg = node.Attribute(nsx + "Key").Value;
-                var nameBrushBase = nameDg.Replace("DrawingGroup", "Brush");
+                var keyDg = node.Attribute(nsx + "Key").Value;
+                var elemName = GetElemNameFromResKey(keyDg, resKeyInfo);
+                var elemBaseName = elemName.Replace("DrawingGroup", "");
                 
                 var brushAttributes = CollectBrushAttributesWithColor(node).ToList();
                 
                 foreach (var brushAttribute in brushAttributes)
                 {
                     var color = brushAttribute.Value;
-                    string resKey;
-                    if (colorKeys.TryGetValue(color, out resKey))
+                    string resKeyColor;
+                    if (colorKeys.TryGetValue(color, out resKeyColor))
                     {   //global color found
                         
                         //build resourcename
-                        var localName = brushAttributes.Count > 1
-                            ? string.Format("{0}Color{1}", nameBrushBase, brushAttributes.IndexOf(brushAttribute) + 1)
-                            : string.Format("{0}Color", nameBrushBase); //dont add number if only one color
+                        var nameBrush = brushAttributes.Count > 1
+                            ? $"{elemBaseName}Color{brushAttributes.IndexOf(brushAttribute) + 1}Brush"
+                            : $"{elemBaseName}ColorBrush"; //dont add number if only one color
+                        var resKeyBrush = BuildResKey(nameBrush, resKeyInfo);
                         node.AddBeforeSelf(new XElement(nsDef + "SolidColorBrush", 
-                            new XAttribute(nsx + "Key", localName), 
-                            new XAttribute("Color", string.Format("{{Binding Color, Source={{StaticResource {0}}}}}", resKey)) ));
-                        brushAttribute.Value = "{DynamicResource " + localName + "}";
+                            new XAttribute(nsx + "Key", resKeyBrush), 
+                            new XAttribute("Color", $"{{Binding Color, Source={BuildResKeyReference(resKeyColor, false)}}}") ));
+                        //set brush value as Reference
+                        //  <GeometryDrawing Brush="{DynamicResource {x:Static nsname:Test.cloud-3-iconBrushColor}}" ... />
+                        brushAttribute.Value = BuildResKeyReference(resKeyBrush, true);
                     }
                 }
             }
@@ -207,13 +226,14 @@ namespace SvgConverter
             }
         }
 
-        internal static ResourceDictionary ConvertFilesToResourceDictionary(IEnumerable<string> files, WpfDrawingSettings wpfDrawingSettings, string namePrefix)
+        internal static ResourceDictionary ConvertFilesToResourceDictionary(IEnumerable<string> files, WpfDrawingSettings wpfDrawingSettings, ResKeyInfo resKeyInfo)
         {
             var dict = new ResourceDictionary();
             foreach (var file in files)
             {
                 var drawingGroup = ConvertFileToDrawingGroup(file, wpfDrawingSettings);
-                var keyDg = BuildDrawingGroupName(file, namePrefix);
+                var elementName = Path.GetFileNameWithoutExtension(file);
+                var keyDg = BuildDrawingGroupName(elementName, resKeyInfo);
                 dict[keyDg] = drawingGroup;
             }
             return dict;
@@ -441,12 +461,12 @@ namespace SvgConverter
             drawingElement.ReplaceAttributes(attributes);
         }
 
-        private static void ExtractGeometries(XElement drawingGroupElement, string namePrefix)
+        private static void ExtractGeometries(XElement drawingGroupElement, ResKeyInfo resKeyInfo)
         {
             //get Name of DrawingGroup
             var nameDg = drawingGroupElement.Attribute(nsx + "Key").Value;
             var name = nameDg.Replace("DrawingGroup", "");
-            name = RemoveNamePrefix(name, namePrefix);
+            name = GetElemNameFromResKey(name, resKeyInfo);
 
             //find this: <GeometryDrawing Brush="{DynamicResource _3d_view_icon_BrushColor}" Geometry="F1 M512,512z M0,0z M436.631,207.445L436.631,298.319z" />
             //var geos = drawingGroupElement.XPathSelectElements(".//defns:GeometryDrawing/@defns:Geometry", _nsManager).ToList();
@@ -461,12 +481,12 @@ namespace SvgConverter
                 int? no = geos.Count > 1
                     ? geos.IndexOf(geo) + 1
                     : (int?)null;
-                var localName = BuildGeometryName(name, no, namePrefix);
+                var localName = BuildGeometryName(name, no, resKeyInfo);
                 //Add this: <Geometry x:Key="cloud_3_iconGeometry">F1 M512,512z M0,0z M409.338,216.254C398.922,351.523z</Geometry>
                 drawingGroupElement.AddBeforeSelf(new XElement(nsDef+"Geometry",
                     new XAttribute(nsx + "Key", localName),
                     geo.Value));
-                geo.Value = string.Format("{{StaticResource {0}}}", localName);
+                geo.Value = BuildResKeyReference(localName, false);
             }
         }
 
@@ -491,56 +511,81 @@ namespace SvgConverter
             }
         }
 
-        internal static string BuildDrawingGroupName(string filename, string namePrefix)
+        internal static string BuildDrawingGroupName(string elementName, ResKeyInfo resKeyInfo)
         {
-            var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingGroup";
-            rawName = AddNamePrefix(rawName, namePrefix);
-            return ValidateName(rawName);
+            var rawName = elementName + "DrawingGroup";
+            return BuildResKey(rawName, resKeyInfo);
         }
-        internal static string BuildDrawingImageName(string filename, string namePrefix)
+        internal static string BuildDrawingImageName(string elementName, ResKeyInfo resKeyInfo)
         {
-            var rawName = Path.GetFileNameWithoutExtension(filename) + "DrawingImage";
-            rawName = AddNamePrefix(rawName, namePrefix);
-            return ValidateName(rawName);
+            var rawName = elementName + "DrawingImage";
+            return BuildResKey(rawName, resKeyInfo);
         }
 
-        internal static string BuildGeometryName(string name, int? no, string namePrefix)
+        internal static string BuildGeometryName(string name, int? no, ResKeyInfo resKeyInfo)
         {
             var rawName = no.HasValue
-                ? string.Format("{0}Geometry{1}", name, no.Value)
-                : string.Format("{0}Geometry", name); //dont add number if only one Geometry
-            rawName = AddNamePrefix(rawName, namePrefix);
-            return ValidateName(rawName);
+                ? $"{name}Geometry{no.Value}"
+                : $"{name}Geometry"; //dont add number if only one Geometry
+            return BuildResKey(rawName, resKeyInfo);
         }
 
-        internal static string BuildColorName(int no, string namePrefix)
+        internal static string BuildColorName(int no, ResKeyInfo resKeyInfo)
         {
-            var rawName = string.Format("Color{0}", no);
-            rawName = AddNamePrefix(rawName, namePrefix);
-            return ValidateName(rawName);
+            var rawName = $"Color{no}";
+            return BuildResKey(rawName, resKeyInfo);
         }
-        internal static string BuildColorBrushName(int no, string namePrefix)
+        internal static string BuildColorBrushName(int no, ResKeyInfo resKeyInfo)
         {
-            var rawName = string.Format("ColorBrush{0}", no);
-            rawName = AddNamePrefix(rawName, namePrefix);
-            return ValidateName(rawName);
+            var rawName = $"Color{no}Brush";
+            return BuildResKey(rawName, resKeyInfo);
         }
 
-        internal static string AddNamePrefix(string name, string namePrefix)
+        internal static string BuildResKey(string name, ResKeyInfo resKeyInfo)
         {
-            if (namePrefix == null)
+            if (resKeyInfo.UseComponentResKeys)
+            {
+                return $"{{x:Static {resKeyInfo.NameSpaceName}:{resKeyInfo.XamlName}.{name}}}";
+            }
+            string result = name;
+            if (resKeyInfo.Prefix != null)
+                result = resKeyInfo.Prefix + C_PrefixSeparator + name;
+            result = ValidateName(result);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="refName">ist der schon komplett fertige name mit prefix oder Reskey</param>
+        /// <param name="dynamic"></param>
+        /// <returns></returns>
+        internal static string BuildResKeyReference(string refName, bool dynamic = false)
+        {
+            var resourceIdent = dynamic ? "DynamicResource" : "StaticResource";
+            return $"{{{resourceIdent} {refName}}}";
+        }
+
+        internal static string GetElemNameFromResKey(string name, ResKeyInfo resKeyInfo)
+        {
+            if (resKeyInfo.UseComponentResKeys)
+            {   //{x:Static NameSpaceName:XamlName.ElementName}
+                var p1 = name.IndexOf(".");
+                var p2 = name.LastIndexOf("}");
+                if (p1 < p2)
+                    return name.Substring(p1 + 1, p2 - p1 - 1);
+                else
+                    return name;
+            }
+            else
+            {
+                if (resKeyInfo.Prefix == null)
+                    return name;
+                var prefixWithSeparator = resKeyInfo.Prefix + C_PrefixSeparator;
+                if (name.StartsWith(resKeyInfo.Prefix + C_PrefixSeparator, StringComparison.OrdinalIgnoreCase))
+                    name = name.Remove(0, prefixWithSeparator.Length);
                 return name;
-            return namePrefix + C_PrefixSeparator + name;
-        }
-
-        internal static string RemoveNamePrefix(string name, string namePrefix)
-        {
-            if (namePrefix == null)
-                return name;
-            var prefixWithSeparator = namePrefix + C_PrefixSeparator;
-            if (name.StartsWith(namePrefix + C_PrefixSeparator, StringComparison.OrdinalIgnoreCase))
-                name = name.Remove(0, prefixWithSeparator.Length);
-            return name;
+            }
         }
 
         internal static string ValidateName(string name)
