@@ -105,7 +105,7 @@ namespace SvgConverterTest
             
             var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", ResKeyInfoUseCompResKey, settings);
             Console.WriteLine(xaml);
-            //File.WriteAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withUseCompResKey.xaml", xaml);
+            File.WriteAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withUseCompResKey.xaml", xaml);
             var expectedXaml = File.ReadAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withUseCompResKey.xaml");
             xaml.Should().Be(expectedXaml);
         }

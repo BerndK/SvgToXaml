@@ -26,15 +26,18 @@ namespace WpfDemoApp
 
         private void ChangeBaseColor_OnClick(object sender, RoutedEventArgs e)
         {
-            var baseColor = (SolidColorBrush) FindResource("ImagesColorBrush1");
+            var baseColor = (SolidColorBrush) FindResource("Color1Brush");
             baseColor.Color = Colors.Brown;
+            var test = FindResource(ImagesC.ImagesC.cloud_3_iconDrawingImage);
+            var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1Brush);
+            baseColorC.Color = Colors.Brown;
         }
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SolidColorBrush) (FindResource("JOGBrushColor1"))).Color = Colors.SlateGray;
-            ((SolidColorBrush) (FindResource("JOGBrushColor4"))).Color = Colors.Red;
-            ((SolidColorBrush) (FindResource("JOGBrushColor2"))).Color = Colors.Yellow;
+            ((SolidColorBrush) (FindResource("JOGColor1Brush"))).Color = Colors.SlateGray;
+            ((SolidColorBrush) (FindResource("JOGColor4Brush"))).Color = Colors.Red;
+            ((SolidColorBrush) (FindResource("JOGColor2Brush"))).Color = Colors.Yellow;
         }
     }
 }

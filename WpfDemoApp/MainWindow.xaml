@@ -1,9 +1,11 @@
 ﻿<Window x:Class="WpfDemoApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:imagesC="clr-namespace:WpfDemoApp.ImagesC"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -15,9 +17,12 @@
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="1">
             <Image Source="{StaticResource JOGDrawingImage}"/>
         </Button>
-        <Button  Content="Change Base Color" Click="ChangeBaseColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
+        <Button Content="Change Base Color" Click="ChangeBaseColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
         <Button Content="Change Single Colors" Click="ChangeSingleColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Grid.Row="1"/>
         <Path Data="{StaticResource cloud_3_iconGeometry}" Fill="#FF60A1FA" Stretch="Uniform" Margin="25,2,0,2" Grid.Row="2" HorizontalAlignment="Left"></Path>
         <TextBlock Margin="87,15,351,6" Grid.Row="2">Just a Path</TextBlock>
+        <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="3">
+            <Image Source="{StaticResource {x:Static imagesC:ImagesC.cloud_3_iconDrawingImage}}"/>
+        </Button>
     </Grid>
 </Window>

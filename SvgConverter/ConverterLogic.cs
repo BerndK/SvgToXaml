@@ -131,7 +131,7 @@ namespace SvgConverter
         {
             if (resKeyInfo.UseComponentResKeys)
             {
-                root.Add(new XAttribute(XNamespace.Xmlns + resKeyInfo.NameSpaceName, resKeyInfo.NameSpace));
+                root.Add(new XAttribute(XNamespace.Xmlns + resKeyInfo.NameSpaceName, "clr-namespace:" + resKeyInfo.NameSpace));
             }
         }
 
@@ -545,7 +545,7 @@ namespace SvgConverter
         {
             if (resKeyInfo.UseComponentResKeys)
             {
-                return $"{{x:Static {resKeyInfo.NameSpaceName}:{resKeyInfo.XamlName}.{name}}}";
+                return $"{{x:Static {resKeyInfo.NameSpaceName}:{resKeyInfo.XamlName}.{ValidateName(name)}}}";
             }
             string result = name;
             if (resKeyInfo.Prefix != null)

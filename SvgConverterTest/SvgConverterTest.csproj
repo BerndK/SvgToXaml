@@ -100,6 +100,7 @@
     <Compile Include="CommandLineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConverterTests.cs" />
+    <Compile Include="T4Methods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SvgConverter\SvgConverter.csproj">
