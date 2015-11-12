@@ -157,6 +157,9 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Payload\T4Template.tt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="CustomDefined.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

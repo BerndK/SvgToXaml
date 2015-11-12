@@ -88,41 +88,62 @@ namespace SvgToXaml.ViewModels
 
                 };
                 File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo));
-                if (MessageBox.Show(outFileName + "\nhas been written\nCreate a BatchFile to automate next time?", 
-                    null, MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+
+                BuildBatchFile(outFileName, resKeyInfo);
+            }
+        }
+
+        private void BuildBatchFile(string outFileName, ResKeyInfo compResKeyInfo)
+        {
+            if (MessageBox.Show(outFileName + "\nhas been written\nCreate a BatchFile to automate next time?",
+                null, MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+            {
+                var outputname = Path.GetFileNameWithoutExtension(outFileName);
+                var outputdir = Path.GetDirectoryName(outFileName);
+                var batchText = string.Format("SvgToXaml BuildDict /inputdir \"{0}\" /outputdir \"{1}\" /outputname {2}",
+                    CurrentDir, outputdir, outputname);
+
+                if (compResKeyInfo.UseComponentResKeys)
                 {
-                    var outputname = Path.GetFileNameWithoutExtension(outFileName);
-                    var outputdir = Path.GetDirectoryName(outFileName);
-                    var batchText = string.Format("SvgToXaml BuildDict /inputdir \"{0}\" /outputdir \"{1}\" /outputname {2}", CurrentDir, outputdir, outputname);
-
-                    if (useComponentResKeys)
+                    batchText += $" /useComponentResKeys=true /compResKeyNSName={compResKeyInfo.NameSpaceName} /compResKeyNS={compResKeyInfo.NameSpace}";
+                    WriteT4Template(outFileName);
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(compResKeyInfo.Prefix))
                     {
-                        batchText += $" /useComponentResKeys=true /compResKeyNSName={nameSpaceName} /compResKeyNS={nameSpace}";
-                    }
-                    else
-                    {
-                        if (!string.IsNullOrWhiteSpace(namePrefix))
-                        {
-                            batchText += " /nameprefix \"" + namePrefix + "\"";
-                        }
-                    }
-
-                    batchText += "\r\npause";
-
-                    File.WriteAllText(Path.Combine(CurrentDir, "Update.cmd"), batchText);
-
-                    //Copy ExeFile
-                    var srcFile = Environment.GetCommandLineArgs().First();
-                    var destFile = Path.Combine(CurrentDir, Path.GetFileName(srcFile));
-                    Console.WriteLine("srcFile:", srcFile);
-                    Console.WriteLine("destFile:", destFile);
-                    if (!string.Equals(srcFile, destFile, StringComparison.OrdinalIgnoreCase))
-                    {
-                        Console.WriteLine("Copying file...");
-                        File.Copy(srcFile, destFile, true);
+                        batchText += " /nameprefix \"" + compResKeyInfo.Prefix + "\"";
                     }
                 }
+
+                batchText += "\r\npause";
+
+                File.WriteAllText(Path.Combine(CurrentDir, "Update.cmd"), batchText);
+
+                //Copy ExeFile
+                var srcFile = Environment.GetCommandLineArgs().First();
+                var destFile = Path.Combine(CurrentDir, Path.GetFileName(srcFile));
+                //Console.WriteLine("srcFile:", srcFile);
+                //Console.WriteLine("destFile:", destFile);
+                if (!string.Equals(srcFile, destFile, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Copying file...");
+                    File.Copy(srcFile, destFile, true);
+                }
             }
+        }
+
+        private void WriteT4Template(string outFileName)
+        {
+            //BuildAction: "Embedded Resource"
+            var appType = typeof(App);
+            var assembly = appType.Assembly;
+            //assembly.GetName().Name
+            var resourceName = appType.Namespace + "." + "Payload.T4Template.tt"; //Achtung: hier Punkt statt Slash
+            var stream = assembly.GetManifestResourceStream(resourceName);
+            var text = new StreamReader(stream, Encoding.UTF8).ReadToEnd();
+            var t4FileName = Path.ChangeExtension(outFileName, ".tt");
+            File.WriteAllText(t4FileName, text, Encoding.UTF8);
         }
 
         private void InfoExecute()
