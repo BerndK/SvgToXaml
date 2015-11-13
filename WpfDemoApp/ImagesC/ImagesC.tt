@@ -10,8 +10,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Xml.Linq" #>
 <#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
-<#   
+<#@ import namespace="System.Collections.Generic" #><#   
 	string xamlFile = Path.ChangeExtension(this.Host.TemplateFile, ".xaml");
 	string nameSpace;
 	string prefix;

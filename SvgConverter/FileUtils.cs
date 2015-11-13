@@ -14,12 +14,13 @@ namespace SvgConverter
 
     public static class FileUtils
     {
-
         /// <summary>
         /// Creates a relative path from one file or folder to another.
         /// </summary>
         /// <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+        /// <param name="fromIs">Is the fromPath a File or a Folder</param>
         /// <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+        /// <param name="toIs">Is the toPath a File or a Folder</param>
         /// <returns>The relative path from the start directory to the end path or <c>toPath</c> if the paths are not related.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="UriFormatException"></exception>
@@ -29,6 +30,7 @@ namespace SvgConverter
             if (String.IsNullOrEmpty(fromPath)) throw new ArgumentNullException("fromPath");
             if (String.IsNullOrEmpty(toPath)) throw new ArgumentNullException("toPath");
 
+            //Slash am Ende anfügen, damit Uri damit klarkommt und weiß, was ein Folder ist, und was nicht
             if (!fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()) &&
                 !fromPath.EndsWith(Path.AltDirectorySeparatorChar.ToString()) &&
                 fromIs == PathIs.Folder)
@@ -52,7 +54,9 @@ namespace SvgConverter
             }
             if (relativePath == string.Empty)
                 relativePath = ".\\";
-            return relativePath.TrimEnd(Path.DirectorySeparatorChar); //dies macht Probleme, insbesondere in CommandLine wenn quoted
+            //ein \ am Ende entfernen, dies macht Probleme, insbesondere in CommandLine wenn quoted
+            //zudem scheint der .Net - Standard zu sein, kein \ am Ende zu haben vgl. Path.GetDirectoryname()
+            return relativePath.TrimEnd(Path.DirectorySeparatorChar);
         }
     }
 }

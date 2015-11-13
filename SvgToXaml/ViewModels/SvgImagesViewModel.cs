@@ -122,16 +122,16 @@ namespace SvgToXaml.ViewModels
 
                 File.WriteAllText(Path.Combine(CurrentDir, "Update.cmd"), batchText);
 
-                //Copy ExeFile
-                var srcFile = Environment.GetCommandLineArgs().First();
-                var destFile = Path.Combine(CurrentDir, Path.GetFileName(srcFile));
-                //Console.WriteLine("srcFile:", srcFile);
-                //Console.WriteLine("destFile:", destFile);
-                if (!string.Equals(srcFile, destFile, StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine("Copying file...");
-                    File.Copy(srcFile, destFile, true);
-                }
+                ////Copy ExeFile
+                //var srcFile = Environment.GetCommandLineArgs().First();
+                //var destFile = Path.Combine(CurrentDir, Path.GetFileName(srcFile));
+                ////Console.WriteLine("srcFile:", srcFile);
+                ////Console.WriteLine("destFile:", destFile);
+                //if (!string.Equals(srcFile, destFile, StringComparison.OrdinalIgnoreCase))
+                //{
+                //    Console.WriteLine("Copying file...");
+                //    File.Copy(srcFile, destFile, true);
+                //}
             }
         }
 
