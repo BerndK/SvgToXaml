@@ -8,26 +8,21 @@ using SvgConverter;
 
 namespace SvgConverterTest
 {
-    
     public class FileUtilsTests
     {
-        [Test]
-        public void MakeRelativePath()
+        [TestCase(@"C:\Temp\", PathIs.Folder, @"C:\Temp\Sub", PathIs.Folder, @"Sub")]
+        [TestCase(@"C:\Temp", PathIs.Folder, @"C:\Temp\Sub", PathIs.Folder, @"Sub")]
+        [TestCase(@"C:\Temp", PathIs.Folder, @"C:\Temp\", PathIs.Folder, @".")]
+        [TestCase(@"C:\Temp", PathIs.Folder, @"C:\", PathIs.Folder, @"..")]
+        [TestCase(@"D:\Projects\SvgToXaml\WpfDemoApp\ImagesC\Svg", PathIs.Folder, @"D:\Projects\SvgToXaml\WpfDemoApp\ImagesC", PathIs.Folder, @"..")]
+        [TestCase(@"C:\Temp\", PathIs.Folder, @"C:\Temp\Sub", PathIs.File, @"Sub")]
+        [TestCase(@"C:\Temp", PathIs.File, @"C:\Temp\Sub", PathIs.Folder, @"Temp\Sub")]
+        [TestCase(@"C:\Temp\Sub", PathIs.Folder, @"C:\Temp\file", PathIs.File, @"..\file")]
+        [TestCase(@"C:\Temp", PathIs.File, @"C:\Temp", PathIs.File, @".")]
+        [TestCase(@"C:\Temp", PathIs.Folder, @"C:\Temp", PathIs.Folder, @".")]
+        public void MakeRelativePath(string fromPath, PathIs fromIs, string toPath, PathIs toIs, string result)
         {
-            FileUtils.MakeRelativePath(@"C:\Temp\", PathIs.Folder, @"C:\Temp\Sub", PathIs.Folder).Should().Be(@"Sub\");
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.Folder, @"C:\Temp\Sub", PathIs.Folder).Should().Be(@"Sub\");
-
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.Folder, @"C:\Temp\", PathIs.Folder).Should().Be(@".\");
-
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.Folder, @"C:\", PathIs.Folder).Should().Be(@"..\");
-            FileUtils.MakeRelativePath(@"D:\Projects\SvgToXaml\WpfDemoApp\ImagesC\Svg", PathIs.Folder, @"D:\Projects\SvgToXaml\WpfDemoApp\ImagesC", PathIs.Folder).Should().Be(@"..\");
-
-
-            FileUtils.MakeRelativePath(@"C:\Temp\", PathIs.Folder, @"C:\Temp\Sub", PathIs.File).Should().Be(@"Sub");
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.File, @"C:\Temp\Sub", PathIs.Folder).Should().Be(@"Temp\Sub\");
-
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.File, @"C:\Temp", PathIs.File).Should().Be(@".\");
-            FileUtils.MakeRelativePath(@"C:\Temp", PathIs.Folder, @"C:\Temp", PathIs.Folder).Should().Be(@".\");
+            FileUtils.MakeRelativePath(fromPath, fromIs, toPath, toIs).Should().Be(result);
         }
     }
 }
