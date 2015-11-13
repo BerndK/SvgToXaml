@@ -100,8 +100,11 @@ namespace SvgToXaml.ViewModels
             {
                 var outputname = Path.GetFileNameWithoutExtension(outFileName);
                 var outputdir = Path.GetDirectoryName(outFileName);
+                var relOutputDir = FileUtils.MakeRelativePath(CurrentDir, PathIs.Folder, outputdir, PathIs.Folder);
                 var batchText = string.Format("SvgToXaml BuildDict /inputdir \"{0}\" /outputdir \"{1}\" /outputname {2}",
-                    CurrentDir, outputdir, outputname);
+                    ".", //CurrentDir
+                    relOutputDir, 
+                    outputname);
 
                 if (compResKeyInfo.UseComponentResKeys)
                 {

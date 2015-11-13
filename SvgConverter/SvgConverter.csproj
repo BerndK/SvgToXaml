@@ -80,6 +80,7 @@
     <Compile Include="CmdLineHandler.cs" />
     <Compile Include="ConvertedSvgData.cs" />
     <Compile Include="CmdLineTarget.cs" />
+    <Compile Include="FileUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConverterLogic.cs" />
     <Compile Include="ResKeyInfo.cs" />
