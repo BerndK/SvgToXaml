@@ -215,7 +215,7 @@ namespace SvgConverterTest
             };
             var key = ConverterLogic.BuildDrawingGroupName("ElementName", resKeyInfo);
             Console.WriteLine(key);
-            key.Should().Be("{x:Static NameSpaceName:XamlName.ElementNameDrawingGroup}");
+            key.Should().Be("{x:Static NameSpaceName:XamlName.ElementNameDrawingGroupKey}");
         }
         [Test]
         public void BuildDrawingImageName_returns_simpleName()
@@ -238,7 +238,7 @@ namespace SvgConverterTest
         {
             var key = ConverterLogic.BuildDrawingImageName("ElementName", ResKeyInfoUseCompResKey);
             Console.WriteLine(key);
-            key.Should().Be("{x:Static NameSpaceName:XamlName.ElementNameDrawingImage}");
+            key.Should().Be("{x:Static NameSpaceName:XamlName.ElementNameDrawingImageKey}");
         }
 
         [Test]
