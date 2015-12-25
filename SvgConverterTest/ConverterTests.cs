@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using FluentAssertions;
 using NUnit.Framework;
 using SharpVectors.Converters;
@@ -267,5 +270,31 @@ namespace SvgConverterTest
         {
             ConverterLogic.GetElemNameFromResKey("{x:Static NameSpaceName:XamlName.ElementName}", ResKeyInfoUseCompResKey).Should().Be("ElementName");
         }
+
+        [Test]
+        public void GetCorrectClippingElement()
+        {
+            var doc = XDocument.Load(@"TestFiles\xamlUntidy.xaml");
+            ConverterLogic.RemoveResDictEntries(doc.Root);
+            var drawingGroupElements = doc.Root.XPathSelectElements("defns:DrawingGroup", ConverterLogic._nsManager).ToList();
+
+            var clipElements = drawingGroupElements.Select(dg =>
+            {
+                Rect rect;
+                var element = ConverterLogic.GetClipElement(dg, out rect);
+                return Tuple.Create(element, rect);
+            }).ToArray();
+            foreach (var clipElement in clipElements)
+            {
+                Console.WriteLine(clipElement.Item2);
+                Console.WriteLine(clipElement.Item1);
+                Console.WriteLine();
+            }
+
+            clipElements[0].Item2.ShouldBeEquivalentTo(new Rect(0,0,40,40));
+            clipElements[1].Item2.ShouldBeEquivalentTo(new Rect(0,0,45,34));
+            //..
+        }
+
     }
 }

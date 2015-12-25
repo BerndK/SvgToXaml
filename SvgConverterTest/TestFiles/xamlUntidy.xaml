@@ -1,0 +1,162 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.Entries>
+        <DrawingGroup x:Key="NamePrefix_HandwheelDrawingGroup">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0,0,40,40" />
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF0000FF" Thickness="1" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Transform="1,0,0,1,-428.70961,-386.49945" Figures="M40,40z M0,0z M0,400L0,400" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <DrawingGroup>
+                        <DrawingGroup>
+                            <GlyphRunDrawing ForegroundBrush="#FF000000">
+                                <GlyphRunDrawing.GlyphRun>
+                                    <GlyphRun BaselineOrigin="1.1717333,37.4375" FontRenderingEmSize="5.84810781" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="HANDWHEEL" GlyphIndices="43 36 49 39 58 43 40 40 47" AdvanceWidths="4.15113333333333 3.7711 4.37330666666667 3.95819333333333 5.46078666666667 4.15113333333333 2.95841333333333 2.95841333333333 2.75378" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+                                        <GlyphRun.GlyphTypeface>
+                                            <GlyphTypeface FontUri="C:\WINDOWS\FONTS\SEGOEUI.TTF" StyleSimulations="None" />
+                                        </GlyphRun.GlyphTypeface>
+                                    </GlyphRun>
+                                </GlyphRunDrawing.GlyphRun>
+                            </GlyphRunDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FF000000" Opacity="0" Transform="0.9247968,0,0,0.9247968,31.152312,-1.2132876" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="1.29758234" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Transform="0.9247968,0,0,0.9247968,31.152312,-1.2132876" Figures="M40,40z M0,0z M3.6875,19.1875A15.375,15.375,0,1,1,-27.0625,19.1875A15.375,15.375,0,1,1,3.6875,19.1875z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FF000000" Opacity="0" Transform="0.7378049,0,0,0.7378049,28.966844,2.3746195" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="1.08429749" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Transform="0.7378049,0,0,0.7378049,28.966844,2.3746195" Figures="M40,40z M0,0z M3.6875,19.1875A15.375,15.375,0,1,1,-27.0625,19.1875A15.375,15.375,0,1,1,3.6875,19.1875z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <DrawingGroup>
+                        <DrawingGroup>
+                            <GlyphRunDrawing ForegroundBrush="#FF000000">
+                                <GlyphRunDrawing.GlyphRun>
+                                    <GlyphRun BaselineOrigin="10.376838,18.028101" FontRenderingEmSize="3.5710113" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="SINUMERIK" GlyphIndices="54 44 49 56 48 40 53 44 46" AdvanceWidths="1.89567 0.94962 2.67036 2.45259 3.20586 1.80642 2.13843 0.94962 2.0706" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+                                        <GlyphRun.GlyphTypeface>
+                                            <GlyphTypeface FontUri="C:\WINDOWS\FONTS\SEGOEUI.TTF" StyleSimulations="None" />
+                                        </GlyphRun.GlyphTypeface>
+                                    </GlyphRun>
+                                </GlyphRunDrawing.GlyphRun>
+                            </GlyphRunDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Brush>
+                            <SolidColorBrush Color="#FF000000" Opacity="1" Transform="0.6478873,0,0,0.6478873,28.817782,11.056338" />
+                        </GeometryDrawing.Brush>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="1.23478258" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Transform="0.6478873,0,0,0.6478873,28.817782,11.056338" Figures="M40,40z M0,0z M-10.8125,22.96875A2.21875,2.21875,0,1,1,-15.25,22.96875A2.21875,2.21875,0,1,1,-10.8125,22.96875z" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingGroup>
+        <DrawingGroup x:Key="NamePrefix_1447267410_arrow_rightDrawingGroup">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0,0,45,34" />
+                </DrawingGroup.ClipGeometry>
+                <GeometryDrawing Brush="#FF231F20">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry FillRule="Nonzero" Figures="M45,34z M0,0z M24.994,31.705L24.994,31.705 36.908,20 0,20 0,15 36.908,15 24.994,3.006 27.822,0.273 45,17.499 27.822,34.605z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingGroup>
+        <DrawingGroup x:Key="NamePrefix_cloud_3_iconDrawingGroup">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0,0,512,512" />
+                </DrawingGroup.ClipGeometry>
+                <GeometryDrawing Brush="#FF000000">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry FillRule="Nonzero" Figures="M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingGroup>
+        <DrawingGroup x:Key="NamePrefix_JOGDrawingGroup">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0,0,40,40" />
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="1.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Figures="M40,40z M0,0z M8.2386138,8.581114L10.997315,3.2949802 14.58093,13.0230932 18.243394,3.2861363 22.441828,13.0330022 26.104293,3.2772448 29.945413,13.0324862 31.821309,8.4079545" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <DrawingGroup Transform="0.9935628,0,0,1.0064789,0,0">
+                        <DrawingGroup>
+                            <GlyphRunDrawing ForegroundBrush="#FF000000">
+                                <GlyphRunDrawing.GlyphRun>
+                                    <GlyphRun BaselineOrigin="11.428195,37.931644" FontRenderingEmSize="10.52512455" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2" Characters="JOG" GlyphIndices="45 50 42" AdvanceWidths="5.85282666666667 8.18974666666667 8.18974666666667" GlyphOffsets="0,0 0,0 0,0" Language="en-us">
+                                        <GlyphRun.GlyphTypeface>
+                                            <GlyphTypeface FontUri="C:\WINDOWS\FONTS\ARIALBD.TTF" StyleSimulations="None" />
+                                        </GlyphRun.GlyphTypeface>
+                                    </GlyphRun>
+                                </GlyphRunDrawing.GlyphRun>
+                            </GlyphRunDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF0000FF" Thickness="1" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Transform="1,0,0,1,-428.70961,-386.49945" Figures="M40,40z M0,0z M0,400L0,400" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF000000" Thickness="1.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry FillRule="Nonzero" Figures="M40,40z M0,0z M7.8908055,20.894289L8.0965549,20.393659 8.3023024,19.912776 8.5080509,19.456537 8.7137985,19.02932 8.9195479,18.635628 9.1252954,18.279304 9.3310439,17.963927 9.5367934,17.692676 9.7425409,17.468068 9.9482894,17.292623 10.1540379,17.16793 10.3597866,17.095181 10.5655336,17.075303 10.7712836,17.1083 10.9770316,17.194034 11.1827796,17.331449 11.3885286,17.519217 11.5942766,17.755619 11.8000246,18.038133 12.0057726,18.363978 12.2115216,18.729844 12.4172706,19.132281 12.6230176,19.567052 12.8287676,20.029782 13.0345146,20.516099 13.2402636,21.020836 13.4460106,21.539223 13.6517606,22.065956 13.8575096,22.595737 14.0632576,23.123399 14.2690056,23.643506 14.4747536,24.151025 14.6805026,24.640655 14.8862506,25.107759 15.0919986,25.547565 15.2977486,25.9557 15.5034956,26.327926 15.7092446,26.660796 15.9149916,26.95073 16.1207416,27.195082 16.3264886,27.391199 16.5322376,27.537226 16.7379866,27.631708 16.9437346,27.673582 17.1494826,27.662584 17.3552316,27.598713 17.5609796,27.482631 17.7667276,27.315668 17.9724766,27.099143 18.1782256,26.835577 18.3839726,26.527356 18.5897216,26.177657 18.7954696,25.790062 19.0012176,25.368277 19.2069656,24.916545 19.4127146,24.439503 19.6184636,23.94179 19.8242106,23.42844 20.0299606,22.904489 20.2357076,22.375371 20.4414566,21.846252 20.6472036,21.322301 20.8529536,20.808951 21.0587016,20.311237 21.2644506,19.834196 21.4701986,19.382463 21.6759466,18.960679 21.8816956,18.573082 22.0874436,18.223385 22.2931916,17.915162 22.4989416,17.651596 22.7046886,17.435073 22.9104376,17.268108 23.1161846,17.152028 23.3219346,17.088158 23.5276816,17.07716 23.7334306,17.119033 23.9391796,17.213514 24.1449276,17.359541 24.3506756,17.555658 24.5564236,17.80001 24.7621726,18.089945 24.9679206,18.422814 25.1736696,18.79504 25.3794186,19.203174 25.5851656,19.642981 25.7909156,20.110084 25.9966626,20.599715 26.2024116,21.107233 26.4081586,21.627342 26.6139086,22.155002 26.8196566,22.684785 27.0254046,23.211519 27.2311536,23.729903 27.4369016,24.23464 27.6426496,24.720958 27.8483976,25.183688 28.0541466,25.618458 28.2598956,26.020897 28.4656436,26.386761 28.6713926,26.712607 28.8771396,26.995122 29.0828896,27.231522 29.2886366,27.419291 29.4943856,27.556706 29.7001346,27.642441 29.9058826,27.675436 30.1116306,27.65556 30.3173786,27.582811 30.5231276,27.458118 30.7288756,27.282672 30.9346236,27.058065 31.1403736,26.786814 31.3461206,26.471436 31.5518696,26.115112 31.7576166,25.72142 31.9633666,25.294203 32.1691136,24.837966" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingGroup>
+        <DrawingGroup x:Key="NamePrefix_3d_view_iconDrawingGroup">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0,0,512,512" />
+                </DrawingGroup.ClipGeometry>
+                <GeometryDrawing Brush="#FF000000">
+                    <GeometryDrawing.Geometry>
+                        <PathGeometry FillRule="Nonzero" Figures="M512,512z M0,0z M436.631,207.445L436.631,371.126 279.232,462 279.232,298.319 436.631,207.445z M256,258.08L436.201,154.04 256,50 75.799,154.041 256,258.08z M232.768,298.319L75.369,207.445 75.369,371.126 232.768,462 232.768,298.319z" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingGroup>
+    </ResourceDictionary.Entries>
+</ResourceDictionary>

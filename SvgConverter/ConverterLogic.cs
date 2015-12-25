@@ -361,7 +361,7 @@ namespace SvgConverter
             return xaml;
         }
 
-        private static void RemoveResDictEntries(XElement root)
+        internal static void RemoveResDictEntries(XElement root)
         {
             var entriesElem = root.Element(nsDef + "ResourceDictionary.Entries");
             if (entriesElem != null)
@@ -611,7 +611,7 @@ namespace SvgConverter
             //       <DrawingGroup.ClipGeometry>
             //           <RectangleGeometry Rect="0,0,512,512" />
             //       </DrawingGroup.ClipGeometry>
-            var clipElement = drawingGroupElement.XPathSelectElement("//defns:DrawingGroup.ClipGeometry", _nsManager);
+            var clipElement = drawingGroupElement.XPathSelectElement(".//defns:DrawingGroup.ClipGeometry", _nsManager);
             if (clipElement != null)
             {
                 var rectangleElement = clipElement.Element(nsDef + "RectangleGeometry");
