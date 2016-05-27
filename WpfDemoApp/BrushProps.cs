@@ -1,34 +1,18 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 
 namespace WpfDemoApp
 {
+    public class BrushCollection : Collection<Brush>
+    {
+    }
 
     //[Bindable(BindableSupport.Yes)]
     public static class BrushProps
     {
-        //public static readonly DependencyProperty ContentBrushProperty = DependencyProperty.Register(
-        //    "ContentBrush", typeof(Brush), typeof(Image), new PropertyMetadata(default(Brush)));
-
-        //public Brush ContentBrush
-        //{
-        //    get { return (Brush) GetValue(ContentBrushProperty); }
-        //    set { SetValue(ContentBrushProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty ContentBrushesProperty = DependencyProperty.Register(
-        //    "ContentBrushes", typeof(Collection<Brush>), typeof(ImageBrushes), new PropertyMetadata(default(Collection<Brush>)));
-
-        //public static void SetContentBrush(DependencyObject element, Brush value)
-        //{
-        //    element.SetValue(ContentBrushProperty, value);
-        //}
-
-        //public static Brush GetContentBrush(DependencyObject element)
-        //{
-        //    return (Brush) element.GetValue(ContentBrushProperty);
-        //}
+        
         public static readonly DependencyProperty ContentBrushProperty = DependencyProperty.RegisterAttached(
             "ContentBrush", typeof(Brush), typeof(BrushProps), new PropertyMetadata(default(Brush)));
 
@@ -43,17 +27,23 @@ namespace WpfDemoApp
         }
 
         public static readonly DependencyProperty ContentBrushesProperty = DependencyProperty.RegisterAttached(
-            "ContentBrushes", typeof(Collection<Brush>), typeof(BrushProps), new PropertyMetadata(default(Collection<Brush>)));
+            "ContentBrushes", // Shadow the name so the parser does not skip GetContentBrushes
+            typeof(BrushCollection), typeof(BrushProps), new PropertyMetadata(default(BrushCollection)));
 
-        public static void SetContentBrushes(DependencyObject element, Collection<Brush> value)
+        public static void SetContentBrushes(DependencyObject element, BrushCollection value)
         {
             element.SetValue(ContentBrushesProperty, value);
         }
 
-        public static Collection<Brush> GetContentBrushes(DependencyObject element)
+        public static BrushCollection GetContentBrushes(DependencyObject element)
         {
-            return (Collection<Brush>) element.GetValue(ContentBrushesProperty);
+            var collection = (BrushCollection)element.GetValue(ContentBrushesProperty);
+            if (collection == null)
+            {
+                collection = new BrushCollection();
+                element.SetValue(ContentBrushesProperty, collection);
+            }
+            return collection;
         }
-
     }
 }
