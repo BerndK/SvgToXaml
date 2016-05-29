@@ -1,20 +1,36 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Media;
+// ReSharper disable CheckNamespace
 
-namespace WpfDemoApp
+namespace Brushes
 {
     public class BrushCollection : Collection<Brush>
     {
     }
 
     //[Bindable(BindableSupport.Yes)]
-    public static class BrushProps
+    public static class Props
     {
         
         public static readonly DependencyProperty ContentBrushProperty = DependencyProperty.RegisterAttached(
-            "ContentBrush", typeof(Brush), typeof(BrushProps), new PropertyMetadata(default(Brush)));
+            "ContentBrush", typeof(Brush), typeof(Props), new PropertyMetadata(default(Brush), ContentBrushPropertyChangedCallback));
+
+        private static void ContentBrushPropertyChangedCallback(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        {
+            var brushes = GetContentBrushes(dp) as BrushCollection;
+            if (brushes == null)
+            {
+                brushes = new BrushCollection();
+                SetContentBrushes(dp, brushes);
+            }
+            if (brushes.Count == 1 && (ReferenceEquals(brushes[0], args.OldValue)))
+                brushes[0] = args.NewValue as Brush;
+            if (brushes.Count == 0)
+                brushes.Add(args.NewValue as Brush);
+        }
 
         public static void SetContentBrush(DependencyObject element, Brush value)
         {
@@ -28,7 +44,7 @@ namespace WpfDemoApp
 
         public static readonly DependencyProperty ContentBrushesProperty = DependencyProperty.RegisterAttached(
             "ContentBrushes", // Shadow the name so the parser does not skip GetContentBrushes
-            typeof(BrushCollection), typeof(BrushProps), new PropertyMetadata(default(BrushCollection)));
+            typeof(BrushCollection), typeof(Props), new PropertyMetadata(default(BrushCollection)));
 
         public static void SetContentBrushes(DependencyObject element, BrushCollection value)
         {

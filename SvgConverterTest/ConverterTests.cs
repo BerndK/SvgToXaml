@@ -93,7 +93,8 @@ namespace SvgConverterTest
             Console.WriteLine(xaml);
             //File.WriteAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withNamePrefix.xaml", xaml);
             var expectedXaml = File.ReadAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withNamePrefix.xaml");
-            xaml.Should().Be(expectedXaml);
+            Assert.That(xaml, Is.EqualTo(expectedXaml));
+            //xaml.Should().Be(expectedXaml);
         }
 
         [Test]

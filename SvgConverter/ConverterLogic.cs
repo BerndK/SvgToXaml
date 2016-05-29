@@ -135,7 +135,12 @@ namespace SvgConverter
             }
         }
 
-        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, ResKeyInfo resKeyInfo)
+        /// <summary>
+        /// This one uses local and global colors
+        /// </summary>
+        /// <param name="rootElement"></param>
+        /// <param name="resKeyInfo"></param>
+        private static void ReplaceBrushesInDrawingGroupsOld(XElement rootElement, ResKeyInfo resKeyInfo)
         {
             //three steps of colouring: 1. global Color, 2, global ColorBrush, 3. local ColorBrush
             //<Color x:Key="ImagesColor1">#FF000000</Color>
@@ -199,6 +204,25 @@ namespace SvgConverter
                     }
                 }
             }
+        }
+
+        private static void ReplaceBrushesInDrawingGroups(XElement rootElement, ResKeyInfo resKeyInfo)
+        {
+            //building local Elements
+            var drawingGroups = rootElement.Elements(nsDef + "DrawingGroup").ToList();
+            foreach (var node in drawingGroups)
+            {
+                var brushAttributes = CollectBrushAttributesWithColor(node).ToList();
+                
+                foreach (var brushAttribute in brushAttributes)
+                {
+                    var color = brushAttribute.Value;
+                    var index = brushAttributes.IndexOf(brushAttribute);
+                    brushAttribute.Value =
+                        $"{{Binding Path=(brushes:Props.ContentBrushes)[{index}], RelativeSource={{RelativeSource AncestorType=Visual}}, FallbackValue={color}}}";
+                }
+            }
+
         }
 
         private static IEnumerable<XAttribute> CollectBrushAttributesWithColor(XElement drawingElement)
