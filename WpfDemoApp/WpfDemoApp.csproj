@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PropertyChangeNotifier.cs" />
     <Compile Include="Props.cs" />
     <Compile Include="ImagesC\ImagesC.cs">
       <AutoGen>True</AutoGen>

@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RelativeBrushes;
 
 namespace WpfDemoApp
 {
@@ -22,14 +23,17 @@ namespace WpfDemoApp
         public MainWindow()
         {
             InitializeComponent();
+            var brush = Props.GetContentBrush(Image1) as SolidColorBrush;
+//            brush.Color = Colors.Yellow;
         }
 
         private void ChangeBaseColor_OnClick(object sender, RoutedEventArgs e)
         {
-            var baseColor = (SolidColorBrush) FindResource("Color1Brush");
-            baseColor.Color = Colors.Brown;
-            var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1BrushKey);
-            baseColorC.Color = Colors.Brown;
+            //var baseColor = (SolidColorBrush) FindResource("Color1Brush");
+            //baseColor.Color = Colors.Brown;
+            //var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1BrushKey);
+            //baseColorC.Color = Colors.Brown;
+            Props.SetContentBrush(Image1, Brushes.Yellow);
         }
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
