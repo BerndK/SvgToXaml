@@ -23,9 +23,11 @@ namespace RelativeBrushes
     //[Bindable(BindableSupport.Yes)]
     public static class Props
     {
-        
+        #region ContentBrush
+
         public static readonly DependencyProperty ContentBrushProperty = DependencyProperty.RegisterAttached(
             "ContentBrush", typeof(Brush), typeof(Props), new PropertyMetadata(default(Brush), ContentBrushPropertyChangedCallback));
+
 
         private static void ContentBrushPropertyChangedCallback(DependencyObject dp, DependencyPropertyChangedEventArgs args)
         {
@@ -54,6 +56,10 @@ namespace RelativeBrushes
             return (Brush)element.GetValue(ContentBrushProperty);
         }
 
+        #endregion
+
+        #region ContentBrushes
+
         public static readonly DependencyProperty ContentBrushesProperty = DependencyProperty.RegisterAttached(
             "ContentBrushes", // possibly Shadow the name so the parser does not skip GetContentBrushes
             typeof(BrushCollection), typeof(Props), new PropertyMetadata(default(BrushCollection), ContentBrushesPropertyChangedCallback));
@@ -67,7 +73,8 @@ namespace RelativeBrushes
                 var brushes = (BrushCollection)args.NewValue;
                 var imageSource = image.Source;
 
-                SetBrushesToImageSource(imageSource, brushes);
+                SetBrushesToClonedImageSource(image, imageSource, brushes);
+
                 brushes.Parent = new WeakReference(image);
                 brushes.CollectionChanged += BrushesOnCollectionChanged;
             }
@@ -84,7 +91,8 @@ namespace RelativeBrushes
                     if (image != null)
                     {
                         var imageSource = image.Source;
-                        SetBrushesToImageSource(imageSource, brushes);
+
+                        SetBrushesToClonedImageSource(image, imageSource, brushes);
                     }
                 }
             }
@@ -106,22 +114,34 @@ namespace RelativeBrushes
             return collection;
         }
 
+        #endregion
+
+        #region SourceEx
+
         public static readonly DependencyProperty SourceExProperty = DependencyProperty.RegisterAttached(
             "SourceEx", typeof(ImageSource), typeof(Props), new PropertyMetadata(default(ImageSource), SourceExPropertyChangedCallback));
 
         private static void SourceExPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             var visual = dependencyObject as Visual;
-            if (visual is Image && args.NewValue is ImageSource)
+            if (visual is Image)
             {
                 var image = visual as Image;
-                var brushes = GetContentBrushes(image);
-                var imageSource = (ImageSource) args.NewValue;
-                var clonedImageSource = imageSource.Clone();
-                SetBrushesToImageSource(clonedImageSource, brushes);
-
-                image.Source = clonedImageSource;
+                if (args.NewValue is ImageSource)
+                {
+                    var brushes = GetContentBrushes(image);
+                    var imageSource = (ImageSource) args.NewValue;
+                    var clonedImageSource = EnsureClonedSource(image, imageSource);
+                    SetBrushesToImageSource(clonedImageSource, brushes);
+                    image.Source = clonedImageSource;
+                }
+                else
+                {
+                    if (args.NewValue == null)
+                        image.Source = null;
+                }
             }
+            //else dann passiert eben nix, selbst schuld, wenn jemand SourceEx woanders benutzt
         }
 
         public static void SetSourceEx(DependencyObject element, ImageSource value)
@@ -132,6 +152,47 @@ namespace RelativeBrushes
         public static ImageSource GetSourceEx(DependencyObject element)
         {
             return (ImageSource)element.GetValue(SourceExProperty);
+        }
+
+        #endregion
+
+        #region SetBrushes
+
+        private static readonly DependencyProperty SourceClonedProperty = DependencyProperty.RegisterAttached(
+            "SourceCloned", typeof(bool), typeof(Props), new PropertyMetadata(default(bool)));
+
+        private static void SetSourceCloned(DependencyObject element, bool value)
+        {
+            element.SetValue(SourceClonedProperty, value);
+        }
+
+        private static bool GetSourceCloned(DependencyObject element)
+        {
+            return (bool) element.GetValue(SourceClonedProperty);
+        }
+
+        private static ImageSource EnsureClonedSource(Image image, ImageSource imageSource)
+        {
+            if (image == null || imageSource == null)
+                return null;
+            if (GetSourceCloned(image)) 
+                return imageSource; //already a clone
+
+            var cloned = imageSource.Clone();
+            SetSourceCloned(image, true);
+            return cloned;
+        }
+
+        #endregion
+
+        #region SetBrushes
+
+        private static void SetBrushesToClonedImageSource(Image image, ImageSource imageSource, BrushCollection brushes)
+        {
+            var clonedImageSource = EnsureClonedSource(image, imageSource);
+            SetBrushesToImageSource(clonedImageSource, brushes);
+            if (clonedImageSource != null && !ReferenceEquals(clonedImageSource, image.Source))
+                image.Source = clonedImageSource;
         }
 
         public static void SetBrushesToImageSource(ImageSource imageSource, BrushCollection brushCollection)
@@ -211,5 +272,7 @@ namespace RelativeBrushes
             public DependencyObject Dp { get; set; }
             public DependencyProperty Prop { get; set; }
         }
+
+        #endregion
     }
 }

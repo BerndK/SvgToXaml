@@ -39,9 +39,16 @@ namespace WpfDemoApp
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
         {
-            ((SolidColorBrush) (FindResource("JOGColor1Brush"))).Color = Colors.SlateGray;
-            ((SolidColorBrush) (FindResource("JOGColor4Brush"))).Color = Colors.Red;
-            ((SolidColorBrush) (FindResource("JOGColor2Brush"))).Color = Colors.Yellow;
+            //((SolidColorBrush) (FindResource("JOGColor1Brush"))).Color = Colors.SlateGray;
+            //((SolidColorBrush) (FindResource("JOGColor4Brush"))).Color = Colors.Red;
+            //((SolidColorBrush) (FindResource("JOGColor2Brush"))).Color = Colors.Yellow;
+            BrushCollection[3] = Brushes.Orange;
+        }
+
+        private void BtnChangeBrushesColor_OnClick(object sender, RoutedEventArgs e)
+        {
+            var brushes = FindResource("BrushCollectionRes") as BrushCollection;
+            brushes[3] = Brushes.Orange;
         }
     }
 }
