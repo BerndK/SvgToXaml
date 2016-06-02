@@ -23,7 +23,7 @@ namespace WpfDemoApp
         public MainWindow()
         {
             InitializeComponent();
-            var brush = Props.GetContentBrush(Image1) as SolidColorBrush;
+            //var brush = Props.GetContentBrush(Image1) as SolidColorBrush;
 //            brush.Color = Colors.Yellow;
         }
 
@@ -33,7 +33,8 @@ namespace WpfDemoApp
             //baseColor.Color = Colors.Brown;
             //var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1BrushKey);
             //baseColorC.Color = Colors.Brown;
-            Props.SetContentBrush(Image1, Brushes.Yellow);
+
+            //Props.SetContentBrush(Image1, Brushes.Yellow);
         }
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)

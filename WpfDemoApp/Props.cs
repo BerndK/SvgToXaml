@@ -117,10 +117,10 @@ namespace RelativeBrushes
                 var image = visual as Image;
                 var brushes = GetContentBrushes(image);
                 var imageSource = (ImageSource) args.NewValue;
+                var clonedImageSource = imageSource.Clone();
+                SetBrushesToImageSource(clonedImageSource, brushes);
 
-                SetBrushesToImageSource(imageSource, brushes);
-
-                image.Source = imageSource;
+                image.Source = clonedImageSource;
             }
         }
 
@@ -164,7 +164,10 @@ namespace RelativeBrushes
             if (brushProps == null)
                 brushProps = Enumerable.Empty<BrushProp>();
 
-            return brushProps.Where(e => e.Dp != null).ToArray();
+            return brushProps
+                .Where(e => e.Dp != null)
+                .Where(e => e.Dp.GetValue(e.Prop) != null) //nur die verwenden, bei denen schon was gesetzt ist
+                .ToArray();
         }
 
         private static IEnumerable<BrushProp> GetBrushesFromDrawing(Drawing drawing)

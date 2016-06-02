@@ -14,15 +14,15 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
        
-        <Button HorizontalAlignment="Left" Margin="25,2,0,2" >
+        <!--<Button HorizontalAlignment="Left" Margin="25,2,0,2" >
             <Image x:Name="Image1" brushes:Props.ContentBrush="Red" >
-                <!--<brushes:Props.ContentBrushes>
+                --><!--<brushes:Props.ContentBrushes>
                     <brushes:BrushCollection>
                         <SolidColorBrush Color="Black"/>
                         <SolidColorBrush Color="Red"/>
                         <SolidColorBrush Color="Yellow"/>
                     </brushes:BrushCollection>
-                </brushes:Props.ContentBrushes>-->
+                </brushes:Props.ContentBrushes>--><!--
                 <brushes:Props.SourceEx>
                     <DrawingImage>
                         <DrawingImage.Drawing>
@@ -34,9 +34,18 @@
                     </DrawingImage>
                 </brushes:Props.SourceEx>
             </Image>
-        </Button>
+        </Button>-->
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="1">
-            <Image Source="{StaticResource JOGDrawingImage}"/>
+            <Image x:Name="Jog1" brushes:Props.SourceEx="{StaticResource JOGDrawingImage}">
+                <brushes:Props.ContentBrushes>
+                    <brushes:BrushCollection>
+                        <SolidColorBrush Color="Black"/>
+                        <SolidColorBrush Color="Yellow"/>
+                        <SolidColorBrush Color="Blue"/>
+                        <SolidColorBrush Color="Red"/>
+                    </brushes:BrushCollection>
+                </brushes:Props.ContentBrushes>
+            </Image>
         </Button>
         <Button Content="Change Base Color" Click="ChangeBaseColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
         <Button Content="Change Single Colors" Click="ChangeSingleColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Grid.Row="1"/>
@@ -46,7 +55,7 @@
             <Image Source="{StaticResource {x:Static imagesC:ImagesC.cloud_3_iconDrawingImageKey}}"/>
         </Button>
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="4">
-            <Image Source="{StaticResource JOGDrawingImage}"/>
+            <Image x:Name="Jog2" brushes:Props.SourceEx="{StaticResource JOGDrawingImage}"/>
         </Button>
 
     </Grid>
