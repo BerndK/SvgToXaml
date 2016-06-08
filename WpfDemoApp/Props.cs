@@ -18,6 +18,50 @@ namespace RelativeBrushes
     public class BrushCollection : ObservableCollection<Brush>
     {
         public WeakReference Parent;
+        private List<WeakReference> _parents;
+        private List<WeakReference> Parents
+        {
+            get
+            {
+                if (_parents == null)
+                    _parents = new List<WeakReference>();
+                return _parents;
+            }
+        }
+
+        public void AddParent(Visual visual)
+        {
+            if (visual == null)
+                return;
+            Parents.Add(new WeakReference(visual));
+        }
+
+        public void RemoveParent(Visual visual)
+        {
+            if (visual == null)
+                return;
+            var index  = Parents.FindIndex(wr => ReferenceEquals(wr.Target, visual));
+            if (index >= 0)
+                Parents.RemoveAt(index);
+        }
+
+        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnCollectionChanged(e);
+            foreach (var weakReference in Parents)
+            {
+                if (weakReference.IsAlive)
+                {
+                    var image = weakReference.Target as Image;
+                    if (image != null)
+                    {
+                        var imageSource = image.Source;
+                        Props.SetBrushesToClonedImageSource(image, imageSource, this);
+                    }
+                }
+            }
+        }
+
     }
 
     //[Bindable(BindableSupport.Yes)]
@@ -67,6 +111,12 @@ namespace RelativeBrushes
         private static void ContentBrushesPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             var visual = dependencyObject as Visual;
+            if (visual is Image && args.OldValue is BrushCollection)
+            {
+                var image = visual as Image;
+                var brushes = (BrushCollection)args.OldValue;
+                brushes.RemoveParent(image);
+            }
             if (visual is Image && args.NewValue is BrushCollection)
             {
                 var image = visual as Image;
@@ -75,8 +125,7 @@ namespace RelativeBrushes
 
                 SetBrushesToClonedImageSource(image, imageSource, brushes);
 
-                brushes.Parent = new WeakReference(image);
-                brushes.CollectionChanged += BrushesOnCollectionChanged;
+                brushes.AddParent(image);
             }
         }
 
@@ -187,7 +236,7 @@ namespace RelativeBrushes
 
         #region SetBrushes
 
-        private static void SetBrushesToClonedImageSource(Image image, ImageSource imageSource, BrushCollection brushes)
+        internal static void SetBrushesToClonedImageSource(Image image, ImageSource imageSource, BrushCollection brushes)
         {
             var clonedImageSource = EnsureClonedSource(image, imageSource);
             SetBrushesToImageSource(clonedImageSource, brushes);

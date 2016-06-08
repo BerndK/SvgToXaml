@@ -34,7 +34,7 @@ namespace WpfDemoApp
             //var baseColorC = (SolidColorBrush)FindResource(ImagesC.ImagesC.Color1BrushKey);
             //baseColorC.Color = Colors.Brown;
 
-            //Props.SetContentBrush(Image1, Brushes.Yellow);
+            Props.SetContentBrush(Image1, Brushes.Yellow);
         }
 
         private void ChangeSingleColor_OnClick(object sender, RoutedEventArgs e)
