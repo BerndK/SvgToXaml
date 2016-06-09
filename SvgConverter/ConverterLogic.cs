@@ -110,7 +110,7 @@ namespace SvgConverter
             }
 
             AddNameSpaceDef(doc.Root, resKeyInfo);
-            ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
+            //ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
             AddDrawingImagesToDrawingGroups(doc.Root);
             return doc.ToString();
         }

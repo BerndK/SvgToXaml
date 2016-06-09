@@ -129,24 +129,6 @@ namespace RelativeBrushes
             }
         }
 
-        private static void BrushesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            var brushes = sender as BrushCollection;
-            if (brushes != null)
-            {
-                if (brushes.Parent.IsAlive)
-                {
-                    var image = brushes.Parent.Target as Image;
-                    if (image != null)
-                    {
-                        var imageSource = image.Source;
-
-                        SetBrushesToClonedImageSource(image, imageSource, brushes);
-                    }
-                }
-            }
-        }
-
         public static void SetContentBrushes(DependencyObject element, BrushCollection value)
         {
             element.SetValue(ContentBrushesProperty, value);
@@ -168,10 +150,11 @@ namespace RelativeBrushes
         #region SourceEx
 
         public static readonly DependencyProperty SourceExProperty = DependencyProperty.RegisterAttached(
-            "SourceEx", typeof(ImageSource), typeof(Props), new PropertyMetadata(default(ImageSource), SourceExPropertyChangedCallback));
+            "SourceEx", typeof(ImageSource), typeof(Props), new FrameworkPropertyMetadata(default(ImageSource), FrameworkPropertyMetadataOptions.AffectsRender, SourceExPropertyChangedCallback));
 
         private static void SourceExPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
+            //(dependencyObject as Image).Source = args.NewValue as ImageSource;
             var visual = dependencyObject as Visual;
             if (visual is Image)
             {
@@ -179,7 +162,7 @@ namespace RelativeBrushes
                 if (args.NewValue is ImageSource)
                 {
                     var brushes = GetContentBrushes(image);
-                    var imageSource = (ImageSource) args.NewValue;
+                    var imageSource = (ImageSource)args.NewValue;
                     var clonedImageSource = EnsureClonedSource(image, imageSource);
                     SetBrushesToImageSource(clonedImageSource, brushes);
                     image.Source = clonedImageSource;
