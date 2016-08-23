@@ -84,15 +84,15 @@ namespace SvgConverter
             return xamlClean;
         }
 
-        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo)
-        {
-            return SvgDirToXaml(folder, resKeyInfo, null);
-        }
+        //public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo)
+        //{
+        //    return SvgDirToXaml(folder, resKeyInfo, null);
+        //}
 
         public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings)
         {
             //firstChar Upper
-            var firstChar = Char.ToUpper(resKeyInfo.XamlName[0]);
+            var firstChar = char.ToUpper(resKeyInfo.XamlName[0]);
             resKeyInfo.XamlName = firstChar + resKeyInfo.XamlName.Remove(0, 1);
 
 
@@ -102,16 +102,19 @@ namespace SvgConverter
 
             var doc = XDocument.Parse(xamlUntidy);
             RemoveResDictEntries(doc.Root);
-            var drawingGroupElements = doc.Root.XPathSelectElements("defns:DrawingGroup", _nsManager).ToList();
-            foreach (var drawingGroupElement in drawingGroupElements)
+            if (resKeyInfo.BuildStaticResources)
             {
-                BeautifyDrawingElement(drawingGroupElement, null);
-                ExtractGeometries(drawingGroupElement, resKeyInfo);
-            }
+                var drawingGroupElements = doc.Root.XPathSelectElements("defns:DrawingGroup", _nsManager).ToList();
+                foreach (var drawingGroupElement in drawingGroupElements)
+                {
+                    BeautifyDrawingElement(drawingGroupElement, null);
+                    ExtractGeometries(drawingGroupElement, resKeyInfo);
+                }
 
-            AddNameSpaceDef(doc.Root, resKeyInfo);
-            ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
-            AddDrawingImagesToDrawingGroups(doc.Root);
+                AddNameSpaceDef(doc.Root, resKeyInfo);
+                ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
+            }
+            AddDrawingImagesToDrawingGroups(doc.Root, resKeyInfo.BuildStaticResources);
             return doc.ToString();
         }
 
@@ -209,20 +212,33 @@ namespace SvgConverter
                 .Where(a => a.Value.StartsWith("#")); //is Color like #FF000000
         }
 
-        private static void AddDrawingImagesToDrawingGroups(XElement rootElement)
+        private static void AddDrawingImagesToDrawingGroups(XElement rootElement, bool makeStaticResources)
         {
             var drawingGroups = rootElement.Elements(nsDef + "DrawingGroup").ToList();
             foreach (var node in drawingGroups)
             {
                 //get Name of DrawingGroup
-                var nameDg = node.Attribute(nsx + "Key").Value;
-                var nameImg = nameDg.Replace("DrawingGroup", "DrawingImage");
-                //<DrawingImage x:Key="xxx" Drawing="{StaticResource cloud_5_icon_DrawingGroup}"/>
-                var drawingImage = new XElement(nsDef + "DrawingImage",
-                    new XAttribute(nsx + "Key", nameImg),
-                    new XAttribute("Drawing", string.Format("{{StaticResource {0}}}", nameDg))
-                    );
-                node.AddAfterSelf(drawingImage);
+                var att = node.Attribute(nsx + "Key");
+                var nameDg = att.Value;
+                if (makeStaticResources)
+                {
+                    //get Name of DrawingGroup
+                    var nameImg = nameDg.Replace("DrawingGroup", "DrawingImage");
+                    //<DrawingImage x:Key="xxx" Drawing="{StaticResource cloud_5_icon_DrawingGroup}"/>
+                    var drawingImage = new XElement(nsDef + "DrawingImage",
+                        new XAttribute(nsx + "Key", nameImg),
+                        new XAttribute("Drawing", string.Format("{{StaticResource {0}}}", nameDg))
+                        );
+                    node.AddAfterSelf(drawingImage);
+                }
+                else
+                {
+                    var nameImg = nameDg.Replace("DrawingGroup", "DrawingImage");
+                    var drawingImage = new XElement(nsDef + "DrawingImage", new XAttribute(nsx + "Key", nameImg));
+                    att.Remove();
+                    drawingImage.Add(node);
+                    node.ReplaceWith(drawingImage);
+                }
             }
         }
 

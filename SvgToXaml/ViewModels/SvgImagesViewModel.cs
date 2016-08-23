@@ -76,6 +76,7 @@ namespace SvgToXaml.ViewModels
                         namePrefix = null;
 
                 }
+                MessageBoxResult inlineQ = MessageBox.Show("Inline Resources?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 outFileName = Path.GetFullPath(saveDlg.FileName);
                 var resKeyInfo = new ResKeyInfo
@@ -85,9 +86,9 @@ namespace SvgToXaml.ViewModels
                     UseComponentResKeys = useComponentResKeys,
                     NameSpace = nameSpace,
                     NameSpaceName = nameSpaceName,
-
+                    BuildStaticResources = inlineQ == MessageBoxResult.Yes
                 };
-                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo));
+                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo,null));
 
                 BuildBatchFile(outFileName, resKeyInfo);
             }
@@ -103,7 +104,8 @@ namespace SvgToXaml.ViewModels
                 var relOutputDir = FileUtils.MakeRelativePath(CurrentDir, PathIs.Folder, outputdir, PathIs.Folder);
                 var svgToXamlPath =System.Reflection.Assembly.GetEntryAssembly().Location;
                 var relSvgToXamlPath = FileUtils.MakeRelativePath(CurrentDir, PathIs.Folder, svgToXamlPath, PathIs.File);
-                var batchText = $"{relSvgToXamlPath} BuildDict /inputdir \"{"."}\" /outputdir \"{relOutputDir}\" /outputname {outputname}";
+                var buildStaticResource = compResKeyInfo.BuildStaticResources ? "/buildStaticResources" : String.Empty;
+                var batchText = $"{relSvgToXamlPath} BuildDict /inputdir \"{"."}\" /outputdir \"{relOutputDir}\" /outputname {outputname} {buildStaticResource}";
 
                 if (compResKeyInfo.UseComponentResKeys)
                 {

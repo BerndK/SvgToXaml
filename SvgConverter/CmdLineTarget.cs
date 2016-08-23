@@ -37,7 +37,9 @@ namespace SvgConverter
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Namespace to use with UseResKey")]
             string compResKeyNS = null,
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "name of Namespace to use with UseResKey" )]
-            string compResKeyNSName = null
+            string compResKeyNSName = null,
+            [ArgumentParam(DefaultValue = false, ExplicitNeeded = false, LongDesc = "build staticresources outside each image" )]
+            bool buildStaticResources = false
             )
         {
             Console.WriteLine("Building resource dictionary...");
@@ -58,6 +60,7 @@ namespace SvgConverter
                 UseComponentResKeys = useComponentResKeys,
                 NameSpace = compResKeyNS,
                 NameSpaceName = compResKeyNSName,
+                BuildStaticResources = buildStaticResources
             };
 
             File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null));
