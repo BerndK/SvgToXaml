@@ -76,7 +76,7 @@ namespace SvgToXaml.ViewModels
                         namePrefix = null;
 
                 }
-                MessageBoxResult inlineQ = MessageBox.Show("Inline Resources?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult inlineQ = MessageBox.Show("Create StaticResources?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 outFileName = Path.GetFullPath(saveDlg.FileName);
                 var resKeyInfo = new ResKeyInfo
