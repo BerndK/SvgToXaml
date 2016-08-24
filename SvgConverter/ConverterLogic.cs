@@ -236,8 +236,11 @@ namespace SvgConverter
                     var nameImg = nameDg.Replace("DrawingGroup", "DrawingImage");
                     var drawingImage = new XElement(nsDef + "DrawingImage", new XAttribute(nsx + "Key", nameImg));
                     att.Remove();
+                    node.Name = nsDef + "DrawingImage.Drawing";
+
                     drawingImage.Add(node);
                     node.ReplaceWith(drawingImage);
+
                 }
             }
         }
