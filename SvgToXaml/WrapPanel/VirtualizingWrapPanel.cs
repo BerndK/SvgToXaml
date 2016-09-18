@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -88,7 +85,7 @@ namespace SvgToXaml.WrapPanel
             _isInMeasure = true;
             _childLayouts.Clear();
 
-            var extentInfo = GetExtentInfo(availableSize, ItemHeight);
+            var extentInfo = GetExtentInfo(availableSize);
 
             EnsureScrollOffsetIsWithinConstrains(extentInfo);
 
@@ -122,7 +119,7 @@ namespace SvgToXaml.WrapPanel
                         // check if item needs to be moved into a new position in the Children collection
                         if (visualIndex < Children.Count)
                         {
-                            if (Children[visualIndex] != child)
+                            if (!ReferenceEquals(Children[visualIndex], child))
                             {
                                 var childCurrentIndex = Children.IndexOf(child);
 
@@ -249,7 +246,8 @@ namespace SvgToXaml.WrapPanel
 
             var firstRealizedIndex = Math.Max(extentInfo.ItemsPerLine * firstVisibleLine - 1, 0);
             var firstRealizedItemLeft = firstRealizedIndex % extentInfo.ItemsPerLine * ItemWidth - HorizontalOffset;
-            var firstRealizedItemTop = (firstRealizedIndex / extentInfo.ItemsPerLine) * itemHeight - VerticalOffset;
+            // ReSharper disable once PossibleLossOfFraction
+            var firstRealizedItemTop = firstRealizedIndex / extentInfo.ItemsPerLine * itemHeight - VerticalOffset;
 
             var firstCompleteLineTop = (firstVisibleLine == 0 ? firstRealizedItemTop : firstRealizedItemTop + ItemHeight);
             var completeRealizedLines = (int)Math.Ceiling((availableSize.Height - firstCompleteLineTop) / itemHeight);
@@ -265,7 +263,7 @@ namespace SvgToXaml.WrapPanel
             };
         }
 
-        private ExtentInfo GetExtentInfo(Size viewPortSize, double itemHeight)
+        private ExtentInfo GetExtentInfo(Size viewPortSize)
         {
             if (_itemsControl == null)
             {
@@ -377,7 +375,7 @@ namespace SvgToXaml.WrapPanel
         {
             if (rectangle.IsEmpty ||
                 visual == null ||
-                visual == this ||
+                ReferenceEquals(visual, this) ||
                 !IsAncestorOf(visual))
             {
                 return Rect.Empty;
@@ -420,7 +418,7 @@ namespace SvgToXaml.WrapPanel
 
         public ItemLayoutInfo GetVisibleItemsRange()
         {
-            return GetLayoutInfo(_viewportSize, ItemHeight, GetExtentInfo(_viewportSize, ItemHeight));
+            return GetLayoutInfo(_viewportSize, ItemHeight, GetExtentInfo(_viewportSize));
         }
 
         public bool CanVerticallyScroll
@@ -435,35 +433,17 @@ namespace SvgToXaml.WrapPanel
             set;
         }
 
-        public double ExtentWidth
-        {
-            get { return _extentSize.Width; }
-        }
+        public double ExtentWidth => _extentSize.Width;
 
-        public double ExtentHeight
-        {
-            get { return _extentSize.Height; }
-        }
+        public double ExtentHeight => _extentSize.Height;
 
-        public double ViewportWidth
-        {
-            get { return _viewportSize.Width; }
-        }
+        public double ViewportWidth => _viewportSize.Width;
 
-        public double ViewportHeight
-        {
-            get { return _viewportSize.Height; }
-        }
+        public double ViewportHeight => _viewportSize.Height;
 
-        public double HorizontalOffset
-        {
-            get { return _offset.X; }
-        }
+        public double HorizontalOffset => _offset.X;
 
-        public double VerticalOffset
-        {
-            get { return _offset.Y; }
-        }
+        public double VerticalOffset => _offset.Y;
 
         public ScrollViewer ScrollOwner
         {
@@ -473,18 +453,14 @@ namespace SvgToXaml.WrapPanel
 
         private void InvalidateScrollInfo()
         {
-            if (ScrollOwner != null)
-            {
-                ScrollOwner.InvalidateScrollInfo();
-            }
+            ScrollOwner?.InvalidateScrollInfo();
         }
 
         private static void HandleItemDimensionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var wrapPanel = (d as VirtualizingWrapPanel);
 
-            if (wrapPanel != null)
-                wrapPanel.InvalidateMeasure();
+            wrapPanel?.InvalidateMeasure();
         }
 
         private double Clamp(double value, double min, double max)

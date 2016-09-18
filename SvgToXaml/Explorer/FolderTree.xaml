@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TreeView Grid.Column="0" x:Name="foldersTree" BorderThickness="0">
+        <TreeView Grid.Column="0" x:Name="FoldersTree" BorderThickness="0">
             <TreeView.Resources>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="HeaderTemplate">

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using SvgToXaml.Properties;
 
 namespace SvgToXaml.ViewModels
 {
@@ -37,10 +32,10 @@ namespace SvgToXaml.ViewModels
         /// </returns>
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals((object)storage, (object)value))
+            if (Equals(storage, value))
                 return false;
             storage = value;
-            this.OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName);
             return true;
         }
 
@@ -53,10 +48,8 @@ namespace SvgToXaml.ViewModels
         ///             that support <see cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.</param>
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler changedEventHandler = this.PropertyChanged;
-            if (changedEventHandler == null)
-                return;
-            changedEventHandler((object)this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler changedEventHandler = PropertyChanged;
+            changedEventHandler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -66,7 +59,7 @@ namespace SvgToXaml.ViewModels
         /// <typeparam name="T">The type of the property that has a new value</typeparam><param name="propertyExpression">A Lambda expression representing the property that has a new value.</param>
         protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            this.OnPropertyChanged(ExtractPropertyName<T>(propertyExpression));
+            OnPropertyChanged(ExtractPropertyName(propertyExpression));
         }
 
         /// <summary>
@@ -85,15 +78,15 @@ namespace SvgToXaml.ViewModels
         public static string ExtractPropertyName<T>(Expression<Func<T>> propertyExpression)
         {
             if (propertyExpression == null)
-                throw new ArgumentNullException("propertyExpression");
+                throw new ArgumentNullException(nameof(propertyExpression));
             MemberExpression memberExpression = propertyExpression.Body as MemberExpression;
             if (memberExpression == null)
-                throw new ArgumentException("PropertySupport NotMemberAccessExpression", "propertyExpression");
+                throw new ArgumentException("PropertySupport NotMemberAccessExpression", nameof(propertyExpression));
             PropertyInfo propertyInfo = memberExpression.Member as PropertyInfo;
             if (propertyInfo == null)
-                throw new ArgumentException("PropertySupport ExpressionNotProperty", "propertyExpression");
+                throw new ArgumentException("PropertySupport ExpressionNotProperty", nameof(propertyExpression));
             if (propertyInfo.GetMethod.IsStatic)
-                throw new ArgumentException("PropertySupport StaticExpression", "propertyExpression");
+                throw new ArgumentException("PropertySupport StaticExpression", nameof(propertyExpression));
             return memberExpression.Member.Name;
         }
 

@@ -9,13 +9,7 @@ namespace SvgToXaml.ViewModels
 {
     public abstract class ViewModelBase : BindableBase
     {
-        protected static bool InDesignMode
-        {
-            get
-            {
-                return DesignerProperties.GetIsInDesignMode(new DependencyObject());
-            }
-        }
+        protected static bool InDesignMode => DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
         /// <summary>
         /// Führt die Action über den UI-Dispatcher aus.
@@ -29,6 +23,7 @@ namespace SvgToXaml.ViewModels
         /// <summary>
         /// Führt die Action über den UI-Dispatcher aus.
         /// </summary>
+        /// <param name="priority">Priority</param>
         /// <param name="action">Auszuführende Aktion</param>
         public void InUi(DispatcherPriority priority, Action action)
         {
@@ -41,7 +36,7 @@ namespace SvgToXaml.ViewModels
         /// <typeparam name="T">Type-Parameter, wird inferiert und kann ignoriert werden</typeparam>
         /// <param name="field">Member-Variable, deren Wert gesetzt werden soll</param>
         /// <param name="value">der zu setzende neue Wert</param>
-        /// <param name="propertyExpression">Lambda-Ausdruck, der die Property aufruft, deren Name in <see cref="PropertyChanged"/> übergeben werden soll. <example>Beispiel: <code>()=>Name</code></example></param> 
+        /// <param name="propertyExpression">Lambda-Ausdruck, der die Property aufruft, deren Name in <see cref="BindableBase.PropertyChanged"/> übergeben werden soll. <example>Beispiel: <code>()=>Name</code></example></param> 
         /// <returns>Liefert <see cref="bool.True"/>, wenn der Wert des Feldes geändert wurde.</returns>
         protected bool SetProperty<T>(ref T field, T value, Expression<Func<T>> propertyExpression)
         {

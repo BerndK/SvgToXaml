@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.XPath;
 using BKLib.CommandLineParser;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
 
 namespace SvgConverter
 {
@@ -42,11 +31,7 @@ namespace SvgConverter
         {
             Console.WriteLine("Building resource dictionary...");
 
-            string outFileName;
-            if (outputdir != null)
-                outFileName = Path.Combine(outputdir, outputname);
-            else
-                outFileName = Path.Combine(inputdir, outputname);
+            var outFileName = Path.Combine(outputdir ?? inputdir, outputname);
             if (!Path.HasExtension(outFileName))
                 outFileName = Path.ChangeExtension(outFileName, ".xaml");
 
@@ -65,8 +50,8 @@ namespace SvgConverter
 
             if (buildhtmlfile)
             {
-                var htmlFilePath = System.IO.Path.Combine(inputdir,
-                    System.IO.Path.GetFileNameWithoutExtension(outputname));
+                var htmlFilePath = Path.Combine(inputdir,
+                    Path.GetFileNameWithoutExtension(outputname));
                 var files = ConverterLogic.SvgFilesFromFolder(inputdir);
                 BuildHtmlBrowseFile(files, htmlFilePath);
             }
@@ -256,19 +241,19 @@ namespace SvgConverter
             new XElement("html",
                 new XElement("head",
                     new XElement("title", "Browse svg images")),
-                new XElement("body", string.Format("Images in file: {0}", outputFilename),
+                new XElement("body", $"Images in file: {outputFilename}",
                     new XElement("br"),
                     files.Select(
                     f => new XElement("img",
-                        new XAttribute("src", System.IO.Path.GetFileName(f)),
-                        new XAttribute("title", System.IO.Path.GetFileNameWithoutExtension(f)),
+                        new XAttribute("src", Path.GetFileName(f) ?? ""),
+                        new XAttribute("title", Path.GetFileNameWithoutExtension(f) ?? ""),
                         new XAttribute("height", size),
                         new XAttribute("width", size)
                         )
                     )
                 )
             ));
-            var filename = System.IO.Path.ChangeExtension(outputFilename, ".html");
+            var filename = Path.ChangeExtension(outputFilename, ".html");
             doc.Save(filename);
             Console.WriteLine("Html overview written to {0}", filename);
         }

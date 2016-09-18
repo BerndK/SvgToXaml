@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -18,19 +14,19 @@ namespace SvgToXaml.ViewModels
             return new BitmapImage(new Uri(Filepath, UriKind.RelativeOrAbsolute));
         }
 
-        public static string SupportedFormats { get { return "*.jpg|*.jpeg|*.png|*.bmp|*.tiff|*.gif"; } }
+        public static string SupportedFormats => "*.jpg|*.jpeg|*.png|*.bmp|*.tiff|*.gif";
+
         protected override string GetSvgDesignInfo()
         {
-            if (PreviewSource != null && PreviewSource is BitmapImage)
+            if (PreviewSource is BitmapImage)
             {
                 var bi = (BitmapImage)PreviewSource;
-                return string.Format("{0}x{1}", bi.PixelWidth, bi.PixelHeight);
+                return $"{bi.PixelWidth}x{bi.PixelHeight}";
             }
             return null;
         }
 
-        public override bool HasXaml { get { return false; } }
-        public override bool HasSvg { get { return false; } }
-
+        public override bool HasXaml => false;
+        public override bool HasSvg => false;
     }
 }

@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using SvgToXaml.ViewModels;
 
 namespace SvgToXaml
 {
     /// <summary>
     /// Interaction logic for DetailWindow.xaml
     /// </summary>
-    public partial class DetailWindow : Window
+    public partial class DetailWindow
     {
         public DetailWindow()
         {
@@ -27,7 +18,7 @@ namespace SvgToXaml
 
         private void CopyToClipboardClick(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(xmlViewer.Text);
+            Clipboard.SetText(XmlViewer.Text);
         }
 
         private void ToggleStretchClicked(object sender, MouseButtonEventArgs e)

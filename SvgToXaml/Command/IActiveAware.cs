@@ -1,6 +1,6 @@
 using System;
 
-namespace LocalizationControl.Command
+namespace SvgToXaml.Command
 {
     /// <summary>
     /// Interface that defines if the object instance is active

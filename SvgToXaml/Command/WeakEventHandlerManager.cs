@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace LocalizationControl.Command
+namespace SvgToXaml.Command
 {
     /// <summary>
     /// Handles management and dispatching of EventHandlers in a weak way.
@@ -10,7 +10,7 @@ namespace LocalizationControl.Command
     /// </summary>
     public static class WeakEventHandlerManager
     {
-        private static readonly SynchronizationContext syncContext = SynchronizationContext.Current;
+        private static readonly SynchronizationContext SyncContext = SynchronizationContext.Current;
 
         /// <summary>
         /// Invokes the handlers
@@ -32,8 +32,8 @@ namespace LocalizationControl.Command
         {
             if (eventHandler == null)
                 return;
-            if (syncContext != null)
-                syncContext.Post((SendOrPostCallback) (o => eventHandler(sender, EventArgs.Empty)), (object) null);
+            if (SyncContext != null)
+                SyncContext.Post(o => eventHandler(sender, EventArgs.Empty), null);
             else
                 eventHandler(sender, EventArgs.Empty);
         }
@@ -65,7 +65,7 @@ namespace LocalizationControl.Command
         {
             if (handlers == null)
                 handlers = defaultListSize > 0 ? new List<WeakReference>(defaultListSize) : new List<WeakReference>();
-            handlers.Add(new WeakReference((object) handler));
+            handlers.Add(new WeakReference(handler));
         }
 
         /// <summary>

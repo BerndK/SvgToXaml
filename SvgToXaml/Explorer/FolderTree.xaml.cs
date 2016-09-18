@@ -12,15 +12,15 @@ namespace SvgToXaml.Explorer
     /// <summary>
     ///     Interaction logic for FolderTree.xaml
     /// </summary>
-    public partial class FolderTree : UserControl
+    public partial class FolderTree
     {
         public static readonly DependencyProperty CurrentFolderProperty = DependencyProperty.Register(
             "CurrentFolder", typeof (string), typeof (FolderTree), new PropertyMetadata(default(string), CurrentFolderChanged));
 
         private static void CurrentFolderChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            FolderTree folderTree = dependencyObject as FolderTree;
-            var item =  folderTree.FindItem(folderTree.foldersTree, (string)dependencyPropertyChangedEventArgs.NewValue);
+            FolderTree folderTree = (FolderTree)dependencyObject;
+            var item =  folderTree.FindItem(folderTree.FoldersTree, (string)dependencyPropertyChangedEventArgs.NewValue);
             if (item!=null)
                 folderTree.SelectItem(item);
         }
@@ -36,7 +36,7 @@ namespace SvgToXaml.Explorer
         {
             InitializeComponent();
             FillRootLevel();
-            foldersTree.SelectedItemChanged += FoldersTreeOnSelectedItemChanged;
+            FoldersTree.SelectedItemChanged += FoldersTreeOnSelectedItemChanged;
         }
 
         public static readonly DependencyProperty ContextMenuCommandsProperty = DependencyProperty.Register(
@@ -68,7 +68,7 @@ namespace SvgToXaml.Explorer
                 // the triggers know that this is root item.
                 TreeViewItemProps.SetIsRootLevel(item, true);
 
-                foldersTree.Items.Add(item);
+                FoldersTree.Items.Add(item);
             }
         }
 
@@ -80,18 +80,20 @@ namespace SvgToXaml.Explorer
                 item.Items.Clear();
                 try
                 {
-                    foreach (var dir in Directory.GetDirectories(item.Tag as string))
-                    {
-                        var subitem = new TreeViewItem();
-                        subitem.Header = new DirectoryInfo(dir).Name;
-                        subitem.Tag = dir;
-                        subitem.Items.Add(_dummyNode);
-                        subitem.Expanded += folder_Expanded;
-                        item.Items.Add(subitem);
-                    }
+                    if (item.Tag != null)
+                        foreach (var dir in Directory.GetDirectories((string) item.Tag))
+                        {
+                            var subitem = new TreeViewItem();
+                            subitem.Header = new DirectoryInfo(dir).Name;
+                            subitem.Tag = dir;
+                            subitem.Items.Add(_dummyNode);
+                            subitem.Expanded += folder_Expanded;
+                            item.Items.Add(subitem);
+                        }
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
             }
         }
@@ -139,11 +141,11 @@ namespace SvgToXaml.Explorer
         {
             add
             {
-                foldersTree.SelectedItemChanged += value;
+                FoldersTree.SelectedItemChanged += value;
             }
             remove
             {
-                foldersTree.SelectedItemChanged -= value;
+                FoldersTree.SelectedItemChanged -= value;
             }
         }
 

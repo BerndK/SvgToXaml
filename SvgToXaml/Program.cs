@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using SvgConverter;
 using SvgToXaml.Infrastructure;
 
@@ -41,11 +38,11 @@ namespace SvgToXaml
             HConsoleHelper.ReleaseConsoleHandles();
         }
 
-        private static Dictionary<string, Assembly> loadedAsmsCache = new Dictionary<string, Assembly>(StringComparer.InvariantCultureIgnoreCase);
+        private static readonly Dictionary<string, Assembly> LoadedAsmsCache = new Dictionary<string, Assembly>(StringComparer.InvariantCultureIgnoreCase);
         private static Assembly OnResolveAssembly(object sender, ResolveEventArgs args)
         {
             Assembly cachedAsm;
-            if (loadedAsmsCache.TryGetValue(args.Name, out cachedAsm))
+            if (LoadedAsmsCache.TryGetValue(args.Name, out cachedAsm))
                 return cachedAsm;
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
@@ -54,7 +51,7 @@ namespace SvgToXaml
             string path = assemblyName.Name + ".dll";
             if (assemblyName.CultureInfo != null && assemblyName.CultureInfo.Equals(CultureInfo.InvariantCulture) == false)
             {
-                path = String.Format(@"{0}\{1}", assemblyName.CultureInfo, path);
+                path = $@"{assemblyName.CultureInfo}\{path}";
             }
 
             using (Stream stream = executingAssembly.GetManifestResourceStream(path))
@@ -65,7 +62,7 @@ namespace SvgToXaml
                 byte[] assemblyRawBytes = new byte[stream.Length];
                 stream.Read(assemblyRawBytes, 0, assemblyRawBytes.Length);
                 var loadedAsm = Assembly.Load(assemblyRawBytes);
-                loadedAsmsCache.Add(args.Name, loadedAsm);
+                LoadedAsmsCache.Add(args.Name, loadedAsm);
                 return loadedAsm;
             }
         }

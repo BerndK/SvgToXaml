@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
-using LocalizationControl.Command;
 using SvgConverter;
 
 namespace SvgToXaml.ViewModels
@@ -41,30 +32,30 @@ namespace SvgToXaml.ViewModels
 
         protected override ImageSource GetImageSource()
         {
-            return SvgData != null ? SvgData.ConvertedObj as ImageSource : null;
+            return SvgData?.ConvertedObj as ImageSource;
         }
 
         protected override string GetSvgDesignInfo()
         {
-            if (PreviewSource != null && PreviewSource is DrawingImage)
+            if (PreviewSource is DrawingImage)
             {
                 var di = (DrawingImage) PreviewSource;
                 if (di.Drawing is DrawingGroup)
                 {
                     var dg = (DrawingGroup) di.Drawing;
-                    var bounds = (dg.ClipGeometry != null) ? dg.ClipGeometry.Bounds : dg.Bounds;
-                    return string.Format("{0:#.##}x{1:#.##}", bounds.Width, bounds.Height);
+                    var bounds = dg.ClipGeometry?.Bounds ?? dg.Bounds;
+                    return $"{bounds.Width:#.##}x{bounds.Height:#.##}";
                 }
             }
             return null;
         }
 
-        public override bool HasXaml { get { return true; } }
-        public override bool HasSvg { get { return true; } }
+        public override bool HasXaml => true;
+        public override bool HasSvg => true;
 
-        public string Svg { get { return SvgData != null ? SvgData.Svg : null; } }
+        public string Svg => SvgData?.Svg;
 
-        public string Xaml { get { return SvgData != null ? SvgData.Xaml : null; } }
+        public string Xaml => SvgData?.Xaml;
 
 
         public ConvertedSvgData SvgData
@@ -75,7 +66,7 @@ namespace SvgToXaml.ViewModels
                 {
                     try
                     {
-                        _convertedSvgData = ConverterLogic.ConvertSvg(_filepath, ResultMode.DrawingImage);
+                        _convertedSvgData = ConverterLogic.ConvertSvg(Filepath, ResultMode.DrawingImage);
                     }
                     catch (Exception)
                     {

@@ -20,7 +20,7 @@ namespace SvgToXaml.Infrastructure
     [DebuggerDisplay("Count = {Count}")]
     public class ObservableCollectionSafe<T> : INotifyCollectionChanged, INotifyPropertyChanged, IList<T>, IList, IReadOnlyList<T>, IDisposable
     {
-        private Collection<T> _coll;
+        private readonly Collection<T> _coll;
         // ReSharper disable once InconsistentNaming
         internal ReaderWriterLockSlim _lock;
         private volatile bool _isInCollectionChanged;
@@ -44,7 +44,7 @@ namespace SvgToXaml.Infrastructure
             : this()
         {
             if (items == null)
-                throw new ArgumentNullException("items");
+                throw new ArgumentNullException(nameof(items));
             CopyFrom(items);
         }
 
@@ -73,8 +73,7 @@ namespace SvgToXaml.Infrastructure
         public virtual event NotifyCollectionChangedEventHandler CollectionChanged;
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, e);
+            PropertyChanged?.Invoke(this, e);
         }
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -660,15 +659,9 @@ namespace SvgToXaml.Infrastructure
             CopyTo(array, arrayIndex);
         }
 
-        int ICollection<T>.Count
-        {
-            get { return Count; }
-        }
+        int ICollection<T>.Count => Count;
 
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return ((IList<T>)_coll).IsReadOnly; }
-        }
+        bool ICollection<T>.IsReadOnly => ((IList<T>)_coll).IsReadOnly;
 
         bool ICollection<T>.Remove(T item)
         {
@@ -695,15 +688,9 @@ namespace SvgToXaml.Infrastructure
             Insert(index, (T)value);
         }
 
-        bool IList.IsFixedSize
-        {
-            get { return ((IList)_coll).IsFixedSize; }
-        }
+        bool IList.IsFixedSize => ((IList)_coll).IsFixedSize;
 
-        bool IList.IsReadOnly
-        {
-            get { return ((IList)_coll).IsReadOnly; }
-        }
+        bool IList.IsReadOnly => ((IList)_coll).IsReadOnly;
 
         void IList.Remove(object value)
         {
@@ -737,30 +724,18 @@ namespace SvgToXaml.Infrastructure
             CopyTo(array, index);
         }
 
-        int ICollection.Count
-        {
-            get { return Count; }
-        }
+        int ICollection.Count => Count;
 
-        bool ICollection.IsSynchronized
-        {
-            get { return ((IList)_coll).IsFixedSize; }
-        }
+        bool ICollection.IsSynchronized => ((IList)_coll).IsFixedSize;
 
         object ICollection.SyncRoot
         {
             get { throw new NotSupportedException("This ObservableCollection doesn't need external synchronization"); }
         }
 
-        T IReadOnlyList<T>.this[int index]
-        {
-            get { return this[index]; }
-        }
+        T IReadOnlyList<T>.this[int index] => this[index];
 
-        int IReadOnlyCollection<T>.Count
-        {
-            get { return Count; }
-        }
+        int IReadOnlyCollection<T>.Count => Count;
 
         #endregion
 

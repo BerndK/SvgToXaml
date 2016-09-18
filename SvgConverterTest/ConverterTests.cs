@@ -277,7 +277,7 @@ namespace SvgConverterTest
         {
             var doc = XDocument.Load(@"TestFiles\xamlUntidy.xaml");
             ConverterLogic.RemoveResDictEntries(doc.Root);
-            var drawingGroupElements = doc.Root.XPathSelectElements("defns:DrawingGroup", ConverterLogic._nsManager).ToList();
+            var drawingGroupElements = doc.Root.XPathSelectElements("defns:DrawingGroup", ConverterLogic.NsManager).ToList();
 
             var clipElements = drawingGroupElements.Select(dg =>
             {

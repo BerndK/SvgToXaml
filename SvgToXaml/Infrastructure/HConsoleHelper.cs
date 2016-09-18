@@ -46,16 +46,17 @@ namespace SvgToXaml.Infrastructure
     /// </summary>
     public static class HConsoleHelper
     {
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
         private static extern bool AttachConsole(uint pid);
 
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll")]
         private static extern bool FreeConsole();
 
         [StructLayout(LayoutKind.Explicit)]
+        // ReSharper disable once InconsistentNaming
         public struct CHAR_UNION
         {
             // Fields
@@ -106,7 +107,7 @@ namespace SvgToXaml.Infrastructure
         [DllImport("kernel32", SetLastError = true)]
         public static extern bool WriteConsoleInput(IntPtr hConsoleInput, KeyEventStruct[] lpBuffer, int nLength, ref int lpNumberOfEventsWritten);
 
-        public enum StandardHandle : int
+        public enum StandardHandle
         {
             Input = -10,
             Output = -11,
@@ -116,16 +117,17 @@ namespace SvgToXaml.Infrastructure
         [DllImport("kernel32", SetLastError = true)]
         public static extern IntPtr GetStdHandle(StandardHandle nStdHandle);
 
+        // ReSharper disable once InconsistentNaming
         private const UInt32 ATTACH_PARENT_PROCESS = 0xFFFFFFFF;
 
         //true if attached - used to free it later
-        public static bool consoleIsAttached { get; private set; }
+        public static bool ConsoleIsAttached { get; private set; }
 
         public static void InitConsoleHandles()
         {
             // Attach to console window – this may modify the standard handles
             if (AttachConsole(ATTACH_PARENT_PROCESS))
-                consoleIsAttached = true;
+                ConsoleIsAttached = true;
             else
             {
                 AllocConsole();
@@ -136,7 +138,7 @@ namespace SvgToXaml.Infrastructure
         {
             //Console.WriteLine("Bye Bye");
 
-            if (consoleIsAttached)
+            if (ConsoleIsAttached)
             {
                 //Leider wird im Falle von AttachConsole (an vorhandene Console) am Ende noch ein Enter erwartet
                 //dies ist ein im Netz bekanntes Problem, man muss eben ein Enter simulieren, dafür gibt es versch. Methoden:
@@ -161,7 +163,6 @@ namespace SvgToXaml.Infrastructure
             IntPtr stdIn = GetStdHandle(StandardHandle.Input);
 
             int eventsWritten = 0;
-            bool written;
 
             KeyEventStruct[] data = new KeyEventStruct[] { new KeyEventStruct() };
             data[0].EventType = InputEventType.KeyEvent;
@@ -171,7 +172,7 @@ namespace SvgToXaml.Infrastructure
             data[0].wRepeatCount = 1;
             data[0].wVirtualKeyCode = 0;
             data[0].wVirtualScanCode = 0;
-            written = WriteConsoleInput(stdIn, data, 1, ref eventsWritten);
+            WriteConsoleInput(stdIn, data, 1, ref eventsWritten);
             //Console.WriteLine("{0} events written to {1} Written:{2}", eventsWritten, stdIn.ToInt32(), written);
         }
     }

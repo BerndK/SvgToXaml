@@ -4,7 +4,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:viewModels="clr-namespace:SvgToXaml.ViewModels"
-        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:textViewer="clr-namespace:SvgToXaml.TextViewer"
         mc:Ignorable="d" 
         Title="{Binding Filename}" Height="375" Width="300"
@@ -62,7 +61,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="25"/>
                     </Grid.RowDefinitions>
-                    <textViewer:XmlViewer Grid.Row="0" x:Name="xmlViewer" FontFamily="Consolas" FontSize="10pt" Text="{Binding Xaml}">
+                    <textViewer:XmlViewer Grid.Row="0" x:Name="XmlViewer" FontFamily="Consolas" FontSize="10pt" Text="{Binding Xaml}">
 
                     </textViewer:XmlViewer>
                     <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">

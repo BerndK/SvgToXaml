@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace LocalizationControl.Command
+namespace SvgToXaml.Command
 {
     /// <summary>
     /// An <see cref="T:System.Windows.Input.ICommand"/> whose delegates do not take any parameters for <see cref="M:Microsoft.Practices.Prism.Commands.DelegateCommand.Execute"/> and <see cref="M:Microsoft.Practices.Prism.Commands.DelegateCommand.CanExecute"/>.
@@ -31,7 +31,7 @@ namespace LocalizationControl.Command
             : base(o => executeMethod(), o => canExecuteMethod())
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
         }
 
         private DelegateCommand(Func<Task> executeMethod)
@@ -43,7 +43,7 @@ namespace LocalizationControl.Command
             : base(o => executeMethod(), o => canExecuteMethod())
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
         }
 
         /// <summary>
@@ -151,9 +151,9 @@ namespace LocalizationControl.Command
             : base(o => executeMethod((T)o), o => canExecuteMethod((T)o))
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
-            TypeInfo typeInfo = IntrospectionExtensions.GetTypeInfo(typeof(T));
-            if (typeInfo.IsValueType && (!typeInfo.IsGenericType || !IntrospectionExtensions.GetTypeInfo(typeof(Nullable<>)).IsAssignableFrom(IntrospectionExtensions.GetTypeInfo(typeInfo.GetGenericTypeDefinition()))))
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
+            TypeInfo typeInfo = typeof(T).GetTypeInfo();
+            if (typeInfo.IsValueType && (!typeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo().IsAssignableFrom(typeInfo.GetGenericTypeDefinition().GetTypeInfo())))
                 throw new InvalidCastException("DelegateCommand Invalid Generic Payload Type");
         }
 
@@ -166,7 +166,7 @@ namespace LocalizationControl.Command
             : base(o => executeMethod((T)o), o => canExecuteMethod((T)o))
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
         }
 
         /// <summary>

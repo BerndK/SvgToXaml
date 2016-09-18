@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace LocalizationControl.Command
+namespace SvgToXaml.Command
 {
     /// <summary>
     /// An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:Microsoft.Practices.Prism.Commands.DelegateCommandBase.Execute(System.Object)"/> and <see cref="M:Microsoft.Practices.Prism.Commands.DelegateCommandBase.CanExecute(System.Object)"/>.
@@ -82,7 +82,7 @@ namespace LocalizationControl.Command
         protected DelegateCommandBase(Action<object> executeMethod, Func<object, bool> canExecuteMethod)
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
             ExecuteMethod = arg =>
             {
                 executeMethod(arg);
@@ -99,7 +99,7 @@ namespace LocalizationControl.Command
         protected DelegateCommandBase(Func<object, Task> executeMethod, Func<object, bool> canExecuteMethod)
         {
             if (executeMethod == null || canExecuteMethod == null)
-                throw new ArgumentNullException("executeMethod", "DelegateCommand Delegates CannotBeNull");
+                throw new ArgumentNullException(nameof(executeMethod), "DelegateCommand Delegates CannotBeNull");
             ExecuteMethod = executeMethod;
             CanExecuteMethod = canExecuteMethod;
         }
@@ -170,9 +170,7 @@ namespace LocalizationControl.Command
         protected virtual void OnIsActiveChanged()
         {
             EventHandler eventHandler = IsActiveChanged;
-            if (eventHandler == null)
-                return;
-            eventHandler(this, EventArgs.Empty);
+            eventHandler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

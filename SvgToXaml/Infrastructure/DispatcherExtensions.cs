@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace LogInspector.Infrastructure
+namespace SvgToXaml.Infrastructure
 {
     public static class DispatcherExtensions
     {

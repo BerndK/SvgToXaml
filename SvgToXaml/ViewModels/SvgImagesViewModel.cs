@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -8,9 +7,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Xaml;
-using LocalizationControl.Command;
 using SvgConverter;
+using SvgToXaml.Command;
 using SvgToXaml.Infrastructure;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -47,7 +45,7 @@ namespace SvgToXaml.ViewModels
             var openDlg = new OpenFileDialog { CheckFileExists = true, Filter = "Svg-Files|*.svg*", Multiselect = false };
             if (openDlg.ShowDialog().GetValueOrDefault())
             {
-                SvgImageViewModel.OpenDetailWindow(new SvgImageViewModel(openDlg.FileName));
+                ImageBaseViewModel.OpenDetailWindow(new SvgImageViewModel(openDlg.FileName));
             }
         }
 
@@ -143,6 +141,8 @@ namespace SvgToXaml.ViewModels
             //assembly.GetName().Name
             var resourceName = appType.Namespace + "." + "Payload.T4Template.tt"; //Achtung: hier Punkt statt Slash
             var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null)
+                throw new InvalidDataException($"Error: {resourceName} not found in payload file");
             var text = new StreamReader(stream, Encoding.UTF8).ReadToEnd();
             var t4FileName = Path.ChangeExtension(outFileName, ".tt");
             File.WriteAllText(t4FileName, text, Encoding.UTF8);
@@ -211,7 +211,7 @@ namespace SvgToXaml.ViewModels
             Images.AddRange(allImages);
         }
 
-        private static string[] GetFilesMulti(string sourceFolder, string filters, System.IO.SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        private static string[] GetFilesMulti(string sourceFolder, string filters, SearchOption searchOption = SearchOption.TopDirectoryOnly)
         {
             try
             {

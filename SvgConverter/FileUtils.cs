@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace SvgConverter
 {
@@ -25,10 +22,10 @@ namespace SvgConverter
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="UriFormatException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        public static String MakeRelativePath(String fromPath, PathIs fromIs, String toPath, PathIs toIs)
+        public static string MakeRelativePath(string fromPath, PathIs fromIs, string toPath, PathIs toIs)
         {
-            if (String.IsNullOrEmpty(fromPath)) throw new ArgumentNullException("fromPath");
-            if (String.IsNullOrEmpty(toPath)) throw new ArgumentNullException("toPath");
+            if (string.IsNullOrEmpty(fromPath)) throw new ArgumentNullException(nameof(fromPath));
+            if (string.IsNullOrEmpty(toPath)) throw new ArgumentNullException(nameof(toPath));
 
             //Slash am Ende anfügen, damit Uri damit klarkommt und weiß, was ein Folder ist, und was nicht
             if (!fromPath.EndsWith(Path.DirectorySeparatorChar.ToString()) &&
@@ -46,7 +43,7 @@ namespace SvgConverter
             if (fromUri.Scheme != toUri.Scheme) { return toPath; } // path can't be made relative.
 
             Uri relativeUri = fromUri.MakeRelativeUri(toUri);
-            String relativePath = Uri.UnescapeDataString(relativeUri.ToString());
+            string relativePath = Uri.UnescapeDataString(relativeUri.ToString());
 
             if (toUri.Scheme.ToUpperInvariant() == "FILE")
             {

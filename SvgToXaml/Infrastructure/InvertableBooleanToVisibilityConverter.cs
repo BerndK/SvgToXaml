@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -13,8 +9,9 @@ namespace SvgToXaml.Infrastructure
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public class InvertableBooleanToVisibilityConverter : IValueConverter
     {
-        enum InvertEnum
+        private enum InvertEnum
         {
+            // ReSharper disable once UnusedMember.Local
             Normal, Invert
         }
 
@@ -61,7 +58,7 @@ namespace SvgToXaml.Infrastructure
                 if (bool.TryParse((string)param, out aBool))
                     return aBool;
             }
-            throw new InvalidDataException(string.Format("{0}: not able to convert the ConverterParameter to InvertEnum or Boolean [{1}]", this.GetType().Name, param));
+            throw new InvalidDataException($"{GetType().Name}: not able to convert the ConverterParameter to InvertEnum or Boolean [{param}]");
         }
     }
 }

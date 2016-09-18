@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows;
 
 namespace SvgConverter
@@ -23,25 +19,13 @@ namespace SvgConverter
 
         public string Xaml
         {
-            get
-            {
-                if (_xaml == null)
-                {
-                    _xaml = ConverterLogic.SvgObjectToXaml(ConvertedObj, false, _objectName);
-                }
-                return _xaml;
-            }
+            get { return _xaml ?? (_xaml = ConverterLogic.SvgObjectToXaml(ConvertedObj, false, _objectName)); }
             set { _xaml = value; }
         }
 
         public string Svg
         {
-            get
-            {
-                if (_svg == null)
-                    _svg = File.ReadAllText(_filepath);
-                return _svg;
-            }
+            get { return _svg ?? (_svg = File.ReadAllText(_filepath)); }
             set { _svg = value; }
         }
 

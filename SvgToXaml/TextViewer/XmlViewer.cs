@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace SvgToXaml.TextViewer
@@ -16,13 +9,13 @@ namespace SvgToXaml.TextViewer
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             "Text", typeof (string), typeof (XmlViewer), new PropertyMetadata(default(string), TextChanged));
 
-        new private static void TextChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
+        private new static void TextChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs args)
         {
             var xmlViewer = (XmlViewer) dependencyObject;
             xmlViewer.Document.Text = (string)args.NewValue;
         }
 
-        new public string Text
+        public new string Text
         {
             get { return Document.Text; }
             set { SetValue(TextProperty, value); }
