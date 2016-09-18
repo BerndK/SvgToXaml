@@ -91,7 +91,7 @@ namespace SvgConverterTest
             var resKeyInfo = new ResKeyInfo { XamlName = "Test", Prefix = "NamePrefix" };
             var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", resKeyInfo, settings);
             Console.WriteLine(xaml);
-            //File.WriteAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withNamePrefix.xaml", xaml);
+            //File.WriteAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withNamePrefix_.xaml", xaml);
             var expectedXaml = File.ReadAllText("TestFiles\\ExpectedXaml_SvgDirToXamlTest_withNamePrefix.xaml");
             Assert.That(xaml, Is.EqualTo(expectedXaml));
             //xaml.Should().Be(expectedXaml);
