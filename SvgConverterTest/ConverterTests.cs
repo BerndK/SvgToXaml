@@ -269,7 +269,7 @@ namespace SvgConverterTest
         [Test]
         public void GetElemNameFromResKey_CompResKey()
         {
-            ConverterLogic.GetElemNameFromResKey("{x:Static NameSpaceName:XamlName.ElementName}", ResKeyInfoUseCompResKey).Should().Be("ElementName");
+            ConverterLogic.GetElemNameFromResKey("{x:Static NameSpaceName:XamlName.ElementNameKey}", ResKeyInfoUseCompResKey).Should().Be("ElementName");
         }
 
         [Test]

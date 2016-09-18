@@ -594,10 +594,14 @@ namespace SvgConverter
             {   //{x:Static NameSpaceName:XamlName.ElementName}
                 var p1 = name.IndexOf(".", StringComparison.Ordinal);
                 var p2 = name.LastIndexOf("}", StringComparison.Ordinal);
+                string result;
                 if (p1 < p2)
-                    return name.Substring(p1 + 1, p2 - p1 - 1);
+                    result = name.Substring(p1 + 1, p2 - p1 - 1);
                 else
-                    return name;
+                    result = name;
+                if (result.EndsWith("Key"))
+                    result = result.Substring(0, result.Length - 3);
+                return result;
             }
             else
             {
