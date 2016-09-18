@@ -39,10 +39,7 @@ namespace <#= nameSpace #>
         {
 #>        private static readonly ComponentResourceKey <#= name #>CompResKey = MakeKey("<#= prefix #>.<#= name #>");
 
-        public static ResourceKey <#= name #>
-        {
-            get { return <#= name #>CompResKey; }
-        }
+        public static ResourceKey <#= name #> => <#= name #>CompResKey;
 <#+          }
     }
 

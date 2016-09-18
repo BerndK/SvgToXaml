@@ -101,7 +101,7 @@ namespace SvgToXaml.ViewModels
                 var relOutputDir = FileUtils.MakeRelativePath(CurrentDir, PathIs.Folder, outputdir, PathIs.Folder);
                 var svgToXamlPath =System.Reflection.Assembly.GetEntryAssembly().Location;
                 var relSvgToXamlPath = FileUtils.MakeRelativePath(CurrentDir, PathIs.Folder, svgToXamlPath, PathIs.File);
-                var batchText = $"{relSvgToXamlPath} BuildDict /inputdir \"{"."}\" /outputdir \"{relOutputDir}\" /outputname {outputname}";
+                var batchText = $"{relSvgToXamlPath} BuildDict /inputdir \".\" /outputdir \"{relOutputDir}\" /outputname {outputname}";
 
                 if (compResKeyInfo.UseComponentResKeys)
                 {
