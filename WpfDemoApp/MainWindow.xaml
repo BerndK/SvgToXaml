@@ -68,7 +68,7 @@
         </Button>
         <Button Content="Change Color" Click="ChangeColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
         <Button Content="Change Middle Color" Click="ChangeMiddleColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Grid.Row="1"/>
-        <Path Data="{StaticResource {x:Static images:Icons.cloud_3_iconKeyGeometryKey}}" Fill="#FF60A1FA" Stretch="Uniform" Margin="25,2,0,2" Grid.Row="2" HorizontalAlignment="Left"></Path>
+        <Path Data="{StaticResource {x:Static images:Icons.cloud_3_iconGeometryKey}}" Fill="#FF60A1FA" Stretch="Uniform" Margin="25,2,0,2" Grid.Row="2" HorizontalAlignment="Left"></Path>
         <TextBlock Margin="87,15,351,6" Grid.Row="2">Just a Path</TextBlock>
         <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="3">
             <Image Source="{StaticResource {x:Static images:Icons.cloud_3_iconDrawingImageKey}}"/>
