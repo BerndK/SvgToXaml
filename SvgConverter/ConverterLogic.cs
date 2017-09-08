@@ -349,7 +349,7 @@ namespace SvgConverter
 
             //workaround: error when Id starts with a number
             var doc = XDocument.Load(Path.GetFullPath(filepath));
-            ReplaceIdsWithNumbers(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
+            FixIds(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
             using (var ms = new MemoryStream())
             {
                 doc.Save(ms);
@@ -359,17 +359,22 @@ namespace SvgConverter
             }
         }
 
-        private static void ReplaceIdsWithNumbers(XElement root)
+        private static void FixIds(XElement root)
         {
             var idAttributesStartingWithDigit = root.DescendantsAndSelf()
                 .SelectMany(d=>d.Attributes())
-                .Where(a=>string.Equals(a.Name.LocalName, "Id", StringComparison.InvariantCultureIgnoreCase))
-                .Where(a=>char.IsDigit(a.Value.FirstOrDefault()));
+                .Where(a=>string.Equals(a.Name.LocalName, "Id", StringComparison.InvariantCultureIgnoreCase));
             foreach (var attr in idAttributesStartingWithDigit)
             {
-                attr.Value = "_" + attr.Value;
+                if (char.IsDigit(attr.Value.FirstOrDefault()))
+                {
+                    attr.Value = "_" + attr.Value;
+                }
+
+                attr.Value = attr.Value.Replace("/", "_");
             }
         }
+
 
         internal static DrawingImage DrawingToImage(Drawing drawing)
         {
