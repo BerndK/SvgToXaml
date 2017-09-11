@@ -27,7 +27,11 @@ namespace SvgConverter
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Namespace to use with UseResKey")]
             string compResKeyNS = null,
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "name of Namespace to use with UseResKey" )]
-            string compResKeyNSName = null
+            string compResKeyNSName = null,
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Extract child elements into separate resources, default true" )]
+            bool extractChildElements = true,
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "If true will not use hardcoded Brush values but rather a binding to SvgConvertedImageSourceBehavior that can be used to dynamically set the image color. Set this behavior on Images. Use together with extractChildElements:false.", ExplicitWantedArguments = "extractChildElements")]
+            bool useSvgConvertedImageSourceBehavior = false
             )
         {
             Console.WriteLine("Building resource dictionary...");
@@ -43,6 +47,8 @@ namespace SvgConverter
                 UseComponentResKeys = useComponentResKeys,
                 NameSpace = compResKeyNS,
                 NameSpaceName = compResKeyNSName,
+                ExtractChildElements = extractChildElements,
+                UseSvgConvertedImageSourceBehavior = useSvgConvertedImageSourceBehavior
             };
 
             File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null));
