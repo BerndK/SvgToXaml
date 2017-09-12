@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <ResourceDictionary>
+         <!--<ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Images/Icons.xaml" />
+                <ResourceDictionary Source="IconResources;component/Images/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
+         </ResourceDictionary>-->
     </Application.Resources>
 </Application>

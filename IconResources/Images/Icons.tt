@@ -38,8 +38,8 @@ namespace <#= nameSpace #>
 		foreach (var name in keyNames)
         {
 #>        private static readonly ComponentResourceKey <#= name #>CompResKey = MakeKey("<#= prefix #>.<#= name #>");
-
         public static ResourceKey <#= name #> => <#= name #>CompResKey;
+
 <#+          }
     }
 

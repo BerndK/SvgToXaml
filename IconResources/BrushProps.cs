@@ -5,11 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using WpfDemoApp;
 
 // ReSharper disable CheckNamespace
 
@@ -75,7 +71,7 @@ namespace RelativeBrushes
 
         private static void ContentBrushPropertyChangedCallback(DependencyObject dp, DependencyPropertyChangedEventArgs args)
         {
-            var brushes = GetContentBrushes(dp) as BrushCollection;
+            var brushes = GetContentBrushes(dp);
             var brushesCreated = false;
             if (brushes == null)
             {

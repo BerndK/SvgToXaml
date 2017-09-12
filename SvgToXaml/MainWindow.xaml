@@ -68,8 +68,8 @@
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewModels:ImageBaseViewModel}">
-                        <Border x:Name="GraphicBorder" BorderThickness="1" BorderBrush="MediumBlue"
-                            Width="{Binding Path='ActualWidth', ElementName='Bd'}" Height="{Binding Path='ActualHeight', ElementName='Bd'}">
+                        <Border x:Name="GraphicBorder" BorderThickness="1" BorderBrush="MediumBlue">
+                            <!--don't set, use automatic: Width="{Binding Path='ActualWidth', ElementName='Bd'}" Height="{Binding Path='ActualHeight', ElementName='Bd'}"-->
                             <Grid  ToolTip="{Binding Filename}">
                                 <!--<Button Style="{StaticResource FlatButton}">
                                 <Image Source="{Binding PreviewSource}"></Image>

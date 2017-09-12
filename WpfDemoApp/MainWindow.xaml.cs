@@ -27,6 +27,7 @@ namespace WpfDemoApp
 
         private void BtnChangeMiddleColors_OnClick(object sender, RoutedEventArgs e)
         {
+            //Many icons have same Color (application wide)
             var brushes = FindResource("BrushCollectionRes") as BrushCollection;
             if (brushes != null)
                 brushes[2] = Brushes.Green;
