@@ -21,7 +21,7 @@ namespace SvgConverter
             {
                 return clp.ParseArgs(args, true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //nothing to do, the errors are hopefully already reported via CommandLineParser
                 Console.WriteLine("Error while handling Commandline.");

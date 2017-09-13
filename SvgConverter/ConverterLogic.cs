@@ -104,12 +104,19 @@ namespace SvgConverter
             foreach (var drawingGroupElement in drawingGroupElements)
             {
                 BeautifyDrawingElement(drawingGroupElement, null);
-                ExtractGeometries(drawingGroupElement, resKeyInfo);
+
+                if (resKeyInfo.ExtractChildElements)
+                {
+                    ExtractGeometries(drawingGroupElement, resKeyInfo);
+                }
             }
 
             AddNameSpaceDef(doc.Root, resKeyInfo);
-            //ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
-            AddDrawingImagesToDrawingGroups(doc.Root);
+            if (resKeyInfo.UseSvgConvertedImageSourceBehavior)
+            {
+                ReplaceBrushesInDrawingGroups(doc.Root, resKeyInfo);
+            }
+            AddDrawingImagesToDrawingGroups(doc.Root, resKeyInfo);
             return doc.ToString();
         }
 
@@ -217,7 +224,7 @@ namespace SvgConverter
                     var color = brushAttribute.Value;
                     var index = brushAttributes.IndexOf(brushAttribute);
                     brushAttribute.Value =
-                        $"{{Binding Path=(brushes:Props.ContentBrushes)[{index}], RelativeSource={{RelativeSource AncestorType=Visual}}, FallbackValue={color}}}";
+                        $"{{Binding Path=(behaviors:SvgConvertedImageSourceBehavior.BrushesAssist)[{index}], RelativeSource={{RelativeSource Mode=FindAncestor, AncestorType=DrawingImage}}, FallbackValue={color}, TargetNullValue={color}}}";
                 }
             }
 
@@ -231,7 +238,7 @@ namespace SvgConverter
                 .Where(a => a.Value.StartsWith("#")); //is Color like #FF000000
         }
 
-        private static void AddDrawingImagesToDrawingGroups(XElement rootElement)
+        private static void AddDrawingImagesToDrawingGroups(XElement rootElement, ResKeyInfo resKeyInfo)
         {
             var drawingGroups = rootElement.Elements(NsDef + "DrawingGroup").ToList();
             foreach (var node in drawingGroups)
@@ -240,11 +247,22 @@ namespace SvgConverter
                 var nameDg = node.Attribute(Nsx + "Key").Value;
                 var nameImg = nameDg.Replace("DrawingGroup", "DrawingImage");
                 //<DrawingImage x:Key="xxx" Drawing="{StaticResource cloud_5_icon_DrawingGroup}"/>
-                var drawingImage = new XElement(NsDef + "DrawingImage",
-                    new XAttribute(Nsx + "Key", nameImg),
-                    new XAttribute("Drawing", string.Format("{{StaticResource {0}}}", nameDg))
-                    );
+                var drawingImage = new XElement(NsDef + "DrawingImage", new XAttribute(Nsx + "Key", nameImg));
+
                 node.AddAfterSelf(drawingImage);
+                if (resKeyInfo.ExtractChildElements)
+                {
+                    drawingImage.Add(new XAttribute("Drawing", string.Format("{{StaticResource {0}}}", nameDg)));
+                }
+                else
+                {
+                    var drawingImageDrawing = new XElement(NsDef + "DrawingImage.Drawing");
+                    drawingImage.Add(drawingImageDrawing);
+                    
+                    node.Attribute(XName.Get("Key", node.GetNamespaceOfPrefix("x").NamespaceName)).Remove();
+                    node.Remove();
+                    drawingImageDrawing.Add(node);
+                }
             }
         }
 
