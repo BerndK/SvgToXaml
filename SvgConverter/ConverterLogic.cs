@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml;
@@ -35,8 +36,7 @@ namespace SvgConverter
 
         public static string SvgFileToXaml(string filepath, ResultMode resultMode, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings = null)
         {
-            string name;
-            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out name, resKeyInfo);
+            var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out var name, resKeyInfo);
             return SvgObjectToXaml(obj, wpfDrawingSettings != null && wpfDrawingSettings.IncludeRuntime, name);
         }
 
@@ -96,7 +96,7 @@ namespace SvgConverter
 
             var files = SvgFilesFromFolder(folder);
             var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings, resKeyInfo);
-            var xamlUntidy = WpfObjToXaml(dict, wpfDrawingSettings != null ? wpfDrawingSettings.IncludeRuntime : false);
+            var xamlUntidy = WpfObjToXaml(dict, wpfDrawingSettings?.IncludeRuntime ?? false);
 
             var doc = XDocument.Parse(xamlUntidy);
             RemoveResDictEntries(doc.Root);
