@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -90,7 +91,7 @@ namespace SvgConverter
         public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings)
         {
             //firstChar Upper
-            var firstChar = Char.ToUpper(resKeyInfo.XamlName[0]);
+            var firstChar = char.ToUpperInvariant(resKeyInfo.XamlName[0]);
             resKeyInfo.XamlName = firstChar + resKeyInfo.XamlName.Remove(0, 1);
 
 
@@ -228,7 +229,7 @@ namespace SvgConverter
             return drawingElement.Descendants()
                 .SelectMany(d => d.Attributes())
                 .Where(a => a.Name.LocalName == "Brush" || a.Name.LocalName == "ForegroundBrush")
-                .Where(a => a.Value.StartsWith("#")); //is Color like #FF000000
+                .Where(a => a.Value.StartsWith("#", StringComparison.InvariantCulture)); //is Color like #FF000000
         }
 
         private static void AddDrawingImagesToDrawingGroups(XElement rootElement)
@@ -242,7 +243,7 @@ namespace SvgConverter
                 //<DrawingImage x:Key="xxx" Drawing="{StaticResource cloud_5_icon_DrawingGroup}"/>
                 var drawingImage = new XElement(NsDef + "DrawingImage",
                     new XAttribute(Nsx + "Key", nameImg),
-                    new XAttribute("Drawing", string.Format("{{StaticResource {0}}}", nameDg))
+                    new XAttribute("Drawing", string.Format(CultureInfo.InvariantCulture, "{{StaticResource {0}}}", nameDg))
                     );
                 node.AddAfterSelf(drawingImage);
             }
@@ -412,7 +413,7 @@ namespace SvgConverter
             var clipElement = GetClipElement(drawingElement, out clipRect);
             if (clipElement != null && clipElement.Parent.Name.LocalName == "DrawingGroup")
             {   //add Attribute: ClipGeometry="M0,0 V40 H40 V0 H0 Z" this is the description of a rectangle-like Geometry
-                clipElement.Parent.Add(new XAttribute("ClipGeometry", string.Format("M{0},{1} V{2} H{3} V{0} H{1} Z", clipRect.Left, clipRect.Top, clipRect.Bottom, clipRect.Right)));
+                clipElement.Parent.Add(new XAttribute("ClipGeometry", string.Format(CultureInfo.InvariantCulture, "M{0},{1} V{2} H{3} V{0} H{1} Z", clipRect.Left, clipRect.Top, clipRect.Bottom, clipRect.Right)));
                 //delete the old Element
                 clipElement.Remove();
             }
@@ -604,7 +605,7 @@ namespace SvgConverter
                     result = name.Substring(p1 + 1, p2 - p1 - 1);
                 else
                     result = name;
-                if (result.EndsWith("Key"))
+                if (result.EndsWith("Key", StringComparison.InvariantCulture))
                     result = result.Substring(0, result.Length - 3);
                 return result;
             }
