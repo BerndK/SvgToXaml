@@ -12,7 +12,7 @@
       <DrawingGroup>
         <GlyphRunDrawing ForegroundBrush="#FF000000">
           <GlyphRunDrawing.GlyphRun>
-            <GlyphRun BaselineOrigin="1.1717333,37.4375" FontRenderingEmSize="5.84810781" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="HANDWHEEL" GlyphIndices="43 36 49 39 58 43 40 40 47" AdvanceWidths="4.15113333333333 3.7711 4.37330666666667 3.95819333333333 5.46078666666667 4.15113333333333 2.95841333333333 2.95841333333333 2.75378" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+            <GlyphRun PixelsPerDip="2" BaselineOrigin="1.1717333,37.4375" FontRenderingEmSize="5.84810781" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="HANDWHEEL" GlyphIndices="43 36 49 39 58 43 40 40 47" AdvanceWidths="4.15113333333333 3.7711 4.37330666666667 3.95819333333333 5.46078666666667 4.15113333333333 2.95841333333333 2.95841333333333 2.75378" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
               <GlyphRun.GlyphTypeface>
                 <GlyphTypeface FontUri="C:\WINDOWS\FONTS\SEGOEUI.TTF" StyleSimulations="None" />
               </GlyphRun.GlyphTypeface>
@@ -45,7 +45,7 @@
       <DrawingGroup>
         <GlyphRunDrawing ForegroundBrush="#FF000000">
           <GlyphRunDrawing.GlyphRun>
-            <GlyphRun BaselineOrigin="10.376838,18.028101" FontRenderingEmSize="3.5710113" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="SINUMERIK" GlyphIndices="54 44 49 56 48 40 53 44 46" AdvanceWidths="1.89567 0.94962 2.67036 2.45259 3.20586 1.80642 2.13843 0.94962 2.0706" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+            <GlyphRun PixelsPerDip="2" BaselineOrigin="10.376838,18.028101" FontRenderingEmSize="3.5710113" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="SINUMERIK" GlyphIndices="54 44 49 56 48 40 53 44 46" AdvanceWidths="1.89567 0.94962 2.67036 2.45259 3.20586 1.80642 2.13843 0.94962 2.0706" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
               <GlyphRun.GlyphTypeface>
                 <GlyphTypeface FontUri="C:\WINDOWS\FONTS\SEGOEUI.TTF" StyleSimulations="None" />
               </GlyphRun.GlyphTypeface>
@@ -89,7 +89,7 @@
       <DrawingGroup Transform="0.9935628,0,0,1.0064789,0,0">
         <GlyphRunDrawing ForegroundBrush="#FF000000">
           <GlyphRunDrawing.GlyphRun>
-            <GlyphRun BaselineOrigin="11.428195,37.931644" FontRenderingEmSize="10.52512455" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2" Characters="JOG" GlyphIndices="45 50 42" AdvanceWidths="5.85282666666667 8.18974666666667 8.18974666666667" GlyphOffsets="0,0 0,0 0,0" Language="en-us">
+            <GlyphRun PixelsPerDip="2" BaselineOrigin="11.428195,37.931644" FontRenderingEmSize="10.52512455" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2" Characters="JOG" GlyphIndices="45 50 42" AdvanceWidths="5.85282666666667 8.18974666666667 8.18974666666667" GlyphOffsets="0,0 0,0 0,0" Language="en-us">
               <GlyphRun.GlyphTypeface>
                 <GlyphTypeface FontUri="C:\WINDOWS\FONTS\ARIALBD.TTF" StyleSimulations="None" />
               </GlyphRun.GlyphTypeface>
