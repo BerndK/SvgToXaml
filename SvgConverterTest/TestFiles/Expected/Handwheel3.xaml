@@ -1,0 +1,67 @@
+<DrawingGroup x:Key="Test" x:Name="DrawingLayer" ClipGeometry="M0,0 V40 H40 V0 H0 Z">
+  <DrawingGroup x:Name="layer1">
+    <GeometryDrawing x:Name="polyline3016">
+      <GeometryDrawing.Pen>
+        <Pen Brush="#FF0000FF" Thickness="1" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+      </GeometryDrawing.Pen>
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="Nonzero" Transform="1,0,0,1,-428.70961,-386.49945" Figures="M0,400L0,400" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+    <DrawingGroup x:Name="text3380">
+      <GlyphRunDrawing ForegroundBrush="#FF000000">
+        <GlyphRunDrawing.GlyphRun>
+          <GlyphRun PixelsPerDip="2" BaselineOrigin="1.1717333,37.4375" FontRenderingEmSize="5.84810781" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="HANDWHEEL" GlyphIndices="43 36 49 39 58 43 40 40 47" AdvanceWidths="4.15113333333333 3.7711 4.37330666666667 3.95819333333333 5.46078666666667 4.15113333333333 2.95841333333333 2.95841333333333 2.75378" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+            <GlyphRun.GlyphTypeface>
+              <GlyphTypeface FontUri="{svg:SvgFontUri c:\windows\fonts\segoeui.ttf}" StyleSimulations="None" />
+            </GlyphRun.GlyphTypeface>
+          </GlyphRun>
+        </GlyphRunDrawing.GlyphRun>
+      </GlyphRunDrawing>
+    </DrawingGroup>
+    <GeometryDrawing x:Name="path3493">
+      <GeometryDrawing.Brush>
+        <SolidColorBrush Color="#FF000000" Opacity="0" Transform="0.9247968,0,0,0.9247968,31.152312,-1.2132876" />
+      </GeometryDrawing.Brush>
+      <GeometryDrawing.Pen>
+        <Pen Brush="#FF000000" Thickness="1.29758234" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+      </GeometryDrawing.Pen>
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="Nonzero" Transform="0.9247968,0,0,0.9247968,31.152312,-1.2132876" Figures="M3.6875,19.1875A15.375,15.375,0,1,1,-27.0625,19.1875A15.375,15.375,0,1,1,3.6875,19.1875z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+    <GeometryDrawing x:Name="path3515">
+      <GeometryDrawing.Brush>
+        <SolidColorBrush Color="#FF000000" Opacity="0" Transform="0.7378049,0,0,0.7378049,28.966844,2.3746195" />
+      </GeometryDrawing.Brush>
+      <GeometryDrawing.Pen>
+        <Pen Brush="#FF000000" Thickness="1.08429749" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+      </GeometryDrawing.Pen>
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="Nonzero" Transform="0.7378049,0,0,0.7378049,28.966844,2.3746195" Figures="M3.6875,19.1875A15.375,15.375,0,1,1,-27.0625,19.1875A15.375,15.375,0,1,1,3.6875,19.1875z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+    <DrawingGroup x:Name="text3539">
+      <GlyphRunDrawing ForegroundBrush="#FF000000">
+        <GlyphRunDrawing.GlyphRun>
+          <GlyphRun PixelsPerDip="2" BaselineOrigin="10.376838,18.028101" FontRenderingEmSize="3.5710113" BidiLevel="0" IsSideways="False" ClusterMap="0 1 2 3 4 5 6 7 8" Characters="SINUMERIK" GlyphIndices="54 44 49 56 48 40 53 44 46" AdvanceWidths="1.89567 0.94962 2.67036 2.45259 3.20586 1.80642 2.13843 0.94962 2.0706" GlyphOffsets="0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0" Language="en-us">
+            <GlyphRun.GlyphTypeface>
+              <GlyphTypeface FontUri="{svg:SvgFontUri c:\windows\fonts\segoeui.ttf}" StyleSimulations="None" />
+            </GlyphRun.GlyphTypeface>
+          </GlyphRun>
+        </GlyphRunDrawing.GlyphRun>
+      </GlyphRunDrawing>
+    </DrawingGroup>
+    <GeometryDrawing x:Name="path3543">
+      <GeometryDrawing.Brush>
+        <SolidColorBrush Color="#FF000000" Opacity="1" Transform="0.6478873,0,0,0.6478873,28.817782,11.056338" />
+      </GeometryDrawing.Brush>
+      <GeometryDrawing.Pen>
+        <Pen Brush="#FF000000" Thickness="1.23478258" StartLineCap="Square" EndLineCap="Square" LineJoin="Miter" />
+      </GeometryDrawing.Pen>
+      <GeometryDrawing.Geometry>
+        <PathGeometry FillRule="Nonzero" Transform="0.6478873,0,0,0.6478873,28.817782,11.056338" Figures="M-10.8125,22.96875A2.21875,2.21875,0,1,1,-15.25,22.96875A2.21875,2.21875,0,1,1,-10.8125,22.96875z" />
+      </GeometryDrawing.Geometry>
+    </GeometryDrawing>
+  </DrawingGroup>
+</DrawingGroup>

@@ -1,0 +1,7 @@
+<DrawingImage x:Key="Prefix_3d_view_iconDrawingImage">
+  <DrawingImage.Drawing>
+    <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+      <GeometryDrawing Brush="#FF000000" Geometry="F1 M512,512z M0,0z M436.631,207.445L436.631,371.126 279.232,462 279.232,298.319 436.631,207.445z M256,258.08L436.201,154.04 256,50 75.799,154.041 256,258.08z M232.768,298.319L75.369,207.445 75.369,371.126 232.768,462 232.768,298.319z" />
+    </DrawingGroup>
+  </DrawingImage.Drawing>
+</DrawingImage>
