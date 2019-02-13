@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Dom</name>
+    </assembly>
+    <members>
+        <member name="T:SharpVectors.Dom.Attribute">
+            <summary>
+            Summary description for Attribute.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.CDataSection">
+            <summary>
+            Summary description for CDataSection.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Comment">
+            <summary>
+            Summary description for Comment.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Conversion">
+            <summary>
+            Summary description for Conversion.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Declaration">
+            <summary>
+            Summary description for Declaration.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Document">
+            <summary>
+            Summary description for Document.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Document.MutationEvents">
+            <summary>
+            Enables or disables mutation events.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.ReplacedText(SharpVectors.Dom.INode)">
+            <summary>
+            A method to be called when some text was changed in a text node,
+            so that live objects can be notified.
+            </summary>
+            <param name="node">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.DeletedText(SharpVectors.Dom.INode,System.Int32,System.Int32)">
+            <summary>
+            A method to be called when some text was deleted from a text node,
+            so that live objects can be notified.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="offset">
+            </param>
+            <param name="count">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.InsertedText(SharpVectors.Dom.INode,System.Int32,System.Int32)">
+            <summary>
+            A method to be called when some text was inserted into a text node,
+            so that live objects can be notified.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="offset">
+            </param>
+            <param name="count">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.ModifyingCharacterData(SharpVectors.Dom.INode)">
+            <summary>
+            A method to be called when a character data node has been modified.
+            </summary>
+            <param name="node">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.ModifiedCharacterData(SharpVectors.Dom.INode,System.String,System.String)">
+            <summary>
+            A method to be called when a character data node has been modified.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="oldvalue">
+            </param>
+            <param name="value">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.InsertingNode(SharpVectors.Dom.INode,System.Boolean)">
+            <summary>
+            A method to be called when a node is about to be inserted in the tree.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="replace">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.InsertedNode(SharpVectors.Dom.INode,SharpVectors.Dom.INode,System.Boolean)">
+            <summary>
+            A method to be called when a node has been inserted in the tree.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="newInternal">
+            </param>
+            <param name="replace">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.RemovingNode(SharpVectors.Dom.INode,SharpVectors.Dom.INode,System.Boolean)">
+            <summary>
+            A method to be called when a node is about to be removed from the tree.
+            </summary>
+            <param name="node">
+            </param>
+            <param name="oldChild">
+            </param>
+            <param name="replace">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.RemovedNode(SharpVectors.Dom.INode,System.Boolean)">
+            <summary>
+            A method to be called when a node has been removed from the tree.
+            </summary>
+            <param name="node"></param>
+            <param name="replace"></param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.replacingNode(SharpVectors.Dom.INode)">
+            <summary>
+            A method to be called when a node is about to be replaced in the tree.
+            </summary>
+            <param name="node">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.ReplacedNode(SharpVectors.Dom.INode)">
+            <summary>
+            A method to be called when a node has been replaced in the tree.
+            </summary>
+            <param name="node">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.ModifiedAttrValue(SharpVectors.Dom.IAttribute,System.String)">
+            <summary>
+            A method to be called when an attribute value has been modified.
+            </summary>
+            <param name="attr">
+            </param>
+            <param name="oldvalue">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.SetAttrNode(SharpVectors.Dom.IAttribute,SharpVectors.Dom.IAttribute)">
+            <summary>
+            A method to be called when an attribute node has been set.
+            </summary>
+            <param name="attribute">
+            </param>
+            <param name="previous">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.RemovedAttrNode(SharpVectors.Dom.IAttribute,SharpVectors.Dom.INode,System.String)">
+            <summary>
+            A method to be called when an attribute node has been removed.
+            </summary>
+            <param name="attribute">
+            </param>
+            <param name="oldOwner">
+            </param>
+            <param name="name">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.RenamedAttrNode(SharpVectors.Dom.IAttribute,SharpVectors.Dom.IAttribute)">
+            <summary>
+            A method to be called when an attribute node has been renamed.
+            </summary>
+            <param name="oldAttribute">
+            </param>
+            <param name="newAttribute">
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Document.RenamedElement(SharpVectors.Dom.IElement,SharpVectors.Dom.IElement)">
+            <summary>
+            A method to be called when an element has been renamed.
+            </summary>
+            <param name="oldElement">
+            </param>
+            <param name="newElement">
+            </param>
+        </member>
+        <member name="T:SharpVectors.Dom.DocumentFragment">
+            <summary>
+            Summary description for DocumentFragment.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.DocumentType">
+            <summary>
+            Summary description for DocumentType.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.DomImplementation">
+            <summary>
+            Summary description for DomImplementation.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Element">
+            <summary>
+            Summary description for Element.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.EntityReference">
+            <summary>
+            Summary description for EntityReference.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.Event">
+            <summary>
+            Summary description for Event.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.EventClasses">
+            <summary>
+            Summary description for EventClasses.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.EventListenerMap">
+            <summary>
+            Summary description for EventListenerMap.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.EventListenerMapEntry">
+            <summary>
+            Summary description for EventListenerMapEntry.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.EventTarget">
+            <summary>
+            Summary description for EventTarget.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.EventType">
+            <summary>
+            Summary description for MutationEventType.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.IEventTargetSupport">
+            <summary>
+            Summary description for IEventTargetSupports.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.KeyboardEvent">
+            <summary>
+            Summary description for KeyboardEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.MouseEvent">
+            <summary>
+            Summary description for MouseEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.MutationEvent">
+            <summary>
+            Summary description for MutationEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.MutationNameEvent">
+            <summary>
+            Summary description for MutationNameEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.TextEvent">
+            <summary>
+            Summary description for TextEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Events.UiEvent">
+            <summary>
+            Summary description for UiEvent.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.NodeListAdapter">
+            <summary>
+            Summary description for NodeListAdapter.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.ProcessingInstruction">
+            <summary>
+            Summary description for ProcessingInstruction.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.SignificantWhitespace">
+            <summary>
+            Summary description for SignificantWhitespace.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Text">
+            <summary>
+            Summary description for Text.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Whitespace">
+            <summary>
+            Summary description for Whitespace.
+            </summary>
+        </member>
+    </members>
+</doc>

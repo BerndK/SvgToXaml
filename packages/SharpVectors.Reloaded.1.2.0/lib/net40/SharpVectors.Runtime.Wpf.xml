@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Runtime.Wpf</name>
+    </assembly>
+    <members>
+        <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.BeginInit">
+            <summary>
+            Call BeginInit every time the WICSourceHandle is going to be change.
+            again this methods is not exposed and reflection is needed.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.EndInit">
+            <summary>
+            Call EndInit after the WICSourceHandle was changed and after using BeginInit.
+            again this methods is not exposed and reflection is needed.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.InitWicInfo(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Set the WicSourceHandle property with the source associated with this class.
+            again this methods is not exposed and reflection is needed.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:SharpVectors.Runtime.EmbeddedBitmapSource.EnsureStream">
+            <summary>
+            In the designer Data is not set. To prevent exceptions when displaying in the Designer, add a dummy bitmap.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.SvgAnimationLayer">
+            <summary>
+            This creates a host for visuals derived from the <see cref="T:System.Windows.Controls.Canvas"/> class.
+            </summary>
+            <remarks>
+            This class provides layout, event handling, and container support for the 
+            child visual objects.
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Runtime.SvgAnimator">
+            <summary>
+            This provides a wrapper for the Scoreboard, which is used for opacity animation.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.SvgDrawingCanvas">
+            <summary>
+            This is the main drawing canvas for the wiring diagrams.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.SvgImage">
+            <summary>
+            This class, if placed at the root of a XAML file which is loaded by XamlReader.Load()
+            will end up having all named elements contained in its nameTable automatically.
+            If you want to get that list, it is now in your power.
+            </summary>
+            <remarks>
+            This class is based on the discussion, which can be found here
+            <see href="http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/5c226430-c54d-45b8-a8a2-7e4a79e3692a"/>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Runtime.ZoomPanAnimationHelper">
+            <summary>
+            A helper class to simplify animation.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanAnimationHelper.StartAnimation(System.Windows.UIElement,System.Windows.DependencyProperty,System.Double,System.Double)">
+            <summary>
+            Starts an animation to a particular value on the specified dependency property.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanAnimationHelper.StartAnimation(System.Windows.UIElement,System.Windows.DependencyProperty,System.Double,System.Double,System.EventHandler)">
+            <summary>
+            Starts an animation to a particular value on the specified dependency property.
+            You can pass in an event handler to call when the animation has completed.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanAnimationHelper.CancelAnimation(System.Windows.UIElement,System.Windows.DependencyProperty)">
+            <summary>
+            Cancel any animations that are running on the specified dependency property.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Runtime.ZoomPanControl">
+            <summary>
+            A class that wraps up zooming and panning of it's content.
+            </summary>
+            <summary>
+            This is an extension to the ZoomPanControl class that implements
+            the IScrollInfo interface properties and functions.
+            
+            IScrollInfo is implemented to allow ZoomPanControl to be wrapped (in XAML)
+            in a ScrollViewer. IScrollInfo allows the ScrollViewer and ZoomPanControl to 
+            communicate important information such as the horizontal and vertical scrollbar offsets.
+            
+            There is a good series of articles showing how to implement IScrollInfo starting here:
+                http://blogs.msdn.com/bencon/archive/2006/01/05/509991.aspx     
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.content">
+            <summary>
+            Reference to the underlying content, which is named PART_Content in the template.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.contentScaleTransform">
+            <summary>
+            The transform that is applied to the content to scale it by 'ContentScale'.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.contentOffsetTransform">
+            <summary>
+            The transform that is applied to the content to offset it by 'ContentOffsetX' and 'ContentOffsetY'.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.enableContentOffsetUpdateFromScale">
+            <summary>
+            Enable the update of the content offset as the content scale changes.
+            This enabled for zooming about a point (Google-maps style zooming) and zooming to a rect.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.disableScrollOffsetSync">
+            <summary>
+            Used to disable synchronization between IScrollInfo interface and ContentOffsetX/ContentOffsetY.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.disableContentFocusSync">
+            <summary>
+            Normally when content offsets changes the content focus is automatically updated.
+            This synchronization is disabled when 'disableContentFocusSync' is set to 'true'.
+            When we are zooming in or out we 'disableContentFocusSync' is set to 'true' because 
+            we are zooming in or out relative to the content focus we don't want to update the focus.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.constrainedContentViewportWidth">
+            <summary>
+            The width of the viewport in content coordinates, clamped to the width of the content.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.constrainedContentViewportHeight">
+            <summary>
+            The height of the viewport in content coordinates, clamped to the height of the content.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.canVerticallyScroll">
+            <summary>
+            Set to 'true' when the vertical scrollbar is enabled.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.canHorizontallyScroll">
+            <summary>
+            Set to 'true' when the vertical scrollbar is enabled.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.unScaledExtent">
+            <summary>
+            Records the unscaled extent of the content.
+            This is calculated during the measure and arrange.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.viewport">
+            <summary>
+            Records the size of the viewport (in viewport coordinates) onto the content.
+            This is calculated during the measure and arrange.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Runtime.ZoomPanControl.scrollOwner">
+            <summary>
+            Reference to the ScrollViewer that is wrapped (in XAML) around the ZoomPanControl.
+            Or set to null if there is no ScrollViewer.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.#cctor">
+            <summary>
+            Static constructor to define metadata for the control (and link it to the style in Generic.xaml).
+            </summary>
+        </member>
+        <member name="E:SharpVectors.Runtime.ZoomPanControl.ContentOffsetXChanged">
+            <summary>
+            Event raised when the ContentOffsetX property has changed.
+            </summary>
+        </member>
+        <member name="E:SharpVectors.Runtime.ZoomPanControl.ContentOffsetYChanged">
+            <summary>
+            Event raised when the ContentOffsetY property has changed.
+            </summary>
+        </member>
+        <member name="E:SharpVectors.Runtime.ZoomPanControl.ContentScaleChanged">
+            <summary>
+            Event raised when the ContentScale property has changed.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentOffsetX">
+            <summary>
+            Get/set the X offset (in content coordinates) of the view on the content.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentOffsetY">
+            <summary>
+            Get/set the Y offset (in content coordinates) of the view on the content.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentScale">
+            <summary>
+            Get/set the current scale (or zoom factor) of the content.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.MinContentScale">
+            <summary>
+            Get/set the minimum value for 'ContentScale'.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.MaxContentScale">
+            <summary>
+            Get/set the maximum value for 'ContentScale'.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentZoomFocusX">
+            <summary>
+            The X coordinate of the content focus, this is the point that we are focusing on when zooming.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentZoomFocusY">
+            <summary>
+            The Y coordinate of the content focus, this is the point that we are focusing on when zooming.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ViewportZoomFocusX">
+            <summary>
+            The X coordinate of the viewport focus, this is the point in the viewport (in viewport coordinates) 
+            that the content focus point is locked to while zooming in.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ViewportZoomFocusY">
+            <summary>
+            The Y coordinate of the viewport focus, this is the point in the viewport (in viewport coordinates) 
+            that the content focus point is locked to while zooming in.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.AnimationDuration">
+            <summary>
+            The duration of the animations (in seconds) started by calling AnimatedZoomTo and the other animation methods.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentViewportWidth">
+            <summary>
+            Get the viewport width, in content coordinates.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ContentViewportHeight">
+            <summary>
+            Get the viewport height, in content coordinates.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.IsMouseWheelScrollingEnabled">
+            <summary>
+            Set to 'true' to enable the mouse wheel to scroll the zoom and pan control.
+            This is set to 'false' by default.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedZoomTo(System.Double,System.Windows.Rect)">
+            <summary>
+            Do an animated zoom to view a specific scale and rectangle (in content coordinates).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedZoomTo(System.Windows.Rect)">
+            <summary>
+            Do an animated zoom to the specified rectangle (in content coordinates).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ZoomTo(System.Windows.Rect)">
+            <summary>
+            Instantly zoom to the specified rectangle (in content coordinates).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.SnapTo(System.Windows.Point)">
+            <summary>
+            Instantly center the view on the specified point (in content coordinates).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedSnapTo(System.Windows.Point)">
+            <summary>
+            Use animation to center the view on the specified point (in content coordinates).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedZoomAboutPoint(System.Double,System.Windows.Point)">
+            <summary>
+            Zoom in/out centered on the specified point (in content coordinates).
+            The focus point is kept locked to it's on screen position (ala google maps).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ZoomAboutPoint(System.Double,System.Windows.Point)">
+            <summary>
+            Zoom in/out centered on the specified point (in content coordinates).
+            The focus point is kept locked to it's on screen position (ala google maps).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedZoomTo(System.Double)">
+            <summary>
+            Zoom in/out centered on the viewport center.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ZoomTo(System.Double)">
+            <summary>
+            Zoom in/out centered on the viewport center.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedScaleToFit">
+            <summary>
+            Do animation that scales the content so that it fits completely in the control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ScaleToFit">
+            <summary>
+            Instantly scale the content so that it fits completely in the control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.OnApplyTemplate">
+            <summary>
+            Called when a template has been applied to the control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Measure the control and it's children.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            Arrange the control and it's children.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.AnimatedZoomPointToViewportCenter(System.Double,System.Windows.Point,System.EventHandler)">
+            <summary>
+            Zoom to the specified scale and move the specified focus point to the center of the viewport.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ZoomPointToViewportCenter(System.Double,System.Windows.Point)">
+            <summary>
+            Zoom to the specified scale and move the specified focus point to the center of the viewport.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentScale_PropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Event raised when the 'ContentScale' property has changed value.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentScale_Coerce(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Method called to clamp the 'ContentScale' value to its valid range.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MinOrMaxContentScale_PropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Event raised 'MinContentScale' or 'MaxContentScale' has changed.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentOffsetX_PropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Event raised when the 'ContentOffsetX' property has changed value.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentOffsetX_Coerce(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Method called to clamp the 'ContentOffsetX' value to its valid range.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentOffsetY_PropertyChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Event raised when the 'ContentOffsetY' property has changed value.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ContentOffsetY_Coerce(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Method called to clamp the 'ContentOffsetY' value to its valid range.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.ResetViewportZoomFocus">
+            <summary>
+            Reset the viewport zoom focus to the center of the viewport.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateViewportSize(System.Windows.Size)">
+            <summary>
+            Update the viewport size from the specified size.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateContentViewportSize">
+            <summary>
+            Update the size of the viewport in content coordinates after the viewport size or 'ContentScale' has changed.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateTranslationX">
+            <summary>
+            Update the X coordinate of the translation transformation.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateTranslationY">
+            <summary>
+            Update the Y coordinate of the translation transformation.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateContentZoomFocusX">
+            <summary>
+            Update the X coordinate of the zoom focus point in content coordinates.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.UpdateContentZoomFocusY">
+            <summary>
+            Update the Y coordinate of the zoom focus point in content coordinates.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.CanVerticallyScroll">
+            <summary>
+            Set to 'true' when the vertical scrollbar is enabled.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.CanHorizontallyScroll">
+            <summary>
+            Set to 'true' when the vertical scrollbar is enabled.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ExtentWidth">
+            <summary>
+            The width of the content (with 'ContentScale' applied).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ExtentHeight">
+            <summary>
+            The height of the content (with 'ContentScale' applied).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ViewportWidth">
+            <summary>
+            Get the width of the viewport onto the content.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ViewportHeight">
+            <summary>
+            Get the height of the viewport onto the content.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.ScrollOwner">
+            <summary>
+            Reference to the ScrollViewer that is wrapped (in XAML) around the ZoomPanControl.
+            Or set to null if there is no ScrollViewer.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.HorizontalOffset">
+            <summary>
+            The offset of the horizontal scrollbar.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Runtime.ZoomPanControl.VerticalOffset">
+            <summary>
+            The offset of the vertical scrollbar.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.SetHorizontalOffset(System.Double)">
+            <summary>
+            Called when the offset of the horizontal scrollbar has been set.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.SetVerticalOffset(System.Double)">
+            <summary>
+            Called when the offset of the vertical scrollbar has been set.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.LineUp">
+            <summary>
+            Shift the content offset one line up.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.LineDown">
+            <summary>
+            Shift the content offset one line down.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.LineLeft">
+            <summary>
+            Shift the content offset one line left.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.LineRight">
+            <summary>
+            Shift the content offset one line right.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.PageUp">
+            <summary>
+            Shift the content offset one page up.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.PageDown">
+            <summary>
+            Shift the content offset one page down.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.PageLeft">
+            <summary>
+            Shift the content offset one page left.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.PageRight">
+            <summary>
+            Shift the content offset one page right.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MouseWheelDown">
+            <summary>
+            Don't handle mouse wheel input from the ScrollViewer, the mouse wheel is
+            used for zooming in and out, not for manipulating the scrollbars.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MouseWheelLeft">
+            <summary>
+            Don't handle mouse wheel input from the ScrollViewer, the mouse wheel is
+            used for zooming in and out, not for manipulating the scrollbars.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MouseWheelRight">
+            <summary>
+            Don't handle mouse wheel input from the ScrollViewer, the mouse wheel is
+            used for zooming in and out, not for manipulating the scrollbars.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MouseWheelUp">
+            <summary>
+            Don't handle mouse wheel input from the ScrollViewer, the mouse wheel is
+            used for zooming in and out, not for manipulating the scrollbars.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Runtime.ZoomPanControl.MakeVisible(System.Windows.Media.Visual,System.Windows.Rect)">
+            <summary>
+            Bring the specified rectangle to view.
+            </summary>
+        </member>
+    </members>
+</doc>
