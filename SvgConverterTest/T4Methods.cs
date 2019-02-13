@@ -14,7 +14,7 @@ namespace SvgConverterTest
         {
             string nameSpaceName;
             string prefix;
-            var keys = KeysFromXaml(@"TestFiles\ExpectedXaml_SvgDirToXamlTest_withUseCompResKey.xaml", out nameSpaceName, out prefix);
+            var keys = KeysFromXaml(@"TestFiles\Expected\SvgDirToXamlTest_withUseCompResKey.xaml", out nameSpaceName, out prefix);
             Console.WriteLine($"NS:{nameSpaceName}, Prefix:{prefix}");
             foreach (var key in keys)
             {
