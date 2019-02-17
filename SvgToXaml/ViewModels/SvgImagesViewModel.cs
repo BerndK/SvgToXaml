@@ -85,7 +85,7 @@ namespace SvgToXaml.ViewModels
                     NameSpaceName = nameSpaceName,
 
                 };
-                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo));
+                File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(CurrentDir, resKeyInfo, false));
 
                 BuildBatchFile(outFileName, resKeyInfo);
             }

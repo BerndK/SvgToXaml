@@ -1,85 +1,139 @@
 ﻿<Window x:Class="WpfDemoApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:relativeBrushes="clr-namespace:RelativeBrushes;assembly=IconResources"
         xmlns:images="clr-namespace:IconResources.Images;assembly=IconResources"
-        Title="MainWindow" Height="350" Width="525">
-    <Window.Resources>
-        <relativeBrushes:BrushCollection x:Key="BrushCollectionRes" >
-            <SolidColorBrush Color="Black"/>
-            <SolidColorBrush Color="Yellow"/>
-            <SolidColorBrush Color="Red"/>
-        </relativeBrushes:BrushCollection>
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-       
-        <Button HorizontalAlignment="Left" Margin="25,2,0,2" >
-            <Image x:Name="ButtonImage1" relativeBrushes:Props.ContentBrush="Red" >
-                <!--<brushes:Props.ContentBrushes>
+        xmlns:relativeBrushes="clr-namespace:RelativeBrushes;assembly=IconResources"
+        Title="MainWindow"
+        Width="525"
+        Height="350">
+  <Window.Resources>
+    <relativeBrushes:BrushCollection x:Key="BrushCollectionRes">
+      <SolidColorBrush Color="Black" />
+      <SolidColorBrush Color="Yellow" />
+      <SolidColorBrush Color="Red" />
+    </relativeBrushes:BrushCollection>
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50" />
+      <RowDefinition Height="50" />
+      <RowDefinition Height="50" />
+      <RowDefinition Height="50" />
+      <RowDefinition Height="50" />
+      <RowDefinition Height="50" />
+    </Grid.RowDefinitions>
+
+    <Button Margin="25 2 0 2"
+            HorizontalAlignment="Left">
+      <Image x:Name="ButtonImage1"
+             relativeBrushes:Props.ContentBrush="Red">
+        <!--<brushes:Props.ContentBrushes>
                     <brushes:BrushCollection>
                         <SolidColorBrush Color="Black"/>
                         <SolidColorBrush Color="Red"/>
                         <SolidColorBrush Color="Yellow"/>
                     </brushes:BrushCollection>
                 </brushes:Props.ContentBrushes>-->
-                <!--<Image.Source>
+        <!--<Image.Source>
                     <DrawingImage>
                         <DrawingImage.Drawing>
                             <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
-                                <GeometryDrawing Brush="Black" 
+                                <GeometryDrawing Brush="Black"
                                     Geometry="F1 M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z"/>
                             </DrawingGroup>
-                        </DrawingImage.Drawing>    
+                        </DrawingImage.Drawing>
                     </DrawingImage>
                 </Image.Source>-->
-                <relativeBrushes:Props.SourceEx>
-                    <DrawingImage>
-                        <DrawingImage.Drawing>
-                            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
-                                <GeometryDrawing Brush="Black" 
-                                    Geometry="F1 M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z"/>
-                            </DrawingGroup>
-                        </DrawingImage.Drawing>    
-                    </DrawingImage>
-                </relativeBrushes:Props.SourceEx>
-            </Image>
-        </Button>
-        <Button x:Name="Button2" HorizontalAlignment="Left" Margin="245,2,0,2" Foreground="Red">
-            <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" Stretch="Uniform" Data="F1 M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z"/>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="1">
-            <Image x:Name="Jog1" relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}">
-                <relativeBrushes:Props.ContentBrushes>
-                    <relativeBrushes:BrushCollection x:Name="BrushCollection">
-                        <SolidColorBrush Color="Black"/>
-                        <SolidColorBrush Color="Yellow"/>
-                        <SolidColorBrush Color="Red"/>
-                    </relativeBrushes:BrushCollection>
-                </relativeBrushes:Props.ContentBrushes>
-            </Image>
-        </Button>
-        <Button Content="Change Color" Click="ChangeColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
-        <Button Content="Change Middle Color" Click="ChangeMiddleColor_OnClick" HorizontalAlignment="Left" Margin="87,15,0,0" VerticalAlignment="Top" Width="139" Grid.Row="1"/>
-        <Path Data="{StaticResource {x:Static images:Icons._3d_view_iconGeometryKey}}" Fill="#FF60A1FA" Stretch="Uniform" Margin="25,2,0,2" Grid.Row="2" HorizontalAlignment="Left"></Path>
-        <TextBlock Margin="87,15,351,6" Grid.Row="2">Just a Path</TextBlock>
-        <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="3">
-            <Image Source="{StaticResource {x:Static images:Icons.cloud_3_iconDrawingImageKey}}"/>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="25,2,0,2" Width ="46"  Grid.Row="4">
-            <Image x:Name="Jog2" relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}" relativeBrushes:Props.ContentBrushes="{StaticResource BrushCollectionRes}"/>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="80,2,0,2" Width ="46"  Grid.Row="4">
-            <Image x:Name="Jog3" relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}" relativeBrushes:Props.ContentBrushes="{StaticResource BrushCollectionRes}"/>
-        </Button>
-        <Button Grid.Row="4" Content="Change middle Color" Click="BtnChangeMiddleColors_OnClick" HorizontalAlignment="Left" Margin="137,15,0,0" VerticalAlignment="Top" Width="139" Height="22"/>
-    </Grid>
+        <relativeBrushes:Props.SourceEx>
+          <DrawingImage>
+            <DrawingImage.Drawing>
+              <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <GeometryDrawing Brush="Black"
+                                 Geometry="F1 M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z" />
+              </DrawingGroup>
+            </DrawingImage.Drawing>
+          </DrawingImage>
+        </relativeBrushes:Props.SourceEx>
+      </Image>
+    </Button>
+    <Button x:Name="Button2"
+            Margin="245 2 0 2"
+            HorizontalAlignment="Left"
+            Foreground="Red">
+      <Path Data="F1 M512,512z M0,0z M409.338,216.254C398.922,161.293 350.672,120.477 293.557,120.477 258.459,120.477 225.926,135.762 203.686,162.061 166.538,152.155 127.607,173.842 116.753,210.84 78.16,222.176 50.6,257.895 50.6,299.303 50.6,350.155 91.97,391.524 143.822,391.524L369.18,391.524C420.03,391.524 461.401,350.155 461.401,299.303 461.4,263.389 440.941,231.457 409.338,216.254z M369.18,351.523L143.821,351.523C114.026,351.523 90.599,328.097 90.599,299.302 90.599,265.224 118.249,239.224 152.785,245.486 141.249,205.89 196.916,183.556 217.426,213.138 222.583,198.556 243.249,160.476 293.557,160.476 331.584,160.476 370.918,186.556 372.221,245.458 397.584,245.556 421.401,263.89 421.401,299.302 421.4,328.098 397.975,351.523 369.18,351.523z"
+            Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},
+                           Path=Foreground}"
+            Stretch="Uniform" />
+    </Button>
+    <Button Grid.Row="1"
+            Width="46"
+            Margin="25 2 0 2"
+            HorizontalAlignment="Left">
+      <Image x:Name="Jog1"
+             relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}">
+        <relativeBrushes:Props.ContentBrushes>
+          <relativeBrushes:BrushCollection x:Name="BrushCollection">
+            <SolidColorBrush Color="Black" />
+            <SolidColorBrush Color="Yellow" />
+            <SolidColorBrush Color="Red" />
+          </relativeBrushes:BrushCollection>
+        </relativeBrushes:Props.ContentBrushes>
+      </Image>
+    </Button>
+    <Button Width="139"
+            Height="22"
+            Margin="87 15 0 0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ChangeColor_OnClick"
+            Content="Change Color" />
+    <Button Grid.Row="1"
+            Width="139"
+            Margin="87 15 0 0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ChangeMiddleColor_OnClick"
+            Content="Change Middle Color" />
+    <Path Grid.Row="2"
+          Margin="25 2 0 2"
+          HorizontalAlignment="Left"
+          Data="{StaticResource {x:Static images:Icons._3d_view_iconGeometryKey}}"
+          Fill="#FF60A1FA"
+          Stretch="Uniform" />
+    <TextBlock Grid.Row="2"
+               Margin="87 15 351 6">
+      Just a Path
+    </TextBlock>
+    <Button Grid.Row="3"
+            Width="46"
+            Margin="25 2 0 2"
+            HorizontalAlignment="Left">
+      <Image Source="{StaticResource {x:Static images:Icons.cloud_3_iconDrawingImageKey}}" />
+    </Button>
+    <Button Grid.Row="4"
+            Width="46"
+            Margin="25 2 0 2"
+            HorizontalAlignment="Left">
+      <Image x:Name="Jog2"
+             relativeBrushes:Props.ContentBrushes="{StaticResource BrushCollectionRes}"
+             relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}" />
+    </Button>
+    <Button Grid.Row="4"
+            Width="46"
+            Margin="80 2 0 2"
+            HorizontalAlignment="Left">
+      <Image x:Name="Jog3"
+             relativeBrushes:Props.ContentBrushes="{StaticResource BrushCollectionRes}"
+             relativeBrushes:Props.SourceEx="{StaticResource {x:Static images:Icons.JOGDrawingImageKey}}" />
+    </Button>
+    <Button Grid.Row="4"
+            Width="139"
+            Height="22"
+            Margin="137 15 0 0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="BtnChangeMiddleColors_OnClick"
+            Content="Change middle Color" />
+  </Grid>
 </Window>
 

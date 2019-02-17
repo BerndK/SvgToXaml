@@ -35,10 +35,11 @@ namespace SvgConverter
         internal static XNamespace NsDef = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
         internal static XmlNamespaceManager NsManager = new XmlNamespaceManager(new NameTable());
 
-        public static string SvgFileToXaml(string filepath, ResultMode resultMode, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings = null)
+        public static string SvgFileToXaml(string filepath, ResultMode resultMode, ResKeyInfo resKeyInfo,
+            bool filterPixelsPerDip, WpfDrawingSettings wpfDrawingSettings = null)
         {
             var obj = ConvertSvgToObject(filepath, resultMode, wpfDrawingSettings, out var name, resKeyInfo);
-            return SvgObjectToXaml(obj, wpfDrawingSettings != null && wpfDrawingSettings.IncludeRuntime, name);
+            return SvgObjectToXaml(obj, wpfDrawingSettings != null && wpfDrawingSettings.IncludeRuntime, name, filterPixelsPerDip);
         }
 
         public static ConvertedSvgData ConvertSvg(string filepath, ResultMode resultMode)
@@ -71,24 +72,27 @@ namespace SvgConverter
             }
         }
 
-        public static string SvgObjectToXaml(object obj, bool includeRuntime, string name)
+        public static string SvgObjectToXaml(object obj, bool includeRuntime, string name, bool filterPixelsPerDip)
         {
             var xamlUntidy = WpfObjToXaml(obj, includeRuntime);
 
             var doc = XDocument.Parse(xamlUntidy);
             BeautifyDrawingElement(doc.Root, name);
+            if (filterPixelsPerDip)
+                FilterPixelsPerDip(doc.Root);
             var xamlWithNamespaces = doc.ToString();
 
             var xamlClean = RemoveNamespaceDeclarations(xamlWithNamespaces);
             return xamlClean;
         }
 
-        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo)
+        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, bool filterPixelsPerDip)
         {
-            return SvgDirToXaml(folder, resKeyInfo, null);
+            return SvgDirToXaml(folder, resKeyInfo, null, filterPixelsPerDip);
         }
 
-        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings)
+        public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings,
+            bool filterPixelsPerDip)
         {
             //firstChar Upper
             var firstChar = char.ToUpperInvariant(resKeyInfo.XamlName[0]);
@@ -105,6 +109,9 @@ namespace SvgConverter
             foreach (var drawingGroupElement in drawingGroupElements)
             {
                 BeautifyDrawingElement(drawingGroupElement, null);
+                if (filterPixelsPerDip)
+                    FilterPixelsPerDip(drawingGroupElement);
+
                 ExtractGeometries(drawingGroupElement, resKeyInfo);
             }
 
@@ -487,6 +494,17 @@ namespace SvgConverter
             var attributes = drawingElement.Attributes().ToList();
             attributes.Insert(0, new XAttribute(Nsx + "Key", name)); //place in first position
             drawingElement.ReplaceAttributes(attributes);
+        }
+
+        private static void FilterPixelsPerDip(XElement drawingElement)
+        {
+            var glyphRuns = drawingElement.Descendants(NsDef + nameof(GlyphRun)).ToList();
+            foreach (var glyphRun in glyphRuns)
+            {
+                var pixelsPerDipAttr = glyphRun.Attribute(nameof(GlyphRun.PixelsPerDip));
+                if (pixelsPerDipAttr != null)
+                    pixelsPerDipAttr.Remove();
+            }
         }
 
         private static void ExtractGeometries(XElement drawingGroupElement, ResKeyInfo resKeyInfo)
