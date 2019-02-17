@@ -1,0 +1,1880 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Converters.Wpf</name>
+    </assembly>
+    <members>
+        <member name="T:SharpVectors.Converters.ImageEncoderType">
+            <summary>
+            <para>
+            This specifies the encoder type used to encode a collection of 
+            bitmap frame objects to an image stream.
+            </para>
+            <para>
+            This is used by the <see cref="T:SharpVectors.Converters.ImageSvgConverter"/> converter.
+            </para>
+            </summary>
+            <seealso cref="T:SharpVectors.Converters.ImageSvgConverter"/>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.BmpBitmap">
+            <summary>
+            Specifies an encoder that is used to encode bitmap (BMP) 
+            format images, that is 
+            <see cref="T:System.Windows.Media.Imaging.BmpBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.GifBitmap">
+            <summary>
+            Specifies an encoder that is used to encode Graphics Interchange 
+            Format (GIF) images, that is 
+            <see cref="T:System.Windows.Media.Imaging.GifBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.JpegBitmap">
+            <summary>
+            Specifies an encoder that is used to encode Joint Photographics 
+            Experts Group (JPEG) format images, that is 
+            <see cref="T:System.Windows.Media.Imaging.JpegBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.PngBitmap">
+            <summary>
+            Specifies an encoder that is used to encode Portable Network 
+            Graphics (PNG) format images, that is 
+            <see cref="T:System.Windows.Media.Imaging.PngBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.TiffBitmap">
+            <summary>
+            Specifies an encoder that is used to encode Tagged Image File 
+            Format (TIFF) images, that is 
+            <see cref="T:System.Windows.Media.Imaging.TiffBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageEncoderType.WmpBitmap">
+            <summary>
+            Specifies an encoder that is used to Microsoft Windows Media Photo 
+            (WDP) images, that is 
+            <see cref="T:System.Windows.Media.Imaging.WmpBitmapEncoder"/>. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Converters.ShapeSvgCanvas">
+            <summary>
+            Component that visualizes svg document contents.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.ShapeSvgCanvas.Source">
+            <summary>
+            Gets or sets svg document source.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.ShapeSvgCanvas.ItemStyle">
+            <summary>
+            Gets or sets an item style that will be applied to all svg elements.
+            </summary>
+            <remarks>
+            This style will be used as a BasedOn style for all shapes created from
+            svg elements.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.ShapeSvgCanvas.Bounds">
+            <summary>
+            Gets the bounding box of the svg document.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.ShapeSvgCanvas.UnloadDiagrams">
+            <summary>
+            Unloads loaded svg.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Converters.StreamSvgConverter">
+            <summary>
+            This converts the SVG file to static or bitmap image, which is 
+            saved to a file.
+            </summary>
+            <remarks>
+            <para>
+            The image is save with the <see cref="P:System.Windows.Media.PixelFormats.Pbgra32"/> format,
+            since that is the only pixel format which does not throw an exception
+            with the <see cref="T:System.Windows.Media.Imaging.RenderTargetBitmap"/>.
+            </para>
+            <para>
+            The DPI used is 96.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:SharpVectors.Converters.StreamSvgConverter._drawing">
+            <summary>
+            This is the last drawing generated.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.StreamSvgConverter._wpfWindow">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.StreamSvgConverter"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.StreamSvgConverter"/> class
+            with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.#ctor(System.Boolean,System.Boolean,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.StreamSvgConverter"/> class
+            with the specified drawing or rendering settings and the saving options.
+            </summary>
+            <param name="saveXaml">
+            This specifies whether to save result object tree in image file.
+            </param>
+            <param name="saveZaml">
+            This specifies whether to save result object tree in ZAML file. The
+            ZAML is simply a G-Zip compressed image format, similar to the SVGZ.
+            </param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.StreamSvgConverter.WriterErrorOccurred">
+            <summary>
+            Gets a value indicating whether a writer error occurred when
+            using the custom image writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if an error occurred when using
+            the custom image writer; otherwise, it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.StreamSvgConverter.FallbackOnWriterError">
+            <summary>
+            Gets or sets a value indicating whether to fall back and use
+            the .NET Framework image writer when an error occurred in using the
+            custom writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the converter falls back to using
+            the system image writer when an error occurred in using the custom
+            writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+            an exception, which occurred in using the custom writer will be
+            thrown. The default is <see langword="false"/>. 
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.StreamSvgConverter.EncoderType">
+            <summary>
+            Gets or set the bitmap encoder type to use in encoding the drawing 
+            to an image file.
+            </summary>
+            <value>
+            An enumeration of the type <see cref="T:SharpVectors.Converters.ImageEncoderType"/> specifying
+            the bitmap encoder. The default is the <see cref="F:SharpVectors.Converters.ImageEncoderType.PngBitmap"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.StreamSvgConverter.Encoder">
+            <summary>
+            Gets or sets a custom bitmap encoder to use in encoding the drawing
+            to an image file.
+            </summary>
+            <value>
+            A derived <see cref="T:System.Windows.Media.Imaging.BitmapEncoder"/> object specifying the bitmap
+            encoder for encoding the images. The default is <see langword="null"/>,
+            and the <see cref="P:SharpVectors.Converters.StreamSvgConverter.EncoderType"/> property determines the encoder used.
+            </value>
+            <remarks>
+            If the value of this is set, it must match the MIME type or file 
+            extension defined by the <see cref="P:SharpVectors.Converters.StreamSvgConverter.EncoderType"/> property for it 
+            to be used.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.StreamSvgConverter.Drawing">
+            <summary>
+            Gets the last created drawing.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.Media.DrawingGroup"/> specifying the last converted drawing.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.Convert(System.String,System.IO.Stream)">
+            <overloads>
+            This performs the conversion of the specified SVG file, and saves
+            the output to an image file.
+            </overloads>
+            <summary>
+            This performs the conversion of the specified SVG file, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <param name="imageStream">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.Convert(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgStream">
+            A stream providing access to the SVG source data.
+            </param>
+            <param name="imageStream">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageStream"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgStream"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageStream"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.Convert(System.IO.TextReader,System.IO.Stream)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgTextReader">
+            A text reader providing access to the SVG source data.
+            </param>
+            <param name="imageStream">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageStream"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageStream"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.StreamSvgConverter.Convert(System.Xml.XmlReader,System.IO.Stream)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgXmlReader">
+            An XML reader providing access to the SVG source data.
+            </param>
+            <param name="imageStream">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageStream"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageStream"/> is empty.
+            </exception>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SharpVectors.Converters.SvgControl" -->
+        <member name="T:SharpVectors.Converters.Utils.DirectoryCopier">
+            <summary>
+            Copies a file or a directory and its contents to a new location. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.Utils.DirectoryCopier.Recursive">
+            <summary>
+            Gets or sets a value indicating whether the directory copying is
+            recursive, that is includes the sub-directories.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if the sub-directories are
+            included in the directory copy; otherwise, it is <see langword="false"/>.
+            The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.Utils.DirectoryCopier.Overwrite">
+            <summary>
+            Gets or sets a value indicating whether an existing file is overwritten.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if existing file is overwritten;
+            otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.Utils.DirectoryCopier.IncludeSecurity">
+            <summary>
+            Gets or sets a value indicating whether the security settings of the
+            copied file is retained.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if the security settings of the
+            file is also copied; otherwise, it is <see langword="false"/>. The
+            default is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.Utils.DirectoryCopier.IncludeHidden">
+            <summary>
+            Gets or sets a value indicating whether the copy operation includes
+            hidden directories and files.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if hidden directories and files
+            are included in the copy operation; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.Utils.DirectoryCopier.Copy(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sourceDir">
+            The path of the file or directory to copy. 
+            </param>
+            <param name="targetDir">
+            The path to the new location.
+            </param>
+        </member>
+        <member name="F:SharpVectors.Converters.Utils.DirectoryUtils.ErrorModes.Default">
+            <summary>Use the system default, which is to display all error dialog boxes.</summary>
+        </member>
+        <member name="F:SharpVectors.Converters.Utils.DirectoryUtils.ErrorModes.FailCriticalErrors">
+            <summary>
+            The system does not display the critical-error-handler message box. 
+            Instead, the system sends the error to the calling process.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.Utils.DirectoryUtils.ErrorModes.NoGpFaultErrorBox">
+            <summary>
+            64-bit Windows:  The system automatically fixes memory alignment faults and makes them 
+            invisible to the application. It does this for the calling process and any descendant processes.
+            After this value is set for a process, subsequent attempts to clear the value are ignored.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.Utils.DirectoryUtils.ErrorModes.NoAlignmentFaultExcept">
+            <summary>
+            The system does not display the general-protection-fault message box. 
+            This flag should only be set by debugging applications that handle general 
+            protection (GP) faults themselves with an exception handler.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.Utils.DirectoryUtils.ErrorModes.NoOpenFileErrorBox">
+            <summary>
+            The system does not display a message box when it fails to find a file. 
+            Instead, the error is returned to the calling process.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Converters.FileSvgConverter">
+            <summary>
+            <para>
+            This converts an SVG file to the corresponding XAML file, which can 
+            be viewed in WPF application. 
+            </para>
+            <para>
+            The root object in the converted file is <see cref="T:System.Windows.Media.DrawingGroup"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.FileSvgConverter._drawing">
+            <summary>
+            This is the last drawing generated.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.FileSvgConverter._wpfWindow">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgConverter"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgConverter"/> class
+            with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.#ctor(System.Boolean,System.Boolean,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgConverter"/> class
+            with the specified drawing or rendering settings and the saving options.
+            </summary>
+            <param name="saveXaml">
+            This specifies whether to save result object tree in XAML file.
+            </param>
+            <param name="saveZaml">
+            This specifies whether to save result object tree in ZAML file. The
+            ZAML is simply a G-Zip compressed XAML format, similar to the SVGZ.
+            </param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgConverter.WriterErrorOccurred">
+            <summary>
+            Gets a value indicating whether a writer error occurred when
+            using the custom XAML writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if an error occurred when using
+            the custom XAML writer; otherwise, it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgConverter.FallbackOnWriterError">
+            <summary>
+            Gets or sets a value indicating whether to fall back and use
+            the .NET Framework XAML writer when an error occurred in using the
+            custom writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the converter falls back to using
+            the system XAML writer when an error occurred in using the custom
+            writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+            an exception, which occurred in using the custom writer will be
+            thrown. The default is <see langword="false"/>. 
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgConverter.Drawing">
+            <summary>
+            Gets the last created drawing.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.Media.DrawingGroup"/> specifying the last converted drawing.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgConverter.XamlFile">
+            <summary>
+            Gets the output XAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the XAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgConverter.ZamlFile">
+            <summary>
+            Gets the output ZAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the ZAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.Convert(System.String)">
+            <overloads>
+            This performs the conversion of the specified SVG file, and saves
+            the output to an XAML file.
+            </overloads>
+            <summary>
+            This performs the conversion of the specified SVG file, and saves
+            the output to an XAML file with the same file name.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.Convert(System.String,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG file, and saves
+            the output to the specified XAML file.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <param name="xamlFileName">
+            The output XAML file. This is optional. If not specified, an XAML
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.Convert(System.IO.Stream,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified XAML file.
+            </summary>
+            <param name="svgStream">
+            A stream providing access to the SVG source data.
+            </param>
+            <param name="xamlFileName">
+            The output XAML file. This is optional. If not specified, an XAML
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgStream"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="xamlFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.Convert(System.IO.TextReader,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified XAML file.
+            </summary>
+            <param name="svgTextReader">
+            A text reader providing access to the SVG source data.
+            </param>
+            <param name="xamlFileName">
+            The output XAML file. This is optional. If not specified, an XAML
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="xamlFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgConverter.Convert(System.Xml.XmlReader,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified XAML file.
+            </summary>
+            <param name="svgXmlReader">
+            An XML reader providing access to the SVG source data.
+            </param>
+            <param name="xamlFileName">
+            The output XAML file. This is optional. If not specified, an XAML
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="xamlFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="xamlFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="T:SharpVectors.Converters.ImageSvgConverter">
+            <summary>
+            This converts the SVG file to static or bitmap image, which is 
+            saved to a file.
+            </summary>
+            <remarks>
+            <para>
+            The image is save with the <see cref="P:System.Windows.Media.PixelFormats.Pbgra32"/> format,
+            since that is the only pixel format which does not throw an exception
+            with the <see cref="T:System.Windows.Media.Imaging.RenderTargetBitmap"/>.
+            </para>
+            <para>
+            The DPI used is 96.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageSvgConverter._drawing">
+            <summary>
+            This is the last drawing generated.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.ImageSvgConverter._wpfWindow">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.ImageSvgConverter"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.ImageSvgConverter"/> class
+            with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.#ctor(System.Boolean,System.Boolean,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.ImageSvgConverter"/> class
+            with the specified drawing or rendering settings and the saving options.
+            </summary>
+            <param name="saveXaml">
+            This specifies whether to save result object tree in image file.
+            </param>
+            <param name="saveZaml">
+            This specifies whether to save result object tree in ZAML file. The
+            ZAML is simply a G-Zip compressed image format, similar to the SVGZ.
+            </param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.WriterErrorOccurred">
+            <summary>
+            Gets a value indicating whether a writer error occurred when
+            using the custom image writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if an error occurred when using
+            the custom image writer; otherwise, it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.FallbackOnWriterError">
+            <summary>
+            Gets or sets a value indicating whether to fall back and use
+            the .NET Framework image writer when an error occurred in using the
+            custom writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the converter falls back to using
+            the system image writer when an error occurred in using the custom
+            writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+            an exception, which occurred in using the custom writer will be
+            thrown. The default is <see langword="false"/>. 
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.EncoderType">
+            <summary>
+            Gets or set the bitmap encoder type to use in encoding the drawing 
+            to an image file.
+            </summary>
+            <value>
+            An enumeration of the type <see cref="T:SharpVectors.Converters.ImageEncoderType"/> specifying
+            the bitmap encoder. The default is the <see cref="F:SharpVectors.Converters.ImageEncoderType.PngBitmap"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.Encoder">
+            <summary>
+            Gets or sets a custom bitmap encoder to use in encoding the drawing
+            to an image file.
+            </summary>
+            <value>
+            A derived <see cref="T:System.Windows.Media.Imaging.BitmapEncoder"/> object specifying the bitmap
+            encoder for encoding the images. The default is <see langword="null"/>,
+            and the <see cref="P:SharpVectors.Converters.ImageSvgConverter.EncoderType"/> property determines the encoder used.
+            </value>
+            <remarks>
+            If the value of this is set, it must match the MIME type or file 
+            extension defined by the <see cref="P:SharpVectors.Converters.ImageSvgConverter.EncoderType"/> property for it 
+            to be used.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.Drawing">
+            <summary>
+            Gets the last created drawing.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.Media.DrawingGroup"/> specifying the last converted drawing.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.XamlFile">
+            <summary>
+            Gets the output XAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the XAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.ImageSvgConverter.ZamlFile">
+            <summary>
+            Gets the output ZAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the ZAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.Convert(System.String)">
+            <overloads>
+            This performs the conversion of the specified SVG file, and saves
+            the output to an image file.
+            </overloads>
+            <summary>
+            This performs the conversion of the specified SVG file, and saves
+            the output to an image file with the same file name.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.Convert(System.String,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG file, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <param name="imageFileName">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.Convert(System.IO.Stream,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgStream">
+            A stream providing access to the SVG source data.
+            </param>
+            <param name="imageFileName">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgStream"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.Convert(System.IO.TextReader,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgTextReader">
+            A text reader providing access to the SVG source data.
+            </param>
+            <param name="imageFileName">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.ImageSvgConverter.Convert(System.Xml.XmlReader,System.String)">
+            <summary>
+            This performs the conversion of the specified SVG source, and saves
+            the output to the specified image file.
+            </summary>
+            <param name="svgXmlReader">
+            An XML reader providing access to the SVG source data.
+            </param>
+            <param name="imageFileName">
+            The output image file. This is optional. If not specified, an image
+            file is created in the same directory as the SVG file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if the conversion is successful;
+            otherwise, it return <see langword="false"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="imageFileName"/> is <see langword="null"/>.
+            <para>-or-</para>
+            If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="imageFileName"/> is empty.
+            </exception>
+        </member>
+        <member name="T:SharpVectors.Converters.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Converters.DirectorySvgConverter">
+            <summary>
+            This converts a directory (and optionally the sub-directories) of SVG 
+            files to XAML files in a specified directory, maintaining the original 
+            directory structure.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.DirectorySvgConverter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> 
+            class with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.Recursive">
+            <summary>
+            Gets or sets a value indicating whether the directory copying is
+            recursive, that is includes the sub-directories.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if the sub-directories are
+            included in the directory copy; otherwise, it is <see langword="false"/>.
+            The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.Overwrite">
+            <summary>
+            Gets or sets a value indicating whether an existing file is overwritten.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if existing file is overwritten;
+            otherwise, it is <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.IncludeSecurity">
+            <summary>
+            Gets or sets a value indicating whether the security settings of the
+            copied file is retained.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if the security settings of the
+            file is also copied; otherwise, it is <see langword="false"/>. The
+            default is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.IncludeHidden">
+            <summary>
+            Gets or sets a value indicating whether the copy operation includes
+            hidden directories and files.
+            </summary>
+            <value>
+            This property is <see langword="true"/> if hidden directories and files
+            are included in the copy operation; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.WriterErrorOccurred">
+            <summary>
+            Gets a value indicating whether a writer error occurred when
+            using the custom XAML writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if an error occurred when using
+            the custom XAML writer; otherwise, it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.FallbackOnWriterError">
+            <summary>
+            Gets or sets a value indicating whether to fall back and use
+            the .NET Framework XAML writer when an error occurred in using the
+            custom writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the converter falls back to using
+            the system XAML writer when an error occurred in using the custom
+            writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+            an exception, which occurred in using the custom writer will be
+            thrown. The default is <see langword="false"/>. 
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.SourceDir">
+            <summary>
+            Gets the source directory of the SVG files to be converted.
+            </summary>
+            <value>
+            A <see cref="T:System.IO.DirectoryInfo"/> specifying the source directory of
+            the SVG files.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.DestinationDir">
+            <summary>
+            Gets the destination directory of the converted XAML files.
+            </summary>
+            <value>
+            A <see cref="T:System.IO.DirectoryInfo"/> specifying the destination directory of
+            the converted XAML files.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.DirectorySvgConverter.ErrorFile">
+            <summary>
+            Gets the full path of the last SVG file not successfully converted.
+            </summary>
+            <value>
+            A string containing the full path of the last SVG file not 
+            successfully converted to the XAML
+            </value>
+            <remarks>
+            Whenever an error occurred in the conversion of a file, the 
+            conversion process will stop. Use this property to retrieve the full
+            path of the SVG file causing the error.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.DirectorySvgConverter.Convert(System.IO.DirectoryInfo,System.IO.DirectoryInfo)">
+            <summary>
+            Convert the SVG files in the specified source directory, saving the
+            results in the specified destination directory.
+            </summary>
+            <param name="sourceInfo">
+            A <see cref="T:System.IO.DirectoryInfo"/> specifying the source directory of
+            the SVG files.
+            </param>
+            <param name="destInfo">
+            A <see cref="T:System.IO.DirectoryInfo"/> specifying the source directory of
+            the SVG files.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para>
+            If the <paramref name="sourceInfo"/> is <see langword="null"/>.
+            </para>
+            <para>
+            -or-
+            </para>
+            <para>
+            If the <paramref name="destInfo"/> is <see langword="null"/>.
+            </para>
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the directory specified by <paramref name="sourceInfo"/> does not
+            exists.
+            </exception>
+        </member>
+        <member name="T:SharpVectors.Converters.FileSvgReader">
+            <summary>
+            This converts a SVG file to <see cref="T:System.Windows.Media.DrawingGroup"/> object, and can 
+            optionally save the result to a file as XAML.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.FileSvgReader._drawing">
+            <summary>
+            This is the last drawing generated.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Converters.FileSvgReader._wpfWindow">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgReader"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgReader"/> class
+            with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.#ctor(System.Boolean,System.Boolean,System.IO.DirectoryInfo,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.FileSvgConverter"/> class
+            with the specified drawing or rendering settings, the saving options
+            and the working directory.
+            </summary>
+            <param name="saveXaml">
+            This specifies whether to save result object tree in XAML file.
+            </param>
+            <param name="saveZaml">
+            This specifies whether to save result object tree in ZAML file. The
+            ZAML is simply a G-Zip compressed XAML format, similar to the SVGZ.
+            </param>
+            <param name="workingDir">
+            The working directory, where converted outputs are saved.
+            </param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.WriterErrorOccurred">
+            <summary>
+            Gets a value indicating whether a writer error occurred when
+            using the custom XAML writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if an error occurred when using
+            the custom XAML writer; otherwise, it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.FallbackOnWriterError">
+            <summary>
+            Gets or sets a value indicating whether to fall back and use
+            the .NET Framework XAML writer when an error occurred in using the
+            custom writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the converter falls back to using
+            the system XAML writer when an error occurred in using the custom
+            writer; otherwise, it is <see langword="false"/>. If <see langword="false"/>,
+            an exception, which occurred in using the custom writer will be
+            thrown. The default is <see langword="false"/>. 
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.Drawing">
+            <summary>
+            Gets the last created drawing.
+            </summary>
+            <value>
+            A <see cref="T:System.Windows.Media.DrawingGroup"/> specifying the last converted drawing.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.ImageFile">
+            <summary>
+            Gets the output image file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the image if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.XamlFile">
+            <summary>
+            Gets the output XAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the XAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.FileSvgReader.ZamlFile">
+            <summary>
+            Gets the output ZAML file path if generated.
+            </summary>
+            <value>
+            A string containing the full path to the ZAML if generated; otherwise,
+            it is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.String)">
+            <overloads>
+            Reads in the specified SVG file and converts it to WPF drawing.
+            </overloads>
+            <summary>
+            Reads in the specified SVG file and converts it to WPF drawing.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.Uri)">
+            <summary>
+            Reads in the specified SVG file and converts it to WPF drawing.
+            </summary>
+            <param name="svgUri">
+            A <see cref="T:System.Uri"/> specifying the path to the SVG file.
+            </param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgUri"/> is <see langword="null"/>.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.IO.Stream)">
+            <summary>
+            Reads in the specified SVG file stream and converts it to WPF drawing.
+            </summary>
+            <param name="svgStream">The source SVG file stream.</param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgStream"/> is <see langword="null"/>.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.IO.TextReader)">
+            <summary>
+            Reads in the specified source from the SVG file reader and converts 
+            it to WPF drawing.
+            </summary>
+            <param name="svgTextReader">
+            A text reader providing access to the SVG file data.
+            </param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgTextReader"/> is <see langword="null"/>.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.Xml.XmlReader)">
+            <summary>
+            Reads in the specified source SVG file reader and converts it to 
+            WPF drawing.
+            </summary>
+            <param name="svgXmlReader">
+            An XML reader providing access to the SVG file data.
+            </param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgXmlReader"/> is <see langword="null"/>.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Read(System.String,System.IO.DirectoryInfo)">
+            <summary>
+            Reads in the specified SVG file, converting it to WPF drawing and
+            saving the results to the specified directory if successful.
+            </summary>
+            <param name="svgFileName">
+            The full path of the SVG source file.
+            </param>
+            <param name="destinationDir">
+            The destination of the output XAML file, if the saving properties
+            are enabled.
+            </param>
+            <returns>
+            This returns the <see cref="T:System.Windows.Media.DrawingGroup"/> representing the SVG file,
+            if successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the <paramref name="svgFileName"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            If the <paramref name="svgFileName"/> is empty.
+            <para>-or-</para>
+            If the <paramref name="svgFileName"/> does not exists.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Save(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Saves the last converted file to the specified file name.
+            </summary>
+            <param name="fileName">
+            The full path of the output file.
+            </param>
+            <param name="asXaml">
+            A value indicating whether to save the output to XAML file.
+            </param>
+            <param name="asZaml">
+            A value indicating whether to save the output to ZAML file, which
+            is a G-zip compression of the XAML file.
+            </param>
+            <returns>
+            This returns <see langword="true"/> if either <paramref name="asXaml"/>
+            or <paramref name="asZaml"/> is <see langword="true"/> and the operation
+            is successful.
+            </returns>
+            <remarks>
+            <para>
+            If the output serialization properties are not enabled, this method
+            can be used to save the output to a file.
+            </para>
+            <para>
+            This will not change the output serialization properties of this object.
+            </para>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">
+            If there is no converted drawing from a previous conversion process
+            to be saved.
+            </exception>
+        </member>
+        <member name="M:SharpVectors.Converters.FileSvgReader.Dispose(System.Boolean)">
+            <summary>
+            This releases the unmanaged resources used by the <see cref="T:SharpVectors.Converters.SvgConverter"/> 
+            and optionally releases the managed resources. 
+            </summary>
+            <param name="disposing">
+            This is <see langword="true"/> if managed resources should be 
+            disposed; otherwise, <see langword="false"/>.
+            </param>
+        </member>
+        <member name="T:SharpVectors.Converters.SvgCanvas">
+            <summary>
+            This is a <see cref="!:Canvas"/> control for viewing SVG file in WPF
+            applications.
+            </summary>
+            <remarks>
+            It extends the drawing canvas, <see cref="T:SharpVectors.Runtime.SvgDrawingCanvas"/>, instead of
+            generic <see cref="!:Canvas"/> control, therefore any interactivity support 
+            implemented in the drawing canvas will be available in the 
+            <see cref="!:Canvas"/>.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgCanvas"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.#cctor">
+            <summary>
+            Static constructor to define metadata for the control (and link it to the style in Generic.xaml).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.Source">
+            <summary>
+            Gets or sets the path to the SVG file to load into this 
+            <see cref="!:Canvas"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.Uri"/> specifying the path to the SVG source file.
+            The file can be located on a computer, network or assembly resources.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.AutoSize">
+            <summary>
+            Gets or sets a value indicating whether to automatically resize this
+            <see cref="!:Canvas"/> based on the size of the loaded drawing.
+            </summary>
+            <value>
+            This is <see langword="true"/> if this <see cref="!:Canvas"/> is
+            automatically resized based on the size of the loaded drawing;
+            otherwise, it is <see langword="false"/>. The default is 
+            <see langword="false"/>, and the user-defined size or the parent assigned
+            layout size is used.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.OptimizePath">
+            <summary>
+            Gets or sets a value indicating whether the path geometry is 
+            optimized using the <see cref="T:System.Windows.Media.StreamGeometry"/>.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the path geometry is optimized
+            using the <see cref="T:System.Windows.Media.StreamGeometry"/>; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.TextAsGeometry">
+            <summary>
+            Gets or sets a value indicating whether the texts are rendered as
+            path geometry.
+            </summary>
+            <value>
+            This is <see langword="true"/> if texts are rendered as path 
+            geometries; otherwise, this is <see langword="false"/>. The default
+            is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.IncludeRuntime">
+            <summary>
+            Gets or sets a value indicating whether the <c>SharpVectors.Runtime.dll</c>
+            classes are used in the generated output.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
+            classes and types are used in the generated output; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+            <remarks>
+            The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
+            font path generated by the <see cref="T:System.Windows.Media.FormattedText"/> class, support
+            for embedded images etc.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.CultureInfo">
+            <summary>
+            Gets or sets the main culture information used for rendering texts.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Converters.SvgCanvas.CultureInfo"/> specifying the main
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            <para>
+            This is the culture information passed to the <see cref="T:System.Windows.Media.FormattedText"/>
+            class instance for the text rendering.
+            </para>
+            <para>
+            The library does not currently provide any means of splitting texts
+            into its multi-language parts.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.OnInitialized(System.EventArgs)">
+            <summary>
+            Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.
+            </summary>
+            <param name="e">Event data for the event.</param>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.OnSettingsChanged">
+            <summary>
+            This handles changes in the rendering settings of this control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.OnAutoSizeChanged">
+            <summary>
+            This handles changes in the automatic resizing property of this control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgCanvas.CreateDrawing">
+            <summary>
+            Performs the conversion of a valid SVG source file to the 
+            <see cref="T:System.Windows.Media.DrawingGroup"/>.
+            </summary>
+            <returns>
+            This returns <see cref="T:System.Windows.Media.DrawingGroup"/> if successful; otherwise, it
+            returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgCanvas.BaseUri">
+            <summary>
+            Gets or sets the base URI of the current application context.
+            </summary>
+            <value>
+            The base URI of the application context.
+            </value>
+        </member>
+        <member name="T:SharpVectors.Converters.SvgConverter">
+            <summary>
+            This is the <see langword="abstract"/> base class for all 
+            SVG to WPF converters.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.#ctor">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgConverter"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgConverter"/> class
+            with the default parameters and settings.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgConverter"/> class
+            with the specified drawing or rendering settings.
+            </summary>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.#ctor(System.Boolean,System.Boolean,SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgConverter"/> class
+            with the specified drawing or rendering settings and the saving options.
+            </summary>
+            <param name="saveXaml">
+            This specifies whether to save result object tree in XAML file.
+            </param>
+            <param name="saveZaml">
+            This specifies whether to save result object tree in ZAML file. The
+            ZAML is simply a G-Zip compressed XAML format, similar to the SVGZ.
+            </param>
+            <param name="settings">
+            This specifies the settings used by the rendering or drawing engine.
+            If this is <see langword="null"/>, the default settings is used.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.Finalize">
+            <summary>
+            This allows a converter to attempt to free resources and perform 
+            other cleanup operations before the converter is reclaimed by 
+            garbage collection.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgConverter.SaveXaml">
+            <summary>
+            Gets or sets a value indicating whether to save the conversion
+            output to the XAML file.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the conversion output is saved
+            to the XAML file; otherwise, it is <see langword="false"/>.
+            The default depends on the converter.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgConverter.SaveZaml">
+            <summary>
+            Gets or sets a value indicating whether to save the conversion
+            output to the ZAML file.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the conversion output is saved
+            to the ZAML file; otherwise, it is <see langword="false"/>.
+            The default depends on the converter.
+            </value>
+            <remarks>
+            The ZAML is simply a G-Zip compressed XAML format, similar to the
+            SVGZ.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgConverter.UseFrameXamlWriter">
+            <summary>
+            Gets or sets a value indicating whether to use the .NET framework
+            version of the XAML writer.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the .NET framework version of the
+            XAML writer is used; otherwise, a customized XAML writer, 
+            <see cref="T:SharpVectors.Converters.XmlXamlWriter"/>, is used. The default is <see langword="false"/>.
+            </value>
+            <remarks>
+            The customized XAML writer is optimized for the conversion process,
+            and it is recommended as the writer, unless in cases where it fails
+            to produce accurate result.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgConverter.Background">
+            <summary>
+            Gets or sets a brush that describes the background of a image.
+            </summary>
+            <value>
+            The brush that is used to fill the background of the control. 
+            The default is <see langword="null"/> or transparent.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgConverter.DrawingSettings">
+            <summary>
+            Gets the settings used by the rendering or drawing engine.
+            </summary>
+            <value>
+            An instance of <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> specifying all
+            the options for rendering or drawing.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.Dispose">
+            <overloads>
+            This releases all resources used by the <see cref="T:SharpVectors.Converters.SvgConverter"/> object.
+            </overloads>
+            <summary>
+            This releases all resources used by the <see cref="T:SharpVectors.Converters.SvgConverter"/> object.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgConverter.Dispose(System.Boolean)">
+            <summary>
+            This releases the unmanaged resources used by the <see cref="T:SharpVectors.Converters.SvgConverter"/> 
+            and optionally releases the managed resources. 
+            </summary>
+            <param name="disposing">
+            This is <see langword="true"/> if managed resources should be 
+            disposed; otherwise, <see langword="false"/>.
+            </param>
+        </member>
+        <member name="T:SharpVectors.Converters.SvgImageExtension">
+            <summary>
+            This implements a markup extension that enables the creation
+            of <see cref="T:System.Windows.Media.DrawingImage"/> from SVG files.
+            </summary>
+            <remarks>
+            The SVG source file can be:
+            <list type="bullet">
+            <item>
+            <description>From the web</description>
+            </item>
+            <item>
+            <description>From the local computer (relative or absolute paths)</description>
+            </item>
+            <item>
+            <description>From the resources.</description>
+            </item>
+            </list>
+            <para>
+            The rendering settings are provided as properties for customizations.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgImageExtension.#ctor">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgImageExtension"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgImageExtension"/> 
+            class with the default parameters.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgImageExtension.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgImageExtension"/> 
+            class with the specified SVG file path.
+            </summary>
+            <param name="svgSource"></param>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgImageExtension.Source">
+            <summary>
+            Gets or sets the SVG source file.
+            </summary>
+            <value>
+            A string specifying the path of the SVG source file.
+            The default is <see langword="null"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgImageExtension.OptimizePath">
+            <summary>
+            Gets or sets a value indicating whether the path geometry is 
+            optimized using the <see cref="T:System.Windows.Media.StreamGeometry"/>.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the path geometry is optimized
+            using the <see cref="T:System.Windows.Media.StreamGeometry"/>; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgImageExtension.TextAsGeometry">
+            <summary>
+            Gets or sets a value indicating whether the texts are rendered as
+            path geometry.
+            </summary>
+            <value>
+            This is <see langword="true"/> if texts are rendered as path 
+            geometries; otherwise, this is <see langword="false"/>. The default
+            is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgImageExtension.IncludeRuntime">
+            <summary>
+            Gets or sets a value indicating whether the <c>SharpVectors.Runtime.dll</c>
+            classes are used in the generated output.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
+            classes and types are used in the generated output; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+            <remarks>
+            The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
+            font path generated by the <see cref="T:System.Windows.Media.FormattedText"/> class, support
+            for embedded images etc.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgImageExtension.CultureInfo">
+            <summary>
+            Gets or sets the main culture information used for rendering texts.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Converters.SvgImageExtension.CultureInfo"/> specifying the main
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            <para>
+            This is the culture information passed to the <see cref="T:System.Windows.Media.FormattedText"/>
+            class instance for the text rendering.
+            </para>
+            <para>
+            The library does not currently provide any means of splitting texts
+            into its multi-language parts.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgImageExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Performs the conversion of a valid SVG source file to the 
+            <see cref="T:System.Windows.Media.DrawingImage"/> that is set as the value of the target 
+            property for this markup extension.
+            </summary>
+            <param name="serviceProvider">
+            Object that can provide services for the markup extension.
+            </param>
+            <returns>
+            This returns <see cref="T:System.Windows.Media.DrawingImage"/> if successful; otherwise, it
+            returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgImageExtension.GetUri(System.IServiceProvider)">
+            <summary>
+            Converts the SVG source file to <see cref="T:System.Uri"/>
+            </summary>
+            <param name="serviceProvider">
+            Object that can provide services for the markup extension.
+            </param>
+            <returns>
+            Returns the valid <see cref="T:System.Uri"/> of the SVG source path if
+            successful; otherwise, it returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Converters.SvgViewbox">
+            <summary>
+            This is a <see cref="T:System.Windows.Controls.Viewbox"/> control for viewing SVG file in WPF
+            applications.
+            </summary>
+            <remarks>
+            It wraps the drawing canvas, <see cref="T:SharpVectors.Runtime.SvgDrawingCanvas"/>, instead of
+            image control, therefore any interactivity support implemented in the
+            drawing canvas will be available in the <see cref="T:System.Windows.Controls.Viewbox"/>.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.SvgViewbox"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.#cctor">
+            <summary>
+            Static constructor to define metadata for the control (and link it to the style in Generic.xaml).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.Source">
+            <summary>
+            Gets or sets the path to the SVG file to load into this 
+            <see cref="T:System.Windows.Controls.Viewbox"/>.
+            </summary>
+            <value>
+            A <see cref="T:System.Uri"/> specifying the path to the SVG source file.
+            The file can be located on a computer, network or assembly resources.
+            Settings this to <see langword="null"/> will close any opened diagram.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.DrawingCanvas">
+            <summary>
+            Gets the drawing canvas, which is the child of this <see cref="T:System.Windows.Controls.Viewbox"/>.
+            </summary>
+            <value>
+            An instance of the <see cref="T:SharpVectors.Runtime.SvgDrawingCanvas"/> specifying the child
+            of this <see cref="T:System.Windows.Controls.Viewbox"/>, which handles the rendering.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.AutoSize">
+            <summary>
+            Gets or sets a value indicating whether to automatically resize this
+            <see cref="T:System.Windows.Controls.Viewbox"/> based on the size of the loaded drawing.
+            </summary>
+            <value>
+            This is <see langword="true"/> if this <see cref="T:System.Windows.Controls.Viewbox"/> is
+            automatically resized based on the size of the loaded drawing;
+            otherwise, it is <see langword="false"/>. The default is 
+            <see langword="false"/>, and the user-defined size or the parent assigned
+            layout size is used.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.OptimizePath">
+            <summary>
+            Gets or sets a value indicating whether the path geometry is 
+            optimized using the <see cref="T:System.Windows.Media.StreamGeometry"/>.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the path geometry is optimized
+            using the <see cref="T:System.Windows.Media.StreamGeometry"/>; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.TextAsGeometry">
+            <summary>
+            Gets or sets a value indicating whether the texts are rendered as
+            path geometry.
+            </summary>
+            <value>
+            This is <see langword="true"/> if texts are rendered as path 
+            geometries; otherwise, this is <see langword="false"/>. The default
+            is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.IncludeRuntime">
+            <summary>
+            Gets or sets a value indicating whether the <c>SharpVectors.Runtime.dll</c>
+            classes are used in the generated output.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
+            classes and types are used in the generated output; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+            <remarks>
+            The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
+            font path generated by the <see cref="T:System.Windows.Media.FormattedText"/> class, support
+            for embedded images etc.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.CultureInfo">
+            <summary>
+            Gets or sets the main culture information used for rendering texts.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Converters.SvgViewbox.CultureInfo"/> specifying the main
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            <para>
+            This is the culture information passed to the <see cref="T:System.Windows.Media.FormattedText"/>
+            class instance for the text rendering.
+            </para>
+            <para>
+            The library does not currently provide any means of splitting texts
+            into its multi-language parts.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.OnInitialized(System.EventArgs)">
+            <summary>
+            Raises the Initialized event. This method is invoked whenever IsInitialized is set to true.
+            </summary>
+            <param name="e">Event data for the event.</param>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.OnSettingsChanged">
+            <summary>
+            This handles changes in the rendering settings of this control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.OnAutoSizeChanged">
+            <summary>
+            This handles changes in the automatic resizing property of this control.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.SvgViewbox.CreateDrawing">
+            <summary>
+            Performs the conversion of a valid SVG source file to the 
+            <see cref="T:System.Windows.Media.DrawingGroup"/>.
+            </summary>
+            <returns>
+            This returns <see cref="T:System.Windows.Media.DrawingGroup"/> if successful; otherwise, it
+            returns <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="P:SharpVectors.Converters.SvgViewbox.BaseUri">
+            <summary>
+            Gets or sets the base URI of the current application context.
+            </summary>
+            <value>
+            The base URI of the application context.
+            </value>
+        </member>
+        <member name="T:SharpVectors.Converters.XmlXamlWriter">
+            <summary>
+            This is a customized XAML writer, which provides Extensible Application 
+            Markup Language (XAML) serialization of provided runtime objects into XAML.
+            </summary>
+            <remarks>
+            This is designed to be used by the SVG to XAML converters, and may not be
+            useful in general applications.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Converters.XmlXamlWriter.#ctor">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.XmlXamlWriter"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.XmlXamlWriter"/> class
+            with the default settings.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Converters.XmlXamlWriter.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Converters.XmlXamlWriter"/> class
+            with the specified settings.
+            </summary>
+            <param name="settings">
+            An instance of <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> specifying the
+            rendering options.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Converters.XmlXamlWriter.IncludeNullExtension">
+            <summary>
+            Gets or sets a value indicating whether to include a null markup
+            extension in the output XAML.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the null markup extension is
+            included in the output XAML; otherwise, it is <see langword="false"/>.
+            The default is <see langword="false"/>.
+            </value>
+        </member>
+    </members>
+</doc>

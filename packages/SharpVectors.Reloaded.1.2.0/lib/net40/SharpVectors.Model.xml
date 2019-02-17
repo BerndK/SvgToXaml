@@ -1,0 +1,1602 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Model</name>
+    </assembly>
+    <members>
+        <member name="T:SharpVectors.Dom.Svg.SvgResolveNamespaceEventArgs">
+            <summary>
+            Arguments when namespace is trying to be resolved
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgResolveNamespaceEventArgs.Prefix">
+            <summary>
+            Gets or sets the prefix (for example: 'rdf')
+            </summary>
+            <value>The prefix.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgResolveNamespaceEventArgs.Uri">
+            <summary>
+            Gets or sets the URI (for example: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#').
+            This value may have already been initialized, it's up to the application to check if it wants to override the resolution
+            </summary>
+            <value>The URI.</value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgResolveUriEventArgs">
+            <summary>
+            Arguments when URI is trying to be resolved while loading schema
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgResolveUriEventArgs.Uri">
+            <summary>
+            Gets or sets the URI (for example: 'http://www.w3.org/2000/svg').
+            This value may have already been initialized, it's up to the application to check if it wants to override the resolution
+            </summary>
+            <value>The URI.</value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAngle">
+            <summary>
+            Summary description for SvgAngle.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgAngle.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a SvgAngle value
+            </summary>
+            <param name="s">The string to parse for the angle value</param>
+            <param name="defaultValue">The default value for the angle.</param>
+            <param name="readOnly">Specifies if the value should be read-only</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgAngle.NewValueSpecifiedUnits(SharpVectors.Dom.Svg.SvgAngleType,System.Double)">
+            <summary>
+             Reset the value as a number with an associated unitType, thereby replacing the values 
+             for all of the attributes on the object.
+            </summary>
+            <param name="unitType">The unitType for the angle value (e.g., SvgAngleTypeDEG).</param>
+            <param name="valueInSpecifiedUnits">The angle value</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgAngle.ConvertToSpecifiedUnits(SharpVectors.Dom.Svg.SvgAngleType)">
+            <summary>
+             Preserve the same underlying stored value, but reset the stored unit identifier to the given 
+             unitType. Object attributes unitType, valueAsSpecified and valueAsString might be modified 
+             as a result of this method.
+            </summary>
+            <param name="unitType">The unitType to switch to (e.g., SvgAngleTypeDEG).</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAngle.UnitType">
+            <summary>
+            The type of the value as specified by one of the constants specified above
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAngle.Value">
+            <summary>
+             The angle value as a floating point value, in degrees. Setting this attribute will cause 
+             valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAngle.ValueInSpecifiedUnits">
+            <summary>
+             The angle value as a floating point value, in the units expressed by unitType. Setting this 
+             attribute will cause value and valueAsString to be updated automatically to reflect this setting.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAngle.ValueAsString">
+            <summary>
+             The angle value as a string value, in the units expressed by unitType. Setting this attribute 
+             will cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            value of a readonly attribute.</exception>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedBoolean">
+            <summary>
+            Summary description for SvgAnimatedNumber.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedEnumeration">
+            <summary>
+            Summary description for SvgAnimatedEnumeration.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedLength">
+            <summary>
+            Used for attributes of basic type 'length' which can be animated. 
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgAnimatedLength.#ctor(SharpVectors.Dom.Svg.SvgElement,System.String,SharpVectors.Dom.Svg.SvgLengthDirection,System.String)">
+            <summary>
+            Used for attributes of basic type 'length' which can be animated. 
+            </summary>
+            <param name="ownerElement">The elements that contains the length</param>
+            <param name="direction">The direction of the length, 0=x-axis, 1=y-axis, 2=no special axis</param>
+            <param name="defaultValue">String to parse for the value</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedLength.BaseVal">
+            <summary>
+            The base value of the given attribute before applying any animations.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgAnimatedLength.AnimVal">
+            <summary>
+            If the given attribute or property is being animated, contains the current animated value of the attribute or property, and both the object itself and its contents are readonly. If the given attribute or property is not currently being animated, contains the same value as 'baseVal'. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedLengthList">
+            <summary>
+            Summary description for SvgAnimatedLengthList.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedNumber">
+            <summary>
+            Summary description for SvgAnimatedNumber.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedNumberList">
+            <summary>
+            Summary description for SvgAnimatedLengthList.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedPreserveAspectRatio">
+            <summary>
+            Summary description for SvgAnimatedPreserveAspectRatio.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedRect">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedString">
+            <summary>
+            Summary description for SvgAnimatedLengthList.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgAnimatedTransformList">
+            <summary>
+            Used for the various attributes which specify a set of transformations, such as the transform 
+            attribute which is available for many of Svg's elements, and which can be animated.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgColor">
+            <summary>
+            Summary description for SvgColor.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgElement">
+            <summary>
+            Summary description for SvgElement.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgElement.ElementInstance">
+            <summary>
+            Whenever an SvgElementInstance is created for an SvgElement this property is set. The value of 
+            this property is used by the renderer to dispatch events. SvgElements that are &lt;use&gt;d exist in a 
+            conceptual "instance tree" and the target of events for those elements is the conceptual instance 
+            node represented by the SvgElementInstance.
+            <see cref="!:http://www.w3.org/TR/SVG/struct.html#UseElement"/>
+            <see cref="!:http://www.w3.org/TR/SVG/struct.html#InterfaceSVGElementInstance"/>
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgLengthDirection">
+            <summary>
+            Defines the direction of a SvgLength
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgLengthSource">
+            <summary>
+            Defines the origin type of the SvgLength value
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgLength.#ctor(System.String,System.String,SharpVectors.Dom.Svg.SvgElement,SharpVectors.Dom.Svg.SvgLengthDirection)">
+            <summary>
+            Creates a SvgLength value
+            </summary>
+            <param name="baseVal">String to be parsed into a length</param>
+            <param name="ownerElement">The associated element</param>
+            <param name="direction">Direction of the length, used for percentages</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLength.UnitType">
+            <summary>
+            The type of the value as specified by one of the constants specified above. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLength.Value">
+            <summary>
+            The value as an floating point value, in user units. Setting this attribute will cause 
+            valueInSpecifiedUnits and valueAsString to be updated automatically to reflect this setting. 
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+            the value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLength.ValueInSpecifiedUnits">
+            <summary>
+            The value as an floating point value, in the units expressed by unitType. Setting this 
+            attribute will cause value and valueAsString to be updated automatically to reflect this setting.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException"> NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change 
+            the value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLength.ValueAsString">
+            <summary>
+            The value as a string value, in the units expressed by unitType. Setting this attribute will 
+            cause value and valueInSpecifiedUnits to be updated automatically to reflect this setting.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the 
+            value of a readonly attribute.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgLength.NewValueSpecifiedUnits(SharpVectors.Dom.Svg.SvgLengthType,System.Double)">
+            <summary>
+            Reset the value as a number with an associated unitType, thereby replacing the values for 
+            all of the attributes on the object.
+            </summary>
+            <param name="unitType">The unitType for the value (e.g., MM). </param>
+            <param name="valueInSpecifiedUnits">The new value</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgLength.ConvertToSpecifiedUnits(SharpVectors.Dom.Svg.SvgLengthType)">
+            <summary>
+            Preserve the same underlying stored value, but reset the stored unit identifier to the given unitType. 
+            Object attributes unitType, valueAsSpecified and valueAsString might be modified as a result of this 
+            method. For example, if the original value were "0.5cm" and the method was invoked to convert to 
+            millimeters, then the unitType would be changed to MM, valueAsSpecified would be changed to the 
+            numeric value 5 and valueAsString would be changed to "5mm". 
+            </summary>
+            <param name="unitType">The unitType to switch to (e.g., MM).</param>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgLengthList">
+            <summary>
+            This interface defines a list of SvgLength objects
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgList`1">
+            <summary>
+            Base class for all SVG*List-derived classes.
+            Note we're using <see cref="T:System.Collections.Generic.List`1"/> (as opposed to deriving from) to hide unneeded <see cref="T:System.Collections.Generic.List`1"/> methods
+            Note that a CLR uint is equivalent to an IDL ulong, so uint is used for all index values
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.#ctor">
+            <summary>
+            SvgList constructor
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgList`1.NumberOfItems">
+            <summary>
+            NumberOfItems
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.Clear">
+            <summary>
+            Clear
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.Initialize(`0)">
+            <summary>
+            Initialize
+            </summary>
+            <param name="newItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.GetItem(System.UInt32)">
+            <summary>
+            GetItem
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.InsertItemBefore(`0,System.UInt32)">
+            <summary>
+            InsertItemBefore
+            </summary>
+            <param name="newItem"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.ReplaceItem(`0,System.UInt32)">
+            <summary>
+            ReplaceItem
+            </summary>
+            <param name="newItem"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.RemoveItem(System.UInt32)">
+            <summary>
+            RemoveItem
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.AppendItem(`0)">
+            <summary>
+            AppendItem
+            </summary>
+            <param name="newItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgList`1.RemoveItem(`0)">
+            <summary>
+            RemoveItem - used to remove an item by value as opposed to by position
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgMatrix">
+            <summary>
+            <para>
+            Many of SVG's graphics operations utilize 2x3 matrices of the form:
+                [a c e]
+                [b d f]
+            </para>
+            <para>
+            which, when expanded into a 3x3 matrix for the purposes of matrix arithmetic, become:
+                [a c e]
+                [b d f]
+                [0 0 1]
+            </para>
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgNumberList">
+            <summary>
+            Summary description for SvgNumberList.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPoint">
+            <summary>
+            Many of the SVG DOM interfaces refer to objects of class SvgPoint.
+            An SvgPoint is an (x,y) coordinate pair. When used in matrix 
+            operations, an SvgPoint is treated as a vector of the form:	
+                [x]
+                [y]
+                [1]
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPointList">
+            <summary>
+            This class defines a list of SvgPoint objects. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgRect">
+            <summary>
+            Rectangles are defined as consisting of a (x,y) coordinate pair identifying a minimum X value, 
+            a minimum Y value, and a width and height, which are usually constrained to be non-negative. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgStringList">
+            <summary>
+            This interface defines a list of String objects
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTests">
+            <summary>
+            A class to encapsulate all SvgTest functionality. Used by SVG elements as a helper class
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTransform">
+            <summary>
+            Summary description for SvgTransform.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTransformList">
+            <summary>
+            Summary description for SvgTransformList.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgViewSpec">
+            <summary>
+            
+            TODO:  This class does not yet support custom views
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgClipPathElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Clipping"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMaskElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Masking"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgDefsElement">
+            <summary>
+            The SvgDefsElement interface corresponds to the 'defs' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDefsElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDefsElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgDescElement">
+            <summary>
+            The SvgDescElement interface corresponds to the 'desc' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgDocument">
+            <summary>
+            The root object in the document object hierarchy of an Svg document.
+            </summary>
+            <remarks>
+            <para>
+            When an 'svg'  element is embedded inline as a component of a
+            document from another namespace, such as when an 'svg' element is
+            embedded inline within an XHTML document
+            [<see href="http://www.w3.org/TR/SVG/refs.html#ref-XHTML">XHTML</see>],
+            then an
+            <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will not exist;
+            instead, the root object in the
+            document object hierarchy will be a Document object of a different
+            type, such as an HTMLDocument object.
+            </para>
+            <para>
+            However, an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will
+            indeed exist when the root
+            element of the XML document hierarchy is an 'svg' element, such as
+            when viewing a stand-alone SVG file (i.e., a file with MIME type
+            "image/svg+xml"). In this case, the
+            <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object will be the
+            root object of the document object model hierarchy.
+            </para>
+            <para>
+            In the case where an SVG document is embedded by reference, such as
+            when an XHTML document has an 'object' element whose href attribute
+            references an SVG document (i.e., a document whose MIME type is
+            "image/svg+xml" and whose root element is thus an 'svg' element),
+            there will exist two distinct DOM hierarchies. The first DOM hierarchy
+            will be for the referencing document (e.g., an XHTML document). The
+            second DOM hierarchy will be for the referenced SVG document. In this
+            second DOM hierarchy, the root object of the document object model
+            hierarchy is an <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> object.
+            </para>
+            <para>
+            The <see cref="T:SharpVectors.Dom.Svg.ISvgDocument">ISvgDocument</see> interface contains a
+            similar list of attributes and
+            methods to the HTMLDocument interface described in the
+            <see href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html">Document
+            Object Model (HTML) Level 1</see> chapter of the
+            [<see href="http://www.w3.org/TR/SVG/refs.html#ref-DOM1">DOM1</see>] specification.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgDocument.ResolveNamespaceDelegate">
+            <summary>
+            Namespace resolution event delegate.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgDocument.ResolveUriDelegate">
+            <summary>
+            URI resolution event delegate
+            </summary>
+        </member>
+        <member name="E:SharpVectors.Dom.Svg.SvgDocument.ResolveNamespace">
+            <summary>
+            Occurs when a namespace is being resolved.
+            </summary>
+        </member>
+        <member name="E:SharpVectors.Dom.Svg.SvgDocument.ResolvingUri">
+            <summary>
+            Occurs when an URI is resolved (always).
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.Load(System.String)">
+            <overloads>
+            Loads an XML document.Loads the specified XML data.
+            <blockquote>
+            <b>Note</b>   The Load method always preserves significant white
+            space. The PreserveWhitespace property determines whether or not
+            white space is preserved. The default is false, whites space is
+            not preserved.
+            </blockquote>
+            </overloads>
+            <summary>
+            Loads the XML document from the specified URL.
+            </summary>
+            <param name="url">
+            URL for the file containing the XML document to load.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.Load(System.String,System.IO.Stream)">
+            <summary>
+            Loads the XML document from the specified stream but with the
+            specified base URL
+            </summary>
+            <param name="baseUrl">
+            Base URL for the stream from which the XML document is loaded.
+            </param>
+            <param name="stream">
+            The stream containing the XML document to load.
+            </param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.Load(System.IO.TextReader)">
+            <summary>
+            Loads the XML document from the specified
+            <see cref="T:System.IO.TextReader">TextReader</see>.
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.Load(System.IO.Stream)">
+            <summary>
+            Loads the XML document from the specified stream.
+            </summary>
+            <param name="inStream">
+            The stream containing the XML document to load.
+            </param>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgDocument._entitiesUris">
+            <summary>
+            Entities URIs corrections are cached here.
+            Currently consists in mapping '_' to '' (nothing)
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgDocument._entitiesUrisLock">
+            <summary>
+            Semaphore to access _entitiesUris
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Svg.SvgDocument._rootType">
+            <summary>
+            Root where resources are embedded
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.GetEntityUri(System.String)">
+            <summary>
+            Given a transformed resource name, find a possible existing resource.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.OnXmlResolverGettingEntity(System.Uri,System.String,System.Type)">
+            <summary>
+            Handles DynamicXmlUrlResolver GettingEntity event.
+            </summary>
+            <param name="absoluteUri">The absolute URI.</param>
+            <param name="role">The role.</param>
+            <param name="ofObjectToReturn">The of object to return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.GetEntityFromUri(System.String,System.Type)">
+            <summary>
+            Gets the URI direct.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="ofObjectToReturn">The of object to return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.OnXmlResolverResolving(System.String)">
+            <summary>
+            Handles DynamicXmlResolver Resolve event.
+            </summary>
+            <param name="relativeUri">The relative URI.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.GetXmlParserContext">
+            <summary>
+            Gets/create an XML parser context, with predefined namespaces
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.OnResolveXmlNamespaceManager(System.String)">
+            <summary>
+            Handles DynamicXmlNamespaceManager Resolve event.
+            </summary>
+            <param name="prefix">The prefix.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.CreateValidatingXmlReader(System.String)">
+            <summary>
+            Creates the validating XML reader.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.CreateValidatingXmlReader(System.IO.TextReader)">
+            <summary>
+            Creates the validating XML reader.
+            </summary>
+            <param name="textReader">The text reader.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.CreateValidatingXmlReader(System.String,System.IO.Stream)">
+            <summary>
+            Creates the validating XML reader.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="stream">The stream.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgDocument.CreateValidatingXmlReader(System.Xml.XmlReader)">
+            <summary>
+            Creates the validating XML reader.
+            </summary>
+            <param name="xmlReader">The XML reader.</param>
+            <returns></returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDocument.Title">
+            <summary>
+            The title of the document which is the text content of the first child title element of the 'svg' root element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDocument.Referrer">
+            <summary>
+            Returns the URI of the page that linked to this page. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, via a bookmark).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDocument.Domain">
+            <summary>
+            The domain name of the server that served the document, or a null string if the server cannot be identified by a domain name.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgDocument.RootElement">
+            <summary>
+            The root 'svg' element in the document hierarchy
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgGElement">
+            <summary>
+            The SvgGElement interface corresponds to the 'g' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgImageElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Image"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgStyleableElement">
+            <summary>
+            SvgStyleableElement is an extension to the Svg DOM to create a class for all elements that are styleable.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgSvgElement">
+            <summary>
+            <para>
+            A key interface definition is the SVGSVGElement interface, which is the interface that corresponds 
+            to the 'svg' element. This interface contains various miscellaneous commonly-used utility methods, 
+            such as matrix operations and the ability to control the time of redraw on visual rendering devices.
+            </para>
+            <para>
+            SVGSVGElement extends ViewCSS and DocumentCSS to provide access to the 
+            computed values of properties and the override style sheet as described in DOM2. 
+            </para>
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.X">
+            <summary>
+            Corresponds to attribute x on the given 'svg' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.Y">
+            <summary>
+            Corresponds to attribute y on the given 'svg' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.Width">
+            <summary>
+            Corresponds to attribute width on the given 'svg' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.Height">
+            <summary>
+            Corresponds to attribute height on the given 'svg' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ContentScriptType">
+            <summary>
+            Corresponds to attribute contentScriptType on the given 'svg' element
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ContentStyleType">
+            <summary>
+            Corresponds to attribute contentStyleType on the given 'svg' element.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.Viewport">
+            <summary>
+            The position and size of the viewport (implicit or explicit) that corresponds to this 'svg' element. When the user agent is actually rendering the content, then the position and size values represent the actual values when rendering. The position and size values are unitless values in the coordinate system of the parent element. If no parent element exists (i.e., 'svg' element represents the root of the document tree), if this SVG document is embedded as part of another document (e.g., via the HTML 'object' element), then the position and size are unitless values in the coordinate system of the parent document. (If the parent uses CSS or XSL layout, then unitless values represent pixel units for the current CSS or XSL viewport, as described in the CSS2 specification.) If the parent element does not have a coordinate system, then the user agent should provide reasonable default values for this attribute.
+            The object itself and its contents are both readonly.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.PixelUnitToMillimeterX">
+            <summary>
+            Size of a pixel units (as defined by CSS2) along the x-axis of the viewport, which represents a unit somewhere in the range of 70dpi to 120dpi, and, on systems that support this, might actually match the characteristics of the target medium. On systems where it is impossible to know the size of a pixel, a suitable default pixel size is provided.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.PixelUnitToMillimeterY">
+            <summary>
+            Corresponding size of a pixel unit along the y-axis of the viewport.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ScreenPixelToMillimeterX">
+            <summary>
+            User interface (UI) events in DOM Level 2 indicate the screen positions at which the given UI event occurred. When the user agent actually knows the physical size of a "screen unit", this attribute will express that information; otherwise, user agents will provide a suitable default value such as .28mm.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ScreenPixelToMillimeterY">
+            <summary>
+            Corresponding size of a screen pixel along the y-axis of the viewport.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.UseCurrentView">
+            <summary>
+            The initial view (i.e., before magnification and panning) of the current innermost SVG 
+            document fragment can be either the "standard" view (i.e., based on attributes on 
+            the 'svg' element such as fitBoxToViewport) or to a "custom" view (i.e., a hyperlink 
+            into a particular 'view' or other element - see Linking into SVG content: URI 
+            fragments and SVG views). If the initial view is the "standard" view, then this 
+            attribute is false. If the initial view is a "custom" view, then this attribute is 
+            true.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.CurrentView">
+            <summary>
+            The definition of the initial view (i.e., before magnification and panning) of the current innermost SVG document fragment. The meaning depends on the situation:
+            * If the initial view was a "standard" view, then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will match the values for the corresponding DOM attributes that are on SVGSVGElement directly
+             o the values for transform and viewTarget within currentView will be null
+            * If the initial view was a link into a 'view' element, then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will correspond to the corresponding attributes for the given 'view' element
+             o the values for transform and viewTarget within currentView will be null
+            * If the initial view was a link into another element (i.e., other than a 'view'), then:
+             o the values for viewBox, preserveAspectRatio and zoomAndPan within currentView will match the values for the corresponding DOM attributes that are on SVGSVGElement directly for the closest ancestor 'svg' element
+             o the values for transform within currentView will be null
+             o the viewTarget within currentView will represent the target of the link
+            * If the initial view was a link into the SVG document fragment using an SVG view specification fragment identifier (i.e., #svgView(...)), then:
+             o the values for viewBox, preserveAspectRatio, zoomAndPan, transform and viewTarget within currentView will correspond to the values from the SVG view specification fragment identifier
+            The object itself and its contents are both readonly. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.CurrentScale">
+            <summary>
+            This attribute indicates the current scale factor relative to the initial view to take into account user magnification and panning operations, as described under Magnification and panning. DOM attributes currentScale and currentTranslate are equivalent to the 2x3 matrix [a b c d e f] = [currentScale 0 0 currentScale currentTranslate.x currentTranslate.y]. If "magnification" is enabled (i.e., zoomAndPan="magnify"), then the effect is as if an extra transformation were placed at the outermost level on the SVG document fragment (i.e., outside the outermost 'svg' element).
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised on an attempt to change the value of a readonly attribute</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.ViewBoxTransform">
+            <summary>
+            This function is super useful, calculates out the transformation matrix 
+            (i.e., scale and translate) of the viewport to user space.
+            </summary>
+            <returns>A Matrix which has the translate and scale portions set.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.CurrentTranslate">
+            <summary>
+            The corresponding translation factor that takes into account user "magnification".
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.SuspendRedraw(System.Int32)">
+            <summary>
+            Takes a time-out value which indicates that redraw shall not occur until: (a) the 
+            corresponding unsuspendRedraw(suspend_handle_id) call has been made, (b) an 
+            unsuspendRedrawAll() call has been made, or (c) its timer has timed out. In 
+            environments that do not support interactivity (e.g., print media), then redraw shall 
+            not be suspended. suspend_handle_id = suspendRedraw(max_wait_milliseconds) and 
+            unsuspendRedraw(suspend_handle_id) must be packaged as balanced pairs. When you 
+            want to suspend redraw actions as a collection of SVG DOM changes occur, then 
+            precede the changes to the SVG DOM with a method call similar to 
+            suspend_handle_id = suspendRedraw(max_wait_milliseconds) and follow the changes with 
+            a method call similar to unsuspendRedraw(suspend_handle_id). Note that multiple 
+            suspendRedraw calls can be used at once and that each such method call is treated
+            independently of the other suspendRedraw method calls.
+            </summary>
+            <param name="maxWaitMilliseconds">The amount of time in milliseconds to hold off 
+            before redrawing the device. Values greater than 60 seconds will be truncated 
+            down to 60 seconds.</param>
+            <returns>A number which acts as a unique identifier for the given suspendRedraw() call. This value must be passed as the parameter to the corresponding unsuspendRedraw() method call.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.UnsuspendRedraw(System.Int32)">
+            <summary>
+            Cancels a specified suspendRedraw() by providing a unique suspend_handle_id.
+            </summary>
+            <param name="suspendHandleId">A number which acts as a unique identifier for the desired suspendRedraw() call. The number supplied must be a value returned from a previous call to suspendRedraw()</param>
+            <exception cref="T:SharpVectors.Dom.DomException">This method will raise a DOMException with value NOT_FOUND_ERR if an invalid value (i.e., no such suspend_handle_id is active) for suspend_handle_id is provided.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.UnsuspendRedrawAll">
+            <summary>
+            Cancels all currently active suspendRedraw() method calls. This method is most 
+            useful 
+            at the very end of a set of SVG DOM calls to ensure that all pending suspendRedraw() 
+            method calls have been cancelled.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.ForceRedraw">
+            <summary>
+            In rendering environments supporting interactivity, forces the user agent to 
+            immediately redraw all regions of the viewport that require updating.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.PauseAnimations">
+            <summary>
+            Suspends (i.e., pauses) all currently running animations that are defined within the 
+            SVG document fragment corresponding to this 'svg' element, causing the animation clock 
+            corresponding to this document fragment to stand still until it is unpaused.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.UnpauseAnimations">
+            <summary>
+            Unsuspends (i.e., unpauses) currently running animations that are defined within the 
+            SVG document fragment, causing the animation clock to continue from the time at which 
+            it was suspended.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.AnimationsPaused">
+            <summary>
+            Returns true if this SVG document fragment is in a paused state
+            </summary>
+            <returns>Boolean indicating whether this SVG document fragment is in a paused 
+            state.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSvgElement.CurrentTime">
+            <summary>
+            The current time in seconds relative to the start time for the current SVG document 
+            fragment.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.GetIntersectionList(SharpVectors.Dom.Svg.ISvgRect,SharpVectors.Dom.Svg.ISvgElement)">
+            <summary>
+            Returns the list of graphics elements whose rendered content intersects the supplied 
+            rectangle, honoring the 'pointer-events' property value on each candidate graphics 
+            element.
+            </summary>
+            <param name="rect">The test rectangle. The values are in the initial coordinate 
+            system for the current 'svg' element.</param>
+            <param name="referenceElement">If not null, then only return elements whose drawing 
+            order has them below the given reference element.</param>
+            <returns>A list of Elements whose content intersects the supplied rectangle.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.GetEnclosureList(SharpVectors.Dom.Svg.ISvgRect,SharpVectors.Dom.Svg.ISvgElement)">
+            <summary>
+            Returns the list of graphics elements whose rendered content is entirely contained 
+            within the supplied rectangle, honoring the 'pointer-events' property value on each 
+            candidate graphics element.
+            </summary>
+            <param name="rect">The test rectangle. The values are in the initial coordinate system 
+            for the current 'svg' element.</param>
+            <param name="referenceElement">If not null, then only return elements whose drawing 
+            order has them below the given reference element.</param>
+            <returns>A list of Elements whose content is enclosed by the supplied 
+            rectangle.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CheckIntersection(SharpVectors.Dom.Svg.ISvgElement,SharpVectors.Dom.Svg.ISvgRect)">
+            <summary>
+            Returns true if the rendered content of the given element intersects the supplied 
+            rectangle, honoring the 'pointer-events' property value on each candidate graphics 
+            element.
+            </summary>
+            <param name="element">The element on which to perform the given test.</param>
+            <param name="rect">The test rectangle. The values are in the initial coordinate system 
+            for the current 'svg' element.</param>
+            <returns>True or false, depending on whether the given element intersects the supplied 
+            rectangle.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CheckEnclosure(SharpVectors.Dom.Svg.ISvgElement,SharpVectors.Dom.Svg.ISvgRect)">
+            <summary>
+            Returns true if the rendered content of the given element is entirely contained within 
+            the supplied rectangle, honoring the 'pointer-events' property value on each candidate 
+            graphics element.
+            </summary>
+            <param name="element">The element on which to perform the given test</param>
+            <param name="rect">The test rectangle. The values are in the initial coordinate system 
+            for the current 'svg' element.</param>
+            <returns>True or false, depending on whether the given element is enclosed by the 
+            supplied rectangle.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.DeselectAll">
+            <summary>
+            Unselects any selected objects, including any selections of text strings and type-in 
+            bars.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgNumber">
+            <summary>
+            Creates an SVGNumber object outside of any document trees. The object is initialized 
+            to a value of zero.
+            </summary>
+            <returns>An SVGNumber object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgLength">
+            <summary>
+            Creates an SVGLength object outside of any document trees. The object is initialized 
+            to the value of 0 user units.
+            </summary>
+            <returns>An SVGLength object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgAngle">
+            <summary>
+            Creates an SVGAngle object outside of any document trees. The object is initialized to 
+            the value 0 degrees (unitless).
+            </summary>
+            <returns>An SVGAngle object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgPoint">
+            <summary>
+            Creates an SVGPoint object outside of any document trees. The object is initialized to 
+            the point (0,0) in the user coordinate system.
+            </summary>
+            <returns>An SVGPoint object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgMatrix">
+            <summary>
+            Creates an SVGMatrix object outside of any document trees. The object is initialized 
+            to the identity matrix.
+            </summary>
+            <returns>An SVGMatrix object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgRect">
+            <summary>
+            Creates an SVGRect object outside of any document trees. The object is initialized 
+            such that all values are set to 0 user units.
+            </summary>
+            <returns>An SVGRect object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgTransform">
+            <summary>
+            Creates an SVGTransform object outside of any document trees. The object is initialized
+            to an identity matrix transform (SVG_TRANSFORM_MATRIX).
+            </summary>
+            <returns>An SVGTransform object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.CreateSvgTransformFromMatrix(SharpVectors.Dom.Svg.ISvgMatrix)">
+            <summary>
+            Creates an SVGTransform object outside of any document trees. The object is 
+            initialized to the given matrix transform (i.e., SVG_TRANSFORM_MATRIX).
+            </summary>
+            <param name="matrix">The transform matrix.</param>
+            <returns>An SVGTransform object.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgSvgElement.GetElementById(System.String)">
+            <summary>
+            Searches this SVG document fragment (i.e., the search is restricted to a subset of the 
+            document tree) for an Element whose id is given by elementId. If an Element is found, 
+            that Element is returned. If no such element exists, returns null. Behavior is not 
+            defined if more than one element has this id.
+            </summary>
+            <param name="elementId">The unique id value for an element.</param>
+            <returns>The matching element.</returns>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgSwitchElement">
+            <summary>
+            The SvgSwitchElement interface corresponds to the 'switch' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSwitchElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSymbolElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgSymbolElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTitleElement">
+            <summary>
+            The SvgTitleElement interface corresponds to the 'title' element. 
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgTransformableElement.GetCTM">
+            <summary>
+            For each given element, the accumulation of all transformations that have been defined 
+            on the given element and all of its ancestors up to and including the element that 
+            established the current viewport (usually, the 'svg' element which is the most 
+            immediate ancestor to the given element) is called the current transformation matrix 
+            or CTM. 
+            </summary>
+            <returns>A matrix representing the mapping of current user coordinates to viewport 
+            coordinates.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgWindow.CreateEmptySvgDocument">
+            <summary>
+            Create and assign an empty SvgDocument to this window.  This is needed only in situations where 
+            the library user needs to create an SVG DOM tree outside of the usual LoadSvgDocument mechanism.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgWindow.Resize(System.Int32,System.Int32)">
+            <summary>
+            This is expected to be called by the host
+            </summary>
+            <param name="innerWidth">The new width of the control</param>
+            <param name="innerHeight">The new height of the control</param>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFilterElement">
+            <summary>
+            Summary description for SvgFilterElement.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPatternElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Containment"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgRadialGradientElement">
+            <summary>
+            Summary description for SvgRadialGradientElement.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgStopElement">
+            <summary>
+            Summary description for SvgStopElement.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.IsRenderable">
+            <summary>
+            Gets a value indicating whether this SVG element is renderable.
+            </summary>
+            <value>
+            This is <see langword="'true"/> if the element is renderable; otherwise,
+            it is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Marker"/>
+            </value>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgMarkerElement.SetOrientToAuto">
+            <summary>
+             Sets the value of attribute orient to 'auto'.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Svg.SvgMarkerElement.SetOrientToAngle(SharpVectors.Dom.Svg.ISvgAngle)">
+            <summary>
+             Sets the value of attribute orient to the given angle.
+            </summary>
+            <param name="angle"> The angle value to use for attribute orient.</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.RefX">
+            <summary>
+            Corresponds to attribute refX on the given 'marker' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.RefY">
+            <summary>
+            Corresponds to attribute refY on the given 'marker' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.MarkerUnits">
+            <summary>
+            Corresponds to attribute markerUnits on the given 'marker' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.MarkerWidth">
+            <summary>
+            Corresponds to attribute markerWidth on the given 'marker' element
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.MarkerHeight">
+            <summary>
+            Corresponds to attribute markerHeight on the given 'marker' element.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.OrientType">
+            <summary>
+            Corresponds to attribute orient on the given 'marker' element. One of the Marker Orientation Types defined above.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMarkerElement.OrientAngle">
+            <summary>
+            Corresponds to attribute orient on the given 'marker' element. If markerUnits is SVG_MARKER_ORIENT_ANGLE, the angle value for attribute orient; otherwise, it will be set to zero.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPathElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegArcAbs">
+            <summary>
+            Summary description for SvgPathSegLinetoAbs.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegArcRel">
+            <summary>
+            Summary description for SvgPathSegLinetoAbs.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegClosePath">
+            <summary>
+            Summary description for SvgPathSegClosePath.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicRel">
+            <summary>
+            Summary description for SvgPathSegCurvetoCubicRel.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoCubicSmoothRel">
+            <summary>
+            Summary description for SvgPathSegCurvetoCubicSmoothAbs.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticAbs">
+            <summary>
+            Summary description for SvgPathSegCurvetoCubicAbs.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticRel">
+            <summary>
+            Summary description for SvgPathSegCurvetoCubicAbs.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothAbs">
+            <summary>
+            The SvgPathSegCurvetoQuadraticSmoothAbs interface corresponds to an "absolute smooth quadratic curveto" (T) path data command. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothAbs.X">
+            <summary>
+            The absolute X coordinate for the end point of this path segment. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothAbs.Y">
+            <summary>
+            The absolute Y coordinate for the end point of this path segment. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothRel">
+            <summary>
+            The SvgPathSegCurvetoQuadraticSmoothRel interface corresponds to an "relative smooth quadratic curveto" (t) path data command. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothRel.X">
+            <summary>
+            The absolute X coordinate for the end point of this path segment. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPathSegCurvetoQuadraticSmoothRel.Y">
+            <summary>
+            The absolute Y coordinate for the end point of this path segment. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegMoveto">
+            <summary>
+            Summary description for SvgMoveToSeg.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPathSegMovetoRel">
+            <summary>
+            The SvgPathSegMovetoRel interface corresponds to an "relative moveto" (m) path data command. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgScriptElement">
+            <summary>
+            The SVGScriptElement interface corresponds to the 'script' element.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgCircleElement">
+            <summary>
+            The ISvgCircleElement interface corresponds to the 'circle' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgCircleElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgEllipseElement">
+            <summary>
+            The SvgEllipseElement class corresponds to the 'ellipse' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgEllipseElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgLineElement">
+            <summary>
+            The SVGLineElement interface corresponds to the 'line' element.  
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgLineElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgPolyElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPolygonElement">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgPolylineElement">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgRectElement">
+            <summary>
+            The SVGRectElement interface corresponds to the 'rect' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgRectElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Shape"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontElement">
+            <summary>
+            The SvgFontElement interface corresponds to the 'font' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.HorizAdvX">
+            <summary>
+            Gets or sets the default horizontal advance after rendering a glyph in horizontal orientation.  
+            </summary>
+            <remarks>
+            Glyph widths are required to be non-negative, even if the glyph is typically rendered 
+            right-to-left, as in Hebrew and Arabic scripts.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.HorizOriginX">
+            <summary>
+            Gets or sets X-coordinate in the font coordinate system of the origin of a glyph 
+            to be used when drawing horizontally oriented text
+            </summary>
+            <remarks>
+            <para>Note that the origin applies to all glyphs in the font.</para>
+            <para>If the attribute is not specified, the effect is as if a value of '0' were specified.</para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.HorizOriginY">
+            <summary>
+            Gets or sets the Y-coordinate in the font coordinate system of the origin of a glyph to be 
+            used when drawing horizontally oriented text. 
+            </summary>
+            <remarks>
+            <para>Note that the origin applies to all glyphs in the font.</para>
+            <para>If the attribute is not specified, the effect is as if a value of '0' were specified.</para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.VertAdvY">
+            <summary>
+            Gets or sets the 
+            </summary>
+            <remarks>
+            <para>
+            </para>
+            <para>
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.VertOriginX">
+            <summary>
+            Gets or sets the default X-coordinate in the font coordinate system of the origin of a glyph 
+            to be used when drawing vertically oriented text. 
+            </summary>
+            <remarks>
+            If the attribute is not specified, the effect is as if the attribute were set to half of the 
+            effective value of attribute ‘horiz-adv-x’.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontElement.VertOriginY">
+            <summary>
+            Gets or sets the default Y-coordinate in the font coordinate system of the origin of a 
+            glyph to be used when drawing vertically oriented text. 
+            </summary>
+            <remarks>
+            If the attribute is not specified, the effect is as if the attribute were set to the 
+            position specified by the font's ‘ascent’ attribute.
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFaceElement">
+            <summary>
+            The SvgFontFaceElement interface corresponds to the 'font-face' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.FontFamily">
+            <summary>
+            Indicates which font family is to be used to render the text.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.FontSize">
+            <summary>
+            Refers to the size of the font from baseline to baseline when multiple 
+            lines of text are set solid in a multiline layout environment.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.FontStyle">
+            <summary>
+            Refers to the style of the font.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.FontVariant">
+            <summary>
+            Refers to the varient of the font.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgFontFaceElement.FontWeight">
+            <summary>
+            Refers to the boldness of the font.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFaceFormatElement">
+            <summary>
+            The SvgFontFaceFormatElement interface corresponds to the 'font-face-format' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFaceNameElement">
+            <summary>
+            The SvgFontFaceNameElement interface corresponds to the 'font-face-name' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFaceSrcElement">
+            <summary>
+            The SvgFontFaceSrcElement interface corresponds to the 'font-face-src' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgFontFaceUriElement">
+            <summary>
+            The SvgFontFaceUriElement interface corresponds to the 'font-face-uri' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgGlyphElement">
+            <summary>
+            The SvgGlyphElement interface corresponds to the 'glyph' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphElement.PathData">
+            <summary>
+            Gets a <see cref="T:SharpVectors.Dom.Svg.ISvgPathSegList"/> of path data.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphElement.D">
+            <summary>
+            Gets or sets.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgGlyphRefElement">
+            <summary>
+            The ISvgGlyphRefElement interface corresponds to the 'glyphRef' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.GlyphRef">
+            <summary>
+            Corresponds to attribute 'glyphRef attribute' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.Format">
+            <summary>
+            Corresponds to attribute 'format' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.X">
+            <summary>
+            Corresponds to attribute 'x' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.Y">
+            <summary>
+            Corresponds to attribute 'y' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.Dx">
+            <summary>
+            Corresponds to attribute 'dx' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgGlyphRefElement.Dy">
+            <summary>
+            Corresponds to attribute 'dy' on the given element.
+            </summary>
+            <remarks>It is read only attribute</remarks>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgHKernElement">
+            <summary>
+            The SvgHKernElement interface corresponds to the 'hkern' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgMissingGlyphElement">
+            <summary>
+            The SvgMissingGlyphElement interface corresponds to the 'missing-glyph' element. 
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMissingGlyphElement.PathData">
+            <summary>
+            Gets a <see cref="T:SharpVectors.Dom.Svg.ISvgPathSegList"/> of path data.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgMissingGlyphElement.D">
+            <summary>
+            Gets or sets.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextContentElement">
+            <summary>
+            Summary description for SvgTextContentElement.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Svg.SvgTextContentElement.RenderingHint">
+            <summary>
+            Gets a value providing a hint on the rendering defined by this element.
+            </summary>
+            <value>
+            An enumeration of the <see cref="T:SharpVectors.Dom.Svg.SvgRenderingHint"/> specifying the rendering hint.
+            This will always return <see cref="F:SharpVectors.Dom.Svg.SvgRenderingHint.Text"/>
+            </value>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextElement">
+            <summary>
+            Summary description for SvgTextElement.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextPathElement">
+            <summary>
+            The implementation of the ISvgTextPathElement interface corresponds to the 'textPath' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTextPositioningElement">
+            <summary>
+            The SvgTextPositioningElement interface is inherited by text-related interfaces: 
+            SvgTextElement, SvgTSpanElement, SvgTRefElement and SvgAltGlyphElement. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTRefElement">
+            <summary>
+            Summary description for SvgTRefElement.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgTSpanElement">
+            <summary>
+            The SvgTSpanElement interface corresponds to the 'tspan' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Svg.SvgVKernElement">
+            <summary>
+            The SvgVKernElement interface corresponds to the 'vkern' element. 
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Resources.Root">
+            <summary>
+            Marks resources root
+            </summary>
+        </member>
+    </members>
+</doc>

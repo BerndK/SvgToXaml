@@ -50,7 +50,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             var resKeyInfo = new ResKeyInfo {Prefix = "Prefix"};
-            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup, resKeyInfo, settings);
+            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup, resKeyInfo, false, settings);
 
             CheckXamlOutput(xaml, Path.GetFileName(filename));
         }
@@ -65,7 +65,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             var resKeyInfo = new ResKeyInfo { Prefix = "Prefix" };
-            var xaml = ConverterLogic.SvgFileToXaml("TestFiles\\3d-view-icon.svg", ResultMode.DrawingGroup, resKeyInfo, settings);
+            var xaml = ConverterLogic.SvgFileToXaml("TestFiles\\3d-view-icon.svg", ResultMode.DrawingGroup, resKeyInfo, false, settings);
             CheckXamlOutput(xaml);
         }
 
@@ -81,7 +81,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             var resKeyInfo = new ResKeyInfo { Prefix = "Prefix" };
-            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingImage, resKeyInfo, settings);
+            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingImage, resKeyInfo, true, settings);
             CheckXamlOutput(xaml, Path.GetFileName(filename));
         }
 
@@ -96,7 +96,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             var resKeyInfo = new ResKeyInfo { Prefix = "Prefix" };
-            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup, resKeyInfo, settings);
+            var xaml = ConverterLogic.SvgFileToXaml(filename, ResultMode.DrawingGroup, resKeyInfo, false, settings);
             CheckXamlOutput(xaml, Path.GetFileName(filename));
         }
 
@@ -110,7 +110,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             var resKeyInfo = new ResKeyInfo { XamlName = "Test", Prefix = "NamePrefix" };
-            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", resKeyInfo, settings);
+            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", resKeyInfo, settings, true);
             CheckXamlOutput(xaml);
         }
 
@@ -124,7 +124,7 @@ namespace SvgConverterTest
                 OptimizePath = true,
             };
             
-            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", ResKeyInfoUseCompResKey, settings);
+            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", ResKeyInfoUseCompResKey, settings, false);
             CheckXamlOutput(xaml);
         }
 
@@ -132,7 +132,7 @@ namespace SvgConverterTest
         public void SvgDirToXaml_with_defaultSettingsTest()
         {
             var resKeyInfo = new ResKeyInfo { XamlName = "Test", Prefix = "NamePrefix" };
-            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", resKeyInfo, null);
+            var xaml = ConverterLogic.SvgDirToXaml("TestFiles\\", resKeyInfo, null, false);
             CheckXamlOutput(xaml);
         }
 
@@ -140,7 +140,7 @@ namespace SvgConverterTest
         public void Handwheel() //Full integrated with all optimizations
         {
             var resKeyInfo = new ResKeyInfo { Prefix = "Prefix" };
-            var xaml = ConverterLogic.SvgFileToXaml("TestFiles\\Handwheel.svg", ResultMode.DrawingGroup, resKeyInfo, null);
+            var xaml = ConverterLogic.SvgFileToXaml("TestFiles\\Handwheel.svg", ResultMode.DrawingGroup, resKeyInfo, false, null);
             CheckXamlOutput(xaml);
         }
         [Test, STAThread]
@@ -164,7 +164,7 @@ namespace SvgConverterTest
         public void Handwheel3() //integrated conversion, integrated writing
         {
             var drawing = ConverterLogic.SvgFileToWpfObject("TestFiles\\Handwheel.svg", null);
-            var xaml = ConverterLogic.SvgObjectToXaml(drawing, true, "Test");
+            var xaml = ConverterLogic.SvgObjectToXaml(drawing, true, "Test", false);
             CheckXamlOutput(xaml);
         }
 

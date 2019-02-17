@@ -1,0 +1,1202 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Css</name>
+    </assembly>
+    <members>
+        <member name="T:SharpVectors.Dom.Css.StaticSection">
+            <summary>
+            Creates a static section for a CssXmlDocument.
+            Typical use:
+            using(StaticSection.Use(doc))
+            {
+                // blah blah
+            }
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.StaticSection._previousStatic">
+            <summary>
+            Previous Static state
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.StaticSection._cssXmlDocument">
+            <summary>
+            Document to be handled
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.StaticSection.#ctor(SharpVectors.Dom.Css.CssXmlDocument)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Dom.Css.StaticSection"/> class.
+            </summary>
+            <param name="cssXmlDocument">The CSS XML document.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.StaticSection.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.StaticSection.Use(SharpVectors.Dom.Css.CssXmlDocument)">
+            <summary>
+            Uses the specified CSS XML document with Static state to true.
+            </summary>
+            <param name="cssXmlDocument">The CSS XML document.</param>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssCharsetRule">
+            <summary>
+            The CSSCharsetRule interface represents a @charset rule in a CSS style sheet. The value of the 
+            encoding attribute does not affect the encoding of text data in the DOM objects; this encoding is 
+            always UTF-16. After a stylesheet is loaded, the value of the encoding attribute is the value found 
+            in the @charset rule. If there was no @charset in the original document, then no CSSCharsetRule is 
+            created. The value of the encoding attribute may also be used as a hint for the encoding used on 
+            serialization of the style sheet.
+            The value of the @charset rule (and therefore of the CSSCharsetRule) may not correspond to the 
+            encoding the document actually came in; character encoding information e.g. in an HTTP header, has 
+            priority (see CSS document representation) but this is not reflected in the CSSCharsetRule.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssCharsetRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssCharSetRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string 
+            used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssCharsetRule.Encoding">
+            <summary>
+            The encoding information used in this @charset rule
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssCharsetRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be 
+            used to cast down from an instance of the CSSRule interface to the specific derived 
+            interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssCollectedProperty">
+            <summary>
+            Used internally to store collected properties.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssCollectedProperty._name">
+            <summary>
+            The name of the property
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssCollectedProperty._specificity">
+            <summary>
+            The calculated specificity
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssCollectedProperty._origin">
+            <summary>
+            The origin of the collected property.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssCollectedProperty._cssValue">
+            <summary>
+            The value of the property
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssCollectedProperty._priority">
+            <summary>
+            The priority of the property, e.g. "important"
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssCollectedStyleDeclaration">
+            <summary>
+            Used internally for collection of styles for a specific element
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyOrigin(System.String)">
+            <summary>
+            Returns the origin type of the collected property
+            </summary>
+            <param name="propertyName">The name of the property</param>
+            <returns>The origin type</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyPriority(System.String)">
+            <summary>
+            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property has been explicitly set in this declaration block.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.GetPropertyValue(System.String)">
+            <summary>
+            Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Length">
+            <summary>
+            The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.CssText">
+            <summary>
+            The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssCollectedStyleDeclaration.Item(System.UInt64)">
+            <summary>
+            Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
+            The name of the property at this ordinal position. The empty string if no property exists at this position.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssFontFaceRule">
+            <summary>
+            The CSSFontFaceRule interface represents a @font-face rule in a CSS style sheet. 
+            The @font-face rule is used to hold a set of font descriptions.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssFontFaceRule.Parse(System.String@,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Parses a string containging CSS and creates a CssFontFaceRule instance if found as the first content
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssFontFaceRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssFontFaceRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssFontFaceRule.Style">
+            <summary>
+            The declaration-block of this rule.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssFontFaceRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+            down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssImportRule">
+            <summary>
+            The CSSImportRule interface represents a @import rule within a CSS style sheet. 
+            The @import rule is used to import style rules from other style sheets.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssImportRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssImportRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used 
+            for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssImportRule.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssImportRule.StyleSheet">
+            <summary>
+            The style sheet referred to by this rule, if it has been loaded. The value of this attribute is 
+            null if the style sheet has not yet been loaded or if it will not be loaded (e.g. if the style 
+            sheet is for a media type not supported by the user agent).
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssImportRule.Media">
+            <summary>
+            A list of media types for which this style sheet may be used.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssImportRule.Href">
+            <summary>
+            The location of the style sheet to be imported. The attribute will not contain the "url(...)" 
+            specifier around the URI
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssImportRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+            down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssMediaRule">
+            <summary>
+            The CSSMediaRule interface represents a @media rule in a CSS style sheet. A @media rule can be 
+            used to delimit style rules for specific media types.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssMediaRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssMediaRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used 
+            for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssMediaRule.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssMediaRule.DeleteRule(System.UInt64)">
+            <summary>
+            Used to delete a rule from the media block.
+            </summary>
+            <param name="index">The index within the media block's rule collection of the rule to remove.</param>
+            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the media rule list.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssMediaRule.InsertRule(System.String,System.UInt64)">
+            <summary>
+            Used to insert a new rule into the media block
+            </summary>
+            <param name="rule">The parsable text representing the rule. For rule sets this contains both the 
+            selector and the style declaration. For at-rules, this specifies both the at-identifier and the 
+            rule content.</param>
+            <param name="index">The index within the media block's rule collection of the rule before which 
+            to insert the specified rule. If the specified index is equal to the length of the media blocks's 
+            rule collection, the rule will be added to the end of the media block.</param>
+            <returns>The index within the media block's rule collection of the newly inserted rule.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the 
+            specified index, e.g., if an @import rule is inserted after a standard rule set or other at-rule.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index is not a valid insertion point.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media rule is readonly</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssMediaRule.CssRules">
+            <summary>
+            A list of all CSS rules contained within the media block.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssMediaRule.Media">
+            <summary>
+            A list of media types for this rule
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssMediaRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+            down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssPageRule">
+            <summary>
+            The CSSPageRule interface represents a @page rule within a CSS style sheet. The @page rule is 
+            used to specify the dimensions, orientation, margins, etc. of a page box for paged media.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPageRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssPageRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssPageRule.SelectorText">
+            <summary>
+            The parsable textual representation of the page selector for the rule.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssPageRule.Style">
+            <summary>
+            The declaration-block of this rule.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssPageRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveRgbValue.IsColorName(System.String)">
+            <developer>scasquiov squerniovsqui</developer>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssPrimitiveValue">
+            <summary>
+            The CSSPrimitiveValue interface represents a single CSS value. 
+            </summary>
+            <remarks>
+            <para>
+            This interface may be used to determine the value of a specific style property currently set in a block 
+            or to set a specific style property explicitly within the block. An instance of this interface might be 
+            obtained from the getPropertyCSSValue method of the CSSStyleDeclaration interface. A CSSPrimitiveValue 
+            object only occurs in a context of a CSS property.
+            </para>
+            <para>
+            Conversions are allowed between absolute values (from millimeters to centimeters, 
+            from degrees to radians, and so on) but not between relative values. (For example, 
+            a pixel value cannot be converted to a centimeter value.) Percentage values can't 
+            be converted since they are relative to the parent value (or another property value). 
+            There is one exception for color percentage values: since a color percentage value 
+            is relative to the range 0-255, a color percentage value can be converted to a number; 
+            (see also the RGBColor interface).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.#ctor(System.Text.RegularExpressions.Match,System.Boolean)">
+            <summary>
+            Constructor called by CssValue.GetCssValue()
+            </summary>
+            <param name="match">A Regex that matches a CssPrimitiveValue</param>
+            <param name="readOnly">Specifiec if this instance is read-only</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.#ctor">
+            <summary>
+            Only for internal use
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.SetFloatValue(SharpVectors.Dom.Css.CssPrimitiveType,System.Double)">
+            <summary>
+            A method to set the float value with a specified unit. If the property attached with this value can not accept the specified unit or the float value, the value will be unchanged and a DOMException will be raised.
+            </summary>
+            <param name="unitType">A unit code as defined above. The unit code can only be a float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
+            <param name="floatValue">The new float value.</param>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a float value.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetFloatValue(SharpVectors.Dom.Css.CssPrimitiveType)">
+            <summary>
+            This method is used to get a float value in a specified unit. If this CSS value doesn't contain a float value or can't be converted into the specified unit, a DOMException is raised
+            </summary>
+            <param name="unitType">A unit code to get the float value. The unit code can only be a float unit type (i.e. CSS_NUMBER, CSS_PERCENTAGE, CSS_EMS, CSS_EXS, CSS_PX, CSS_CM, CSS_MM, CSS_IN, CSS_PT, CSS_PC, CSS_DEG, CSS_RAD, CSS_GRAD, CSS_MS, CSS_S, CSS_HZ, CSS_KHZ, CSS_DIMENSION).</param>
+            <returns>The float value in the specified unit.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a float value.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.SetStringValue(SharpVectors.Dom.Css.CssPrimitiveType,System.String)">
+            <summary>
+            A method to set the string value with the specified unit. If the property attached to this value can't accept the specified unit or the string value, the value will be unchanged and a DOMException will be raised.
+            </summary>
+            <param name="stringType">A string code as defined above. The string code can only be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT, and CSS_ATTR).</param>
+            <param name="stringValue">The new string value</param>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this property is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetStringValue">
+            <summary>
+            This method is used to get the string value. If the CSS value doesn't contain a string value, a DOMException is raised.
+            Note: Some properties (like 'font-family' or 'voice-family') convert a whitespace separated list of idents to a string.
+            </summary>
+            <returns>The string value in the current unit. The current primitiveType can only be a string unit type (i.e. CSS_STRING, CSS_URI, CSS_IDENT and CSS_ATTR).</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a string value.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetCounterValue">
+            <summary>
+            This method is used to get the Counter value. If this CSS value doesn't contain a counter value, a DOMException is raised. Modification to the corresponding style property can be achieved using the Counter interface
+            </summary>
+            <returns>The Counter value.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a Counter value (e.g. this is not CSS_COUNTER).</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetRectValue">
+            <summary>
+            This method is used to get the Rect value. If this CSS value doesn't contain a rect value, a DOMException is raised. Modification to the corresponding style property can be achieved using the Rect interface.
+            </summary>
+            <returns>The Rect value.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a rect value.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssPrimitiveValue.GetRgbColorValue">
+            <summary>
+            This method is used to get the RGB color. If this CSS value doesn't contain a RGB color value, a DOMException is raised. Modification to the corresponding style property can be achieved using the RGBColor interface.
+            </summary>
+            <returns>the RGB color value.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_ACCESS_ERR: Raised if the CSS value doesn't contain a rgb value.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssPrimitiveValue.PrimitiveType">
+            <summary>
+            The type of the value as defined by the constants specified above.
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssRule.origin">
+            <summary>
+            The origin stylesheet type of this rule
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssRule.readOnly">
+            <summary>
+            Specifies the read/write state of the instance
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRule.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRule.ResolveOwnerNode">
+            <summary>
+            Finds the owner node of this rule
+            </summary>
+            <returns>The owner XmlNode</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRule.ParentStyleSheet">
+            <summary>
+            The style sheet that contains this rule
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRule.ParentRule">
+            <summary>
+            If this rule is contained inside another rule (e.g. a style rule inside an @media block), this is the containing rule. If this rule is not nested inside any other rules, this returns null
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRule.Type">
+            <summary>
+            The type of the rule, as defined above. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRule.CssText">
+            <summary>
+            The parsable textual representation of the rule. This reflects the current state of the rule and not its initial value.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssRuleList">
+            <summary>
+            The CSSRuleList interface provides the abstraction of an ordered collection of CSS rules.
+            The items in the CSSRuleList are accessible via an integral index, starting from 0.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRuleList.#ctor(System.String@,System.Object,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Constructor for CssRuleList
+            </summary>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="cssText">The CSS text containing the rules that will be in this list</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRuleList.#ctor(System.String@,System.Object,System.Collections.Generic.IList{System.String},System.Boolean,SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Constructor for CssRuleList
+            </summary>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="cssText">The CSS text containing the rules that will be in this list</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRuleList.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRuleList.DeleteRule(System.UInt64)">
+            <summary>
+            Deletes a rule from the list
+            </summary>
+            <param name="index">The index of the rule to delete</param>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRuleList.Length">
+            <summary>
+            The number of CSSRules in the list. The range of valid child rule indices is 0 to length-1 inclusive
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRuleList.Item(System.UInt64)">
+            <summary>
+                Used to retrieve a CSS rule by ordinal index. The order in this collection represents the order of the rules in the CSS style sheet. If index is greater than or equal to the number of rules in the list, this returns null
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssStyleDeclaration">
+            <summary>
+            <para>
+            The CSSStyleDeclaration interface represents a single CSS declaration block. This interface may 
+            be used to determine the style properties currently set in a block or to set style properties 
+            explicitly within the block.
+            </para>
+            <para>
+            While an implementation may not recognize all CSS properties within a CSS declaration block, it is 
+            expected to provide access to all specified properties in the style sheet through the 
+            CSSStyleDeclaration interface. Furthermore, implementations that support a specific level of CSS 
+            should correctly handle CSS shorthand properties for that level. For a further discussion of 
+            shorthand properties, see the CSS2Properties interface.
+            </para>
+            <para>
+            This interface is also used to provide a read-only access to the computed values of an element. 
+            See also the ViewCSS interface.
+            </para>
+            <para>
+            Note: The CSS Object Model doesn't provide an access to the specified or actual values of the CSS cascade
+            </para>
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.#ctor">
+            <summary>
+            The constructor used internally when collecting styles for a specified element
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.#ctor(System.String@,SharpVectors.Dom.Css.CssRule,System.Boolean,SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssStyleDeclaration
+            </summary>
+            <param name="css">The string to parse for CSS</param>
+            <param name="parentRule">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetStylesForElement(SharpVectors.Dom.Css.CssCollectedStyleDeclaration,System.Int32)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.SetProperty(System.String,System.String,System.String)">
+            <summary>
+            Used to set a property value and priority within this declaration block
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <param name="value">The new value of the property.</param>
+            <param name="priority">The new priority of the property (e.g. "important").</param>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyPriority(System.String)">
+            <summary>
+            Used to retrieve the priority of a CSS property (e.g. the "important" qualifier) if the property has been explicitly set in this declaration block.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>A string representing the priority (e.g. "important") if one exists. The empty string if none exists.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.RemoveProperty(System.String)">
+            <summary>
+            Used to remove a CSS property if it has been explicitly set within this declaration block.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set or the property name does not correspond to a known CSS property.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or the property is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyCssValue(System.String)">
+            <summary>
+            Used to retrieve the object representation of the value of a CSS property if it has been explicitly set within this declaration block. This method returns null if the property is a shorthand property. Shorthand property values can only be accessed and modified as strings, using the getPropertyValue and setProperty methods.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns null if the property has not been set.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleDeclaration.GetPropertyValue(System.String)">
+            <summary>
+            Used to retrieve the value of a CSS property if it has been explicitly set within this declaration block.
+            </summary>
+            <param name="propertyName">The name of the CSS property. See the CSS property index.</param>
+            <returns>Returns the value of the property if it has been explicitly set for this declaration block. Returns the empty string if the property has not been set.</returns>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.ParentRule">
+            <summary>
+            The CSS rule that contains this declaration block or null if this CSSStyleDeclaration is not attached to a CSSRule.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.Length">
+            <summary>
+            The number of properties that have been explicitly set in this declaration block. The range of valid indices is 0 to length-1 inclusive.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.CssText">
+            <summary>
+            The parsable textual representation of the declaration block (excluding the surrounding curly braces). Setting this attribute will result in the parsing of the new value and resetting of all the properties in the declaration block including the removal or addition of properties.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this declaration is readonly or a property is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleDeclaration.Item(System.UInt64)">
+            <summary>
+            Used to retrieve the properties that have been explicitly set in this declaration block. The order of the properties retrieved using this method does not have to be the order in which they were set. This method can be used to iterate over all properties in this declaration block.
+            The name of the property at this ordinal position. The empty string if no property exists at this position.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssStyleRule">
+            <summary>
+            The CSSStyleRule interface represents a single rule set in a CSS style sheet.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleRule.#ctor(System.Text.RegularExpressions.Match,System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssStyleRule
+            </summary>
+            <param name="match">The Regex match that found the charset rule</param>
+            <param name="parent">The parent rule or parent stylesheet</param>
+            <param name="readOnly">True if this instance is readonly</param>
+            <param name="replacedStrings">An array of strings that have been replaced in the string used for matching. These needs to be put back use the DereplaceStrings method</param>
+            <param name="origin">The type of CssStyleSheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleRule.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleRule.SelectorText">
+            <summary>
+            The textual representation of the selector for the rule set. The implementation may have stripped out insignificant whitespace while parsing the selector.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this rule is readonly</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleRule.CssText">
+            <summary>
+            The entire text of the CssStyleRule
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleRule.Style">
+            <summary>
+            The declaration-block of this rule set.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssStyleSheet">
+            <summary>
+            The CSSStyleSheet interface is a concrete interface used to represent a CSS style sheet i.e., 
+            a style sheet whose content type is "text/css".
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.#ctor(System.Xml.XmlProcessingInstruction,SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Constructor for CssStyleSheet
+            </summary>
+            <param name="pi">The XML processing instruction that references the stylesheet</param>
+            <param name="origin">The type of stylesheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.#ctor(System.Xml.XmlElement,SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Constructor for CssStyleSheet
+            </summary>
+            <param name="styleElement">The XML style element that references the stylesheet</param>
+            <param name="origin">The type of stylesheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.#ctor(System.Xml.XmlNode,System.String,System.String,System.String,SharpVectors.Dom.Css.CssRule,SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            Constructor for CssStyleSheet
+            </summary>
+            <param name="ownerNode">The node that owns this stylesheet. E.g. used for getting the BaseUri</param>
+            <param name="href">The URL of the stylesheet</param>
+            <param name="title">The title of the stylesheet</param>
+            <param name="media">List of medias for the stylesheet</param>
+            <param name="ownerRule">The rule (e.g. ImportRule) that referenced this stylesheet</param>
+            <param name="origin">The type of stylesheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.DeleteRule(System.UInt64)">
+            <summary>
+            Used to delete a rule from the style sheet.
+            </summary>
+            <param name="index">The index within the style sheet's rule list of the rule to remove.</param>
+            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssStyleSheet.InsertRule(System.String,System.UInt64)">
+            <summary>
+            Used to insert a new rule into the style sheet. The new rule now becomes part of the cascade.
+            </summary>
+            <param name="rule">The parsable text representing the rule. For rule sets this contains both the selector and the style declaration. For at-rules, this specifies both the at-identifier and the rule content.</param>
+            <param name="index">The index within the style sheet's rule list of the rule before which to insert the specified rule. If the specified index is equal to the length of the style sheet's rule collection, the rule will be added to the end of the style sheet.</param>
+            <returns>The index within the style sheet's rule collection of the newly inserted rule.</returns>
+            <exception cref="T:SharpVectors.Dom.DomException">INDEX_SIZE_ERR: Raised if the specified index does not correspond to a rule in the style sheet's rule list.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this style sheet is readonly.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">HIERARCHY_REQUEST_ERR: Raised if the rule cannot be inserted at the specified index e.g. if an @import rule is inserted after a standard rule set or other at-rule.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified rule has a syntax error and is unparsable.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleSheet.CssRules">
+            <summary>
+            The list of all CSS rules contained within the style sheet. This includes both rule sets and at-rules.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssStyleSheet.OwnerRule">
+            <summary>
+            If this style sheet comes from an @import rule, the ownerRule attribute will contain the CSSImportRule. In that case, the ownerNode attribute in the StyleSheet interface will be null. If the style sheet comes from an element or a processing instruction, the ownerRule attribute will be null and the ownerNode attribute will contain the Node.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssStyleSheetType">
+            <summary>
+            The different types of CssStyleSheets
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.UserAgent">
+            <summary>
+            The stylesheet is a user agent stylesheet
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.Author">
+            <summary>
+            The stylesheet is a author stylesheet
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.User">
+            <summary>
+            The stylesheet is a user stylesheet
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.Inline">
+            <summary>
+            The styles comes from a inline style attribute
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.Collector">
+            <summary>
+            Used internally for collection of styles for an element
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleSheetType.Unknown">
+            <summary>
+            Used internally for unknown properties
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssUnknownRule">
+            <summary>
+            The CSSUnknownRule interface represents an at-rule not supported by this user agent.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssUnknownRule.#ctor(System.Object,System.Boolean,System.Collections.Generic.IList{System.String},SharpVectors.Dom.Css.CssStyleSheetType)">
+            <summary>
+            The constructor for CssUnknownRule
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssUnknownRule.Type">
+            <summary>
+            The type of the rule. The expectation is that binding-specific casting methods can be used to cast 
+            down from an instance of the CSSRule interface to the specific derived interface implied by the type.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssValue">
+            <summary>
+            The CSSValue interface represents a simple or a complex value. A CSSValue object only occurs in a context of a CSS property
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssValue.GetCssValue(System.String,System.Boolean)">
+            <summary>
+            Detects what kind of value cssText contains and returns an instance of the correct CssValue class
+            </summary>
+            <param name="cssText">The text to parse for a CSS value</param>
+            <param name="readOnly">Specifies if this instance is read-only</param>
+            <returns>The correct type of CSS value</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssValue.#ctor(SharpVectors.Dom.Css.CssValueType,System.String,System.Boolean)">
+            <summary>
+            Constructor for CssValue
+            </summary>
+            <param name="type">The type of value</param>
+            <param name="cssText">The entire content of the value</param>
+            <param name="readOnly">Specifies if the instance is read-only</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssValue.#ctor">
+            <summary>
+            Only for internal use
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssValue.CssText">
+            <summary>
+            A string representation of the current value.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified CSS string value has a syntax error (according to the attached property) or is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_MODIFICATION_ERR: Raised if the specified CSS string value represents a different type of values than the values allowed by the CSS property</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this value is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssValue.CssValueType">
+            <summary>
+            A code defining the type of the value as defined above
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssXmlDocument">
+            <summary>
+            A XmlDocument with CSS support
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.#ctor">
+            <summary>
+            Initializes a new instance of CssXmlDocument
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.#ctor(System.Xml.XmlNameTable)">
+            <summary>
+            Initializes a new instance of CssXmlDocument
+            </summary>
+            <param name="nt">The name table to use</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssXmlDocument.Static">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:SharpVectors.Dom.Css.CssXmlDocument"/> handles DOM dynamic changes.
+            Sometimes (when loading or rendering) this needs to be disabled.
+            See <see href="StaticSection"/> for more information about use
+            </summary>
+            <value><c>true</c> if static; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssXmlDocument.StyleSheets">
+            <summary>
+            All the stylesheets associated with this document
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.Load(System.String)">
+            <summary>
+            Loads a XML document, compare to XmlDocument.Load()
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.AddStyleElement(System.String,System.String)">
+            <summary>
+            Adds a element type to be used as style elements (e.g. as in the HTML style element)
+            </summary>
+            <param name="ns">The namespace URI of the element</param>
+            <param name="localName">The local-name of the element</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.SetUserAgentStyleSheet(System.String)">
+            <summary>
+            Sets the user agent stylesheet for this document
+            </summary>
+            <param name="href">The URI to the stylesheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.SetUserStyleSheet(System.String)">
+            <summary>
+            Sets the user stylesheet for this document
+            </summary>
+            <param name="href">The URI to the stylesheet</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.GetOverrideStyle(System.Xml.XmlElement,System.String)">
+            <summary>
+            This method is used to retrieve the override style declaration for a specified element and a specified pseudo-element.
+            </summary>
+            <param name="elt">The element whose style is to be modified. This parameter cannot be null.</param>
+            <param name="pseudoElt">The pseudo-element or null if none.</param>
+            <returns>The override style declaration.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlDocument.GetComputedStyle(System.Xml.XmlElement,System.String)">
+            <summary>
+            This method is used to get the computed style as it is defined in [CSS2].
+            </summary>
+            <param name="elt">The element whose style is to be computed. This parameter cannot be null.</param>
+            <param name="pseudoElt">The pseudo-element or null if none.</param>
+            <returns>The computed style. The CSSStyleDeclaration is read-only and contains only absolute values.</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlElement.ElementChange(System.Object,System.Xml.XmlNodeChangedEventArgs)">
+            <summary>
+            Called when this element is changing in one of the following ways
+            <list type="">
+            <item>Text child added/removed/changed</item>
+            <item>Element moved in the tree</item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlElement.ParentNodeChange(System.Object,System.Xml.XmlNodeChangedEventArgs)">
+            <summary>
+            Called when any parent element is changing. If an element is moved the CSS heirarchy for that element 
+            will need to change.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlElement.AttributeChange(System.Object,System.Xml.XmlNodeChangedEventArgs)">
+            <summary>
+            Called when any attribute is changing. This is typically triggered by calls to 
+            setAttribute() and should only be called from the CssXmlDocument.
+            </summary>
+            <see cref="T:SharpVectors.Dom.Css.CssXmlDocument"/>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlElement.HandleAttributeChange(System.Xml.XmlAttribute)">
+            <summary>
+            This function allows each element to handle it's own behaviors for
+            attribute changing. By default, the cached computed style is invalidated
+            because most attributes refer to style properties.
+            </summary>
+            <param name="attribute">The attribute that is changing.</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssXmlElement.ChildNodeChange(System.Object,System.Xml.XmlNodeChangedEventArgs)">
+            <summary>
+            Called when any child node is changing. If an element is moved the CSS heirarchy for that element 
+            will need to change. This is mainly useful when one of the child nodes parent is a 
+            referenced node (for example in a &lt;use&gt; element.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssRect">
+            <summary>
+            The Rect interface is used to represent any rect value. This interface reflects the values in 
+            the underlying style property. Hence, modifications made to the CSSPrimitiveValue objects modify 
+            the style property.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssRect.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructs a new Rect
+            </summary>
+            <param name="s">The string to parse that contains the Rect structure</param>
+            <param name="readOnly">Specifies if the Rect should be read-only</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRect.Left">
+            <summary>
+            This attribute is used for the left of the rect.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRect.Bottom">
+            <summary>
+            This attribute is used for the bottom of the rect.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRect.Right">
+            <summary>
+            This attribute is used for the right of the rect.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssRect.Top">
+            <summary>
+            This attribute is used for the top of the rect.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssColor">
+            <summary>
+            The RGBColor interface is used to represent any RGB color value. 
+            </summary>
+            <remarks>
+            <para>
+            This interface reflects the values in the underlying style property. Hence, modifications made to the 
+            CSSPrimitiveValue objects modify the style property. A specified RGB color is not clipped 
+            (even if the number is outside the range 0-255 or 0%-100%). 
+            </para>
+            <para>
+            A computed RGB color is clipped depending on the device.
+            Even if a style sheet can only contain an integer for a color value, the internal storage of this 
+            integer is a float, and this can be used as a float in the specified or the computed style.  
+            </para>
+            <para>
+            A color percentage value can always be converted to a number and vice versa.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssColor.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructs a RgbColor based on the GDI color
+            </summary>
+            <param name="red"></param>
+            <param name="green"></param>
+            <param name="blue"></param>
+        </member>
+        <member name="M:SharpVectors.Dom.Css.CssColor.#ctor(System.String)">
+            <summary>
+            Parses a constructs a RgbColor
+            </summary>
+            <param name="str">String to parse to find the color</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssColor.Red">
+            <summary>
+            This attribute is used for the red value of the RGB color
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssColor.Green">
+            <summary>
+            This attribute is used for the green value of the RGB color.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssColor.Blue">
+            <summary>
+            This attribute is used for the blue value of the RGB color
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Css.CssStyleBlock">
+            <summary>
+            Internal class that stores a style in a declaration block
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleBlock.Origin">
+            <summary>
+            The type of the owner stylesheet
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleBlock.Name">
+            <summary>
+            The property name
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleBlock.Value">
+            <summary>
+            The value of the style
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleBlock.Priority">
+            <summary>
+            The prioroty of the style, e.g. "important"
+            </summary>
+        </member>
+        <member name="F:SharpVectors.Dom.Css.CssStyleBlock.Specificity">
+            <summary>
+            The calculated specificity of the owner selector
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Css.CssXPathSelector.XPath">
+            <summary>
+            Only used for testing!
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Stylesheets.MediaList">
+            <summary>
+            The MediaList interface provides the abstraction of an ordered collection of media, without defining or constraining how this collection is implemented. An empty list is the same as a list that contains the medium "all".
+            The items in the MediaList are accessible via an integral index, starting from 0.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.MediaList.Matches(SharpVectors.Dom.Stylesheets.MediaList)">
+            <summary>
+            Compares this MediaList with another and see if the second fits this
+            </summary>
+            <param name="inMedia">The MediaList to compare</param>
+            <returns>True if this list fits the specified</returns>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.MediaList.AppendMedium(System.String)">
+            <summary>
+            Adds the medium newMedium to the end of the list. If the newMedium is already used, it is first removed.
+            </summary>
+            <param name="newMedium">The new medium to add.</param>
+            <exception cref="T:SharpVectors.Dom.DomException">INVALID_CHARACTER_ERR: If the medium contains characters that are invalid in the underlying style language.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.</exception>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.MediaList.DeleteMedium(System.String)">
+            <summary>
+            Deletes the medium indicated by oldMedium from the list.
+            </summary>
+            <param name="oldMedium">The medium to delete in the media list.</param>
+            <exception cref="T:SharpVectors.Dom.DomException">NOT_FOUND_ERR: Raised if oldMedium is not in the list.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.MediaList.Length">
+            <summary>
+            The number of media in the list. The range of valid media is 0 to length-1 inclusive.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.MediaList.MediaText">
+            <summary>
+            The parsable textual representation of the media list. This is a comma-separated list of media.
+            </summary>
+            <exception cref="T:SharpVectors.Dom.DomException">SYNTAX_ERR: Raised if the specified string value has a syntax error and is unparsable.</exception>
+            <exception cref="T:SharpVectors.Dom.DomException">NO_MODIFICATION_ALLOWED_ERR: Raised if this media list is readonly.</exception>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.MediaList.Item(System.UInt64)">
+            <summary>
+            Returns the indexth in the list. If index is greater than or equal to the number of media in the list, this returns null.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Stylesheets.StyleSheet">
+            <summary>
+            The StyleSheet interface is the abstract base interface for any type of style sheet. It represents a 
+            single style sheet associated with a structured document. In HTML, the StyleSheet interface represents 
+            either an external style sheet, included via the HTML LINK element, or an inline STYLE element. 
+            In XML, this interface represents an external style sheet, included via a style sheet processing instruction.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.StyleSheet.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Stylesheets.MediaList,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.Media">
+            <summary>
+            The intended destination media for style information. The media is often specified in the ownerNode. If no media has been specified, the MediaList will be empty. See the media attribute definition for the LINK element in HTML 4.0, and the media pseudo-attribute for the XML style sheet processing instruction . Modifying the media list may cause a change to the attribute disabled.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.Title">
+            <summary>
+            The advisory title. The title is often specified in the ownerNode. See the title attribute definition for the LINK element in HTML 4.0, and the title pseudo-attribute for the XML style sheet processing instruction.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.Href">
+            <summary>
+            If the style sheet is a linked style sheet, the value of its attribute is its location. For inline style sheets, the value of this attribute is null. See the href attribute definition for the LINK element in HTML 4.0, and the href pseudo-attribute for the XML style sheet processing instruction.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.AbsoluteHref">
+            <summary>
+            The resolved absolute URL to the stylesheet
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.ParentStyleSheet">
+            <summary>
+            For style sheet languages that support the concept of style sheet inclusion, this attribute represents the including style sheet, if one exists. If the style sheet is a top-level style sheet, or the style sheet language does not support inclusion, the value of this attribute is null.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.OwnerNode">
+            <summary>
+            The node that associates this style sheet with the document. For HTML, this may be the corresponding LINK or STYLE element. For XML, it may be the linking processing instruction. For style sheets that are included by other style sheets, the value of this attribute is null.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.Disabled">
+            <summary>
+            false if the style sheet is applied to the document. true if it is not. Modifying this attribute may cause a new resolution of style for the document. A stylesheet only applies if both an appropriate medium definition is present and the disabled attribute is false. So, if the media doesn't apply to the current user agent, the disabled attribute is ignored.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheet.Type">
+            <summary>
+            This specifies the style sheet language for this style sheet. The style sheet language is specified as a content type (e.g. "text/css"). The content type is often specified in the ownerNode. Also see the type attribute definition for the LINK element in HTML 4.0, and the type pseudo-attribute for the XML style sheet processing instruction.
+            </summary>
+        </member>
+        <member name="T:SharpVectors.Dom.Stylesheets.StyleSheetList">
+            <summary>
+            The StyleSheetList interface provides the abstraction of an ordered collection of style sheets.
+            The items in the StyleSheetList are accessible via an integral index, starting from 0.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.StyleSheetList.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Css.CssCollectedStyleDeclaration)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="M:SharpVectors.Dom.Stylesheets.StyleSheetList.GetStylesForElement(System.Xml.XmlElement,System.String,SharpVectors.Dom.Css.CssCollectedStyleDeclaration,SharpVectors.Dom.Stylesheets.MediaList)">
+            <summary>
+            Used to find matching style rules in the cascading order
+            </summary>
+            <param name="elt">The element to find styles for</param>
+            <param name="pseudoElt">The pseudo-element to find styles for</param>
+            <param name="ml">The medialist that the document is using</param>
+            <param name="csd">A CssStyleDeclaration that holds the collected styles</param>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheetList.Length">
+            <summary>
+            The number of StyleSheets in the list. The range of valid child stylesheet indices is 0 to length-1 inclusive.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Dom.Stylesheets.StyleSheetList.Item(System.UInt64)">
+            <summary>
+            Used to retrieve a style sheet by ordinal index. If index is greater than or equal to the number of style sheets in the list, this returns null.
+            </summary>
+        </member>
+    </members>
+</doc>

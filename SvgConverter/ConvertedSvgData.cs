@@ -19,7 +19,7 @@ namespace SvgConverter
 
         public string Xaml
         {
-            get { return _xaml ?? (_xaml = ConverterLogic.SvgObjectToXaml(ConvertedObj, false, _objectName)); }
+            get { return _xaml ?? (_xaml = ConverterLogic.SvgObjectToXaml(ConvertedObj, false, _objectName, false)); }
             set { _xaml = value; }
         }
 

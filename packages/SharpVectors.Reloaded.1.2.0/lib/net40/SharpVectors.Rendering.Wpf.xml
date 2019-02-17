@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpVectors.Rendering.Wpf</name>
+    </assembly>
+    <members>
+        <member name="M:SharpVectors.Renderers.Texts.WpfTextRenderer.ExtractTextPathGeometry(System.Windows.Media.Geometry)">
+            <summary>
+            This will extract a <see cref="T:System.Windows.Media.PathGeometry"/> that is nested into GeometryGroup, which
+            is normally created by the FormattedText.BuildGeometry() method.
+            </summary>
+            <param name="sourceGeometry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpVectors.Renderers.Utils.WpfConvert.ToColor(SharpVectors.Dom.Css.ICssColor)">
+            <summary>
+            A GDI Color representation of the RgbColor
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Utils.WpfConvert.ToRect(SharpVectors.Dom.Svg.SvgRectF)">
+            <summary>
+            This converts the specified <see cref="T:System.Windows.Rect"/> structure to a 
+            <see cref="T:SharpVectors.Dom.Svg.SvgRectF"/> structure.
+            </summary>
+            <param name="rect">The <see cref="T:System.Windows.Rect"/> structure to convert.</param>
+            <returns>
+            The <see cref="T:SharpVectors.Dom.Svg.SvgRectF"/> structure that is converted from the 
+            specified <see cref="T:System.Windows.Rect"/> structure.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingContext.Count">
+            <summary>
+            Gets the number of elements contained in the drawing stack.
+            </summary>
+            <value>
+            The number of elements contained in the drawing stack.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingContext.Clear">
+            <summary>
+            Removes all objects from the drawing stack.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingContext.Contains(System.Windows.Media.DrawingGroup)">
+            <summary>
+            Determines whether an element is in the drawing stack.
+            </summary>
+            <param name="item">The object to locate in the drawing stack. The value can be null for reference types.</param>
+            <returns>true if item is found in the drawing stack; otherwise, false.</returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings">
+            <summary>
+            This provides the options for the drawing/rendering engine of the WPF.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingSettings.#ctor">
+            <overloads>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> class.
+            </overloads>
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> class
+            with the default parameters and settings.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingSettings.#ctor(SharpVectors.Renderers.Wpf.WpfDrawingSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpVectors.Renderers.Wpf.WpfDrawingSettings"/> class
+            with the specified initial drawing or rendering settings, a copy constructor.
+            </summary>
+            <param name="settings">
+            This specifies the initial options for the rendering or drawing engine.
+            </param>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.IgnoreRootViewbox">
+            <summary>
+            Gets or sets a value to indicate turning of viewbox at the root of the drawing.
+            </summary>
+            <value>
+            For image outputs, this will force the original size to be saved.
+            <para>
+            The default value is <see langword="false"/>.
+            </para>
+            </value>
+            <remarks>
+            There are reported cases where are diagrams displayed in Inkscape program, but will not
+            show when converted. These are diagrams on the drawing canvas of Inkspace but outside 
+            the svg viewbox. 
+            <para>
+            When converted the drawings are also converted but not displayed due to
+            clipping. Setting this property to <see langword="true"/> will clear the clipping region
+            on conversion.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxSize">
+            <summary>
+            Gets or sets a value to indicate preserving the original viewbox size when saving images.
+            </summary>
+            <value>
+            For image outputs, this will force the original size to be saved.
+            <para>
+            The default value is <see langword="false"/>. However, the ImageSvgConverter converted
+            sets this to <see langword="true"/> by default.
+            </para>
+            </value>
+            <remarks>
+            Setting this to <see langword="true"/> will cause the rendering process to draw a transparent
+            box around the output, if a viewbox is defined. This will ensure that the original image
+            size is saved.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.EnsureViewboxPosition">
+            <summary>
+            Gets or sets a value to indicate applying a translate transform to the viewbox to ensure
+            it is visible when rendered.
+            </summary>
+            <value>
+            This determines whether a transformation is applied to the rendered drawing. For drawings
+            where the top-left position of the viewbox is off the screen, due to negative values, this
+            will ensure the drawing is visible.
+            <para>
+            The default value is <see langword="true"/>. Set this value to <see langword="false"/> if
+            you wish to apply your own transformations to the drawings.
+            </para>
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.OptimizePath">
+            <summary>
+            Gets or sets a value indicating whether the path geometry is 
+            optimized using the <see cref="T:System.Windows.Media.StreamGeometry"/>.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the path geometry is optimized
+            using the <see cref="T:System.Windows.Media.StreamGeometry"/>; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.TextAsGeometry">
+            <summary>
+            Gets or sets a value indicating whether the texts are rendered as
+            path geometry.
+            </summary>
+            <value>
+            This is <see langword="true"/> if texts are rendered as path 
+            geometries; otherwise, this is <see langword="false"/>. The default
+            is <see langword="false"/>.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.IncludeRuntime">
+            <summary>
+            Gets or sets a value indicating whether the <c>SharpVectors.Runtime.dll</c>
+            classes are used in the generated output.
+            </summary>
+            <value>
+            This is <see langword="true"/> if the <c>SharpVectors.Runtime.dll</c>
+            classes and types are used in the generated output; otherwise, it is 
+            <see langword="false"/>. The default is <see langword="true"/>.
+            </value>
+            <remarks>
+            The use of the <c>SharpVectors.Runtime.dll</c> prevents the hard-coded
+            font path generated by the <see cref="T:System.Windows.Media.FormattedText"/> class, support
+            for embedded images etc.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.CultureInfo">
+            <summary>
+            Gets or sets the main culture information used for rendering texts.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.CultureInfo"/> specifying the main
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            <para>
+            This is the culture information passed to the <see cref="T:System.Windows.Media.FormattedText"/>
+            class instance for the text rendering.
+            </para>
+            <para>
+            The library does not currently provide any means of splitting texts
+            into its multi-language parts.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.NeutralCultureInfo">
+            <summary>
+            Gets the neutral language for text rendering.
+            </summary>
+            <value>
+            An instance of the <see cref="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.CultureInfo"/> specifying the neutral
+            culture information for texts. The default is the English culture.
+            </value>
+            <remarks>
+            For vertical text rendering, there is a basic text splitting into
+            Western and other languages. This culture information is used to
+            render the Western language part, and the mains culture information
+            for the other languages.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.DefaultFontName">
+            <summary>
+            Gets or sets the default font family name, which is used when a text
+            node does not specify a font family name.
+            </summary>
+            <value>
+            A string containing the default font family name. The default is
+            the <c>Arial Unicode MS</c> font, for its support of Unicode texts.
+            This value cannot be <see langword="null"/> or empty.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.DefaultFontFamily">
+            <summary>
+            Gets or sets the globally available default font family.
+            </summary>
+            <value>
+            An instance of the <see cref="T:System.Windows.Media.FontFamily"/> specifying the globally
+            available font family. The default is a <c>Arial Unicode MS</c> font
+            family.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericSerif">
+            <summary>
+            Gets or set the globally available generic serif font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Windows.Media.FontFamily"/> specifying the generic serif
+            font family. The default is <c>Times New Roman</c> font family.
+            </value>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericSansSerif">
+            <summary>
+            Gets or set the globally available generic sans serif font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Windows.Media.FontFamily"/> specifying the generic sans 
+            serif font family. The default is <c>Tahoma</c> font family.
+            </value>
+            <remarks>
+            The possible font names are <c>Tahoma</c>, <c>Arial</c>, 
+            <c>Verdana</c>, <c>Trebuchet</c>, <c>MS Sans Serif</c> and <c>Helvetica</c>.
+            </remarks>
+        </member>
+        <member name="P:SharpVectors.Renderers.Wpf.WpfDrawingSettings.GenericMonospace">
+            <summary>
+            Gets or set the globally available generic Monospace font family.
+            </summary>
+            <value>
+            An instance of <see cref="T:System.Windows.Media.FontFamily"/> specifying the generic 
+            Monospace font family. The default is <c>MS Gothic</c> font family.
+            </value>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingSettings.Clone">
+            <overloads>
+            This creates a new settings object that is a deep copy of the current 
+            instance.
+            </overloads>
+            <summary>
+            This creates a new settings object that is a deep copy of the current 
+            instance.
+            </summary>
+            <returns>
+            A new settings object that is a deep copy of this instance.
+            </returns>
+            <remarks>
+            This is deep cloning of the members of this settings object. If you 
+            need just a copy, use the copy constructor to create a new instance.
+            </remarks>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfDrawingSettings.System#ICloneable#Clone">
+            <summary>
+            This creates a new settings object that is a deep copy of the current 
+            instance.
+            </summary>
+            <returns>
+            A new settings object that is a deep copy of this instance.
+            </returns>
+            <remarks>
+            This is deep cloning of the members of this style object. If you need just a copy,
+            use the copy constructor to create a new instance.
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Renderers.Wpf.WpfDrawingRenderer">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Rename: WpfRendererSession
+            </remarks>
+        </member>
+        <member name="F:SharpVectors.Renderers.Wpf.WpfDrawingRenderer._svgWindow">
+            <summary>
+            The renderer's <see cref="T:SharpVectors.Dom.Svg.SvgWindow">SvgWindow</see> object.
+            </summary>
+        </member>
+        <member name="M:SharpVectors.Renderers.Wpf.WpfRendering.CreateByUri(SharpVectors.Dom.Svg.SvgDocument,System.String,System.String)">
+            <summary>
+            Generates a new <see cref="!:RenderingNode">RenderingNode</see> that
+            corresponds to the given Uri.
+            </summary>
+            <param name="baseUri">
+            The base Uri.
+            </param>
+            <param name="url">
+            The url.
+            </param>
+            <returns>
+            The generated <see cref="!:RenderingNode">RenderingNode</see> that
+            corresponds to the given Uri.
+            </returns>
+        </member>
+        <member name="T:SharpVectors.Renderers.Wpf.WpfRenderingBase">
+            <summary>      
+            Defines the interface required for a rendering node to interact with the renderer and the SVG DOM
+            </summary>
+            <remarks>
+            Rename: WpfElementRenderer, WpfRenderingObject
+            </remarks>
+        </member>
+        <member name="T:SharpVectors.Renderers.Wpf.WpfRenderingHelper">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Rename: WpfDocumentRenderer
+            </remarks>
+        </member>
+    </members>
+</doc>
