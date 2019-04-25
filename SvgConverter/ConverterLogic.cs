@@ -92,14 +92,14 @@ namespace SvgConverter
         }
 
         public static string SvgDirToXaml(string folder, ResKeyInfo resKeyInfo, WpfDrawingSettings wpfDrawingSettings,
-            bool filterPixelsPerDip)
+            bool filterPixelsPerDip, bool handleSubFolders = false)
         {
             //firstChar Upper
             var firstChar = char.ToUpperInvariant(resKeyInfo.XamlName[0]);
             resKeyInfo.XamlName = firstChar + resKeyInfo.XamlName.Remove(0, 1);
 
 
-            var files = SvgFilesFromFolder(folder);
+            var files = SvgFilesFromFolder(folder, handleSubFolders);
             var dict = ConvertFilesToResourceDictionary(files, wpfDrawingSettings, resKeyInfo);
             var xamlUntidy = WpfObjToXaml(dict, wpfDrawingSettings?.IncludeRuntime ?? false);
 
@@ -121,10 +121,14 @@ namespace SvgConverter
             return doc.ToString();
         }
 
-        public static IEnumerable<string> SvgFilesFromFolder(string folder)
+        public static IEnumerable<string> SvgFilesFromFolder(string folder, bool handleSubFolders = false)
         {
             try
             {
+                if (handleSubFolders)
+                {
+                    return Directory.GetFiles(folder, "*.svg*", SearchOption.AllDirectories);
+                }
                 return Directory.GetFiles(folder, "*.svg*");
             }
             catch

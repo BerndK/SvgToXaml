@@ -20,7 +20,7 @@ namespace SvgConverter
             string outputdir = null,
             [ArgumentParam(LongDesc = "Builds a htmlfile to browse the svgs, optional, default true")]
             bool buildhtmlfile = true,
-            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Prefix to name alll items of this file, optional, default: no prefix")]
+            [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "Prefix to name all items of this file, optional, default: no prefix")]
             string nameprefix = null,
             [ArgumentParam(DefaultValue = false, ExplicitNeeded = false, LongDesc = "If true, es explicit ResourceKey File is created, default: false", ExplicitWantedArguments = "resKeyNS,resKeyNSName")]
             bool useComponentResKeys = false,
@@ -29,7 +29,9 @@ namespace SvgConverter
             [ArgumentParam(DefaultValue = null, ExplicitNeeded = false, LongDesc = "name of Namespace to use with UseResKey" )]
             string compResKeyNSName = null,
             [ArgumentParam(DefaultValue = false, ExplicitNeeded = false, LongDesc = "If true, PixelsPerDip is filtered to ensure compatibility for < 4.6.2, default: false")]
-            bool filterPixelsPerDip = false
+            bool filterPixelsPerDip = false,
+            [ArgumentParam(DefaultValue = false, ExplicitNeeded = false, LongDesc = "Recursive goes through inputdir subfolders")]
+            bool handleSubFolders = false
             )
         {
             Console.WriteLine("Building resource dictionary...");
@@ -47,7 +49,7 @@ namespace SvgConverter
                 NameSpaceName = compResKeyNSName,
             };
 
-            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null, filterPixelsPerDip));
+            File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null, filterPixelsPerDip, handleSubFolders));
             Console.WriteLine("xaml written to: {0}", outFileName);
 
             if (buildhtmlfile)

@@ -39,5 +39,15 @@ namespace SvgConverterTest
             File.Exists(resultFile).Should().BeTrue();
         }
 
+        [Test]
+        public void SubDirTest()
+        {
+            var resultFile = ".\\images.xaml";
+            if (File.Exists(resultFile))
+                File.Delete(resultFile);
+            CmdLineHandler.HandleCommandLine("BuildDict /inputdir:\"..\\..\\TestFiles\\Subfolder1\\\" /handleSubFolders:true /outputname:images /outputdir:.").Should().Be(0);
+            File.Exists(resultFile).Should().BeTrue();
+        }
+
     }
 }
