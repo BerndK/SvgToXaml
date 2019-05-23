@@ -8,5 +8,7 @@
         public bool UseComponentResKeys { get; set; }
         public string NameSpace { get; set; }
         public string NameSpaceName { get; set; }
+        public bool ExtractChildElements { get; set; }
+        public bool UseSvgConvertedImageSourceBehavior { get; set; }
     }
 }
