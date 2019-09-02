@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -359,8 +360,14 @@ namespace SvgConverter
             //    }
             //}
 
+            filepath = Path.GetFullPath(filepath);
+            Stream stream = IsSvgz(filepath)
+                ? (Stream)new GZipStream(File.OpenRead(filepath), CompressionMode.Decompress, false)
+                : File.OpenRead(filepath);
+            var doc = XDocument.Load(stream);
+            stream.Dispose();
+
             //workaround: error when Id starts with a number
-            var doc = XDocument.Load(Path.GetFullPath(filepath));
             FixIds(doc.Root); //id="3d-view-icon" -> id="_3d-view-icon"
             using (var ms = new MemoryStream())
             {
@@ -369,6 +376,11 @@ namespace SvgConverter
                 reader.Read(ms);
                 return reader.Drawing;
             }
+        }
+
+        private static bool IsSvgz(string filepath)
+        {
+            return string.Equals(Path.GetExtension(filepath), ".svgz", StringComparison.OrdinalIgnoreCase);
         }
 
         private static void FixIds(XElement root)

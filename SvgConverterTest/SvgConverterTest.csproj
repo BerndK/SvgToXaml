@@ -97,6 +97,7 @@
     <Compile Include="FileUtilsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConverterTests.cs" />
+    <Compile Include="SvgzTest.cs" />
     <Compile Include="T4Methods.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestFiles\example.svgz">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\xamlUntidy.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
