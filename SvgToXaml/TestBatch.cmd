@@ -1,2 +1,2 @@
-SvgToXaml BuildDict /inputdir D:\OpenSource\SharpVectors\SvgToXaml\SvgConverterTest\TestFiles /outName Images
+SvgToXaml BuildDict /inputdir:D:\OpenSource\SharpVectors\SvgToXaml\SvgConverterTest\TestFiles /outputname:Images
 pause
