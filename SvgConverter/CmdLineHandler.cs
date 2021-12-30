@@ -10,6 +10,7 @@ namespace SvgConverter
             string[] args = arg != null ? arg.Split(' ') : new string[0];
             return HandleCommandLine(args);
         }
+
         public static int HandleCommandLine(string[] args)
         {
             var clp = new CommandLineParser { SkipCommandsWhenHelpRequested = true };

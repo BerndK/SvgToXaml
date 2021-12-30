@@ -302,8 +302,8 @@ namespace SvgConverterTest
                 Console.WriteLine();
             }
 
-            clipElements[0].Item2.ShouldBeEquivalentTo(new Rect(0,0,40,40));
-            clipElements[1].Item2.ShouldBeEquivalentTo(new Rect(0,0,45,34));
+            clipElements[0].Item2.Should().BeEquivalentTo(new Rect(0,0,40,40));
+            clipElements[1].Item2.Should().BeEquivalentTo(new Rect(0,0,45,34));
             //..
         }
 
