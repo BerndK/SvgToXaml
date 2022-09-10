@@ -1,10 +1,9 @@
-﻿using System;
+﻿using BKLib.CommandLineParser;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Xml.Linq;
-using BKLib.CommandLineParser;
 
 namespace SvgConverter
 {

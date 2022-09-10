@@ -1,115 +1,44 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B4508A49-AE03-4427-980F-15FAF7B0CC8F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SvgConverterTest</RootNamespace>
-    <AssemblyName>SvgConverterTest</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <TargetFrameworkProfile />
+	  <TargetFramework>net5.0-windows</TargetFramework>
+	  <UseWPF>true</UseWPF>
+	  <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="CommandLineParser">
-      <HintPath>..\packages\BKEDV.CommandLineParser.1.0.4.0\lib\net40\CommandLineParser.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net40\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions.Core">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net40\FluentAssertions.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="SharpVectors.Converters.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=b532964b8548be77, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Converters.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7407205e337c98ef, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Css, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7a46e3f532fdb787, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Css.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Dom, Version=1.2.0.0, Culture=neutral, PublicKeyToken=517340b6277b1a7a, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Dom.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Model, Version=1.2.0.0, Culture=neutral, PublicKeyToken=2236cfc76b505845, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Rendering.Gdi, Version=1.2.0.0, Culture=neutral, PublicKeyToken=03902092284347e3, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Rendering.Gdi.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Rendering.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=d0902381100df30e, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Rendering.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpVectors.Runtime.Wpf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=d16e717f0a981fb9, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpVectors.Reloaded.1.2.0\lib\net40\SharpVectors.Runtime.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WindowsBase" />
+    <None Remove="TestFiles\3d-view-icon.svg" />
+    <None Remove="TestFiles\cloud-3-icon.svg" />
+    <None Remove="TestFiles\Handwheel.svg" />
+    <None Remove="TestFiles\Images.html" />
+    <None Remove="TestFiles\JOG.svg" />
+    <None Remove="TestFiles\Readme.txt" />
+    <None Remove="TestFiles\Subfolder1\3d-view-b-icon.svg" />
+    <None Remove="TestFiles\Subfolder1\Handwheel.svg" />
+    <None Remove="TestFiles\Subfolder1\images.html" />
+    <None Remove="TestFiles\Subfolder1\Subfolder2\cloud-3-a-icon.svg" />
   </ItemGroup>
-  <Choose>
-    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-      </ItemGroup>
-    </When>
-    <Otherwise />
-  </Choose>
+
   <ItemGroup>
-    <Compile Include="CommandLineTests.cs" />
-    <Compile Include="FileUtilsTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConverterTests.cs" />
-    <Compile Include="SvgzTest.cs" />
-    <Compile Include="T4Methods.cs" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroup2.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_cloud-3-icon.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_JOG.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroup_3d-view-icon.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroup_cloud-3-icon.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingGroup_JOG.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingImage_3d-view-icon.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingImage_cloud-3-icon.svg.xaml" />
+    <Page Remove="TestFiles\Expected\ConvertFileToDrawingImage_JOG.svg.xaml" />
+    <Page Remove="TestFiles\Expected\Handwheel.xaml" />
+    <Page Remove="TestFiles\Expected\Handwheel1.xaml" />
+    <Page Remove="TestFiles\Expected\Handwheel2.xaml" />
+    <Page Remove="TestFiles\Expected\Handwheel3.xaml" />
+    <Page Remove="TestFiles\Expected\SvgDirToXamlTest_withNamePrefix.xaml" />
+    <Page Remove="TestFiles\Expected\SvgDirToXamlTest_withUseCompResKey.xaml" />
+    <Page Remove="TestFiles\Expected\SvgDirToXaml_with_defaultSettingsTest.xaml" />
+    <Page Remove="TestFiles\xamlUntidy.xaml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SvgConverter\SvgConverter.csproj">
-      <Project>{D1B291FE-A21B-4C27-930D-39CC2C963E13}</Project>
-      <Name>SvgConverter</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="TestFiles\3d-view-icon.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -139,106 +68,98 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="TestFiles\example.svgz">
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup2.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_cloud-3-icon.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_JOG.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_3d-view-icon.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_cloud-3-icon.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_JOG.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_3d-view-icon.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_cloud-3-icon.svg.xaml" />
+    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_JOG.svg.xaml" />
+    <None Include="TestFiles\Expected\Handwheel.xaml" />
+    <None Include="TestFiles\Expected\Handwheel1.xaml" />
+    <None Include="TestFiles\Expected\Handwheel2.xaml" />
+    <None Include="TestFiles\Expected\Handwheel3.xaml" />
+    <None Include="TestFiles\Expected\SvgDirToXamlTest_withNamePrefix.xaml" />
+    <None Include="TestFiles\Expected\SvgDirToXamlTest_withUseCompResKey.xaml" />
+    <None Include="TestFiles\Expected\SvgDirToXaml_with_defaultSettingsTest.xaml" />
+    <None Include="TestFiles\xamlUntidy.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+    <PackageReference Include="SharpVectors" Version="1.7.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SvgConverter\SvgConverter.csproj">
+      <Aliases>global</Aliases>
+      <CopyLocal>True</CopyLocal>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestFiles\example.svgz">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\xamlUntidy.xaml">
-      <SubType>Designer</SubType>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroup2.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_cloud-3-icon.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_JOG.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroup_3d-view-icon.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroup_cloud-3-icon.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingGroup_JOG.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingImage_3d-view-icon.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingImage_cloud-3-icon.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\ConvertFileToDrawingImage_JOG.svg.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\Handwheel.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\Handwheel1.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\Handwheel2.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\Handwheel3.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\SvgDirToXamlTest_withNamePrefix.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\SvgDirToXamlTest_withUseCompResKey.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\Expected\SvgDirToXaml_with_defaultSettingsTest.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\xamlUntidy.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup2.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_cloud-3-icon.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroupWithRuntime_JOG.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_3d-view-icon.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_cloud-3-icon.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingGroup_JOG.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_3d-view-icon.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_cloud-3-icon.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\ConvertFileToDrawingImage_JOG.svg.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\Handwheel.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\Handwheel1.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\Handwheel2.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\Handwheel3.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\SvgDirToXamlTest_withNamePrefix.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\SvgDirToXamlTest_withUseCompResKey.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\Expected\SvgDirToXaml_with_defaultSettingsTest.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <Choose>
-    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
-      <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <Private>False</Private>
-        </Reference>
-        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-          <Private>False</Private>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

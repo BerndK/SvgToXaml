@@ -1,18 +1,17 @@
-﻿using System;
+﻿using SharpVectors.Converters;
+using SharpVectors.Renderers.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using SharpVectors.Converters;
-using SharpVectors.Renderers.Wpf;
 
 namespace SvgConverter
 {
