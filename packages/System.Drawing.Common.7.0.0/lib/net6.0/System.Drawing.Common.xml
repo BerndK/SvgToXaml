@@ -1,0 +1,391 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Drawing.Common</name>
+    </assembly>
+    <members>
+        <member name="P:System.SR.CantTellPrinterName">
+            <summary>(printer name protected due to security restrictions)</summary>
+        </member>
+        <member name="P:System.SR.CantChangeImmutableObjects">
+            <summary>Changes cannot be made to {0} because permissions are not valid.</summary>
+        </member>
+        <member name="P:System.SR.CantMakeIconTransparent">
+            <summary>Bitmaps that are icons cannot be made transparent. Icons natively support transparency. Use the Icon constructor to create an icon.</summary>
+        </member>
+        <member name="P:System.SR.ColorNotSystemColor">
+            <summary>The color {0} is not a system color.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusAborted">
+            <summary>Function was ended.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusAccessDenied">
+            <summary>File access is denied.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusCannotCreateGraphicsFromIndexedPixelFormat">
+            <summary>A Graphics object cannot be created from an image that has an indexed pixel format.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusCannotSetPixelFromIndexedPixelFormat">
+            <summary>SetPixel is not supported for images with indexed pixel formats.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusDestPointsInvalidParallelogram">
+            <summary>Destination points define a parallelogram which must have a length of 3. These points will represent the upper-left, upper-right, and lower-left coordinates (defined in that order).</summary>
+        </member>
+        <member name="P:System.SR.GdiplusDestPointsInvalidLength">
+            <summary>Destination points must be an array with a length of 3 or 4. A length of 3 defines a parallelogram with the upper-left, upper-right, and lower-left corners. A length of 4 defines a quadrilateral with the fourth element of the array specifying the lower-rig ...</summary>
+        </member>
+        <member name="P:System.SR.GdiplusFileNotFound">
+            <summary>File not found.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusFontFamilyNotFound">
+            <summary>Font '{0}' cannot be found.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusFontStyleNotFound">
+            <summary>Font '{0}' does not support style '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusGenericError">
+            <summary>A generic error occurred in GDI+.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusInsufficientBuffer">
+            <summary>Buffer is too small (internal GDI+ error).</summary>
+        </member>
+        <member name="P:System.SR.GdiplusInvalidParameter">
+            <summary>Parameter is not valid.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusInvalidRectangle">
+            <summary>Rectangle '{0}' cannot have a width or height equal to 0.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusInvalidSize">
+            <summary>Operation requires a transformation of the image from GDI+ to GDI. GDI does not support images with a width or height greater than 32767.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusOutOfMemory">
+            <summary>Out of memory.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusNotImplemented">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusNotInitialized">
+            <summary>GDI+ is not properly initialized (internal GDI+ error).</summary>
+        </member>
+        <member name="P:System.SR.GdiplusNotTrueTypeFont">
+            <summary>Only TrueType fonts are supported. '{0}' is not a TrueType font.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusNotTrueTypeFont_NoName">
+            <summary>Only TrueType fonts are supported. This is not a TrueType font.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusObjectBusy">
+            <summary>Object is currently in use elsewhere.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusOverflow">
+            <summary>Overflow error.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusPropertyNotFoundError">
+            <summary>Property cannot be found.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusPropertyNotSupportedError">
+            <summary>Property is not supported.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusUnknown">
+            <summary>Unknown GDI+ error occurred.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusUnknownImageFormat">
+            <summary>Image format is unknown.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusUnsupportedGdiplusVersion">
+            <summary>Current version of GDI+ does not support this feature.</summary>
+        </member>
+        <member name="P:System.SR.GdiplusWrongState">
+            <summary>Bitmap region is already locked.</summary>
+        </member>
+        <member name="P:System.SR.GlobalAssemblyCache">
+            <summary>(Global Assembly Cache)</summary>
+        </member>
+        <member name="P:System.SR.GraphicsBufferCurrentlyBusy">
+            <summary>BufferedGraphicsContext cannot be disposed of because a buffer operation is currently in progress.</summary>
+        </member>
+        <member name="P:System.SR.GraphicsBufferQueryFail">
+            <summary>Screen-compatible bitmap cannot be created. The screen bitmap format cannot be determined.</summary>
+        </member>
+        <member name="P:System.SR.IconInvalidMaskLength">
+            <summary>'{0}' data length expected {1}, read {2}</summary>
+        </member>
+        <member name="P:System.SR.IllegalState">
+            <summary>Internal state of the {0} class is invalid.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsColorBlendNotSet">
+            <summary>Property must be set to a valid ColorBlend object to use interpolation colors.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsCommon">
+            <summary>{0}{1} ColorBlend objects must be constructed with the same number of positions and color values. Positions must be between 0.0 and 1.0, 1.0 indicating the last element in the array.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsInvalidColorBlendObject">
+            <summary>ColorBlend object that was set is not valid.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsInvalidStartPosition">
+            <summary>Position's first element must be equal to 0.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsInvalidEndPosition">
+            <summary>Position's last element must be equal to 1.0.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsLength">
+            <summary>Array of colors and positions must contain at least two elements.</summary>
+        </member>
+        <member name="P:System.SR.InterpolationColorsLengthsDiffer">
+            <summary>Colors and positions do not have the same number of elements.</summary>
+        </member>
+        <member name="P:System.SR.InvalidArgumentValue">
+            <summary>Value of '{1}' is not valid for '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.InvalidArgumentValueFontConverter">
+            <summary>Value of '{0}' is not valid for font size unit.</summary>
+        </member>
+        <member name="P:System.SR.InvalidBoundArgument">
+            <summary>Value of '{1}' is not valid for '{0}'. '{0}' should be greater than {2} and less than or equal to {3}.</summary>
+        </member>
+        <member name="P:System.SR.InvalidColor">
+            <summary>Color '{0}' is not valid.</summary>
+        </member>
+        <member name="P:System.SR.InvalidDashPattern">
+            <summary>DashPattern value is not valid.</summary>
+        </member>
+        <member name="P:System.SR.InvalidEx2BoundArgument">
+            <summary>Value of '{1}' is not valid for '{0}'. '{0}' should be greater than or equal to {2} and less than or equal to {3}.</summary>
+        </member>
+        <member name="P:System.SR.InvalidGDIHandle">
+            <summary>Win32 handle that was passed to {0} is not valid or is the wrong type.</summary>
+        </member>
+        <member name="P:System.SR.InvalidImage">
+            <summary>Image type is unknown.</summary>
+        </member>
+        <member name="P:System.SR.InvalidLowBoundArgumentEx">
+            <summary>Value of '{1}' is not valid for '{0}'. '{0}' must be greater than or equal to {2}.</summary>
+        </member>
+        <member name="P:System.SR.InvalidPermissionState">
+            <summary>Permission state is not valid.</summary>
+        </member>
+        <member name="P:System.SR.InvalidPictureType">
+            <summary>Argument '{0}' must be a picture that can be used as a {1}.</summary>
+        </member>
+        <member name="P:System.SR.InvalidPrinterException_InvalidPrinter">
+            <summary>Settings to access printer '{0}' are not valid.</summary>
+        </member>
+        <member name="P:System.SR.InvalidPrinterException_NoDefaultPrinter">
+            <summary>No printers are installed.</summary>
+        </member>
+        <member name="P:System.SR.InvalidPrinterHandle">
+            <summary>Handle {0} is not valid.</summary>
+        </member>
+        <member name="P:System.SR.ValidRangeX">
+            <summary>Parameter must be positive and &lt; Width.</summary>
+        </member>
+        <member name="P:System.SR.ValidRangeY">
+            <summary>Parameter must be positive and &lt; Height.</summary>
+        </member>
+        <member name="P:System.SR.NativeHandle0">
+            <summary>Native handle is 0.</summary>
+        </member>
+        <member name="P:System.SR.NoDefaultPrinter">
+            <summary>Default printer is not set.</summary>
+        </member>
+        <member name="P:System.SR.NotImplemented">
+            <summary>Not implemented.</summary>
+        </member>
+        <member name="P:System.SR.PDOCbeginPrintDescr">
+            <summary>Occurs when the document is about to be printed.</summary>
+        </member>
+        <member name="P:System.SR.PDOCdocumentNameDescr">
+            <summary>The name of the document shown to the user.</summary>
+        </member>
+        <member name="P:System.SR.PDOCdocumentPageSettingsDescr">
+            <summary>The page settings of the page currently being printed.</summary>
+        </member>
+        <member name="P:System.SR.PDOCendPrintDescr">
+            <summary>Occurs after the document has been printed.</summary>
+        </member>
+        <member name="P:System.SR.PDOCoriginAtMarginsDescr">
+            <summary>Indicates that the graphics origin is located at the user-specified page margins.</summary>
+        </member>
+        <member name="P:System.SR.PDOCprintControllerDescr">
+            <summary>Retrieves the print controller for this document.</summary>
+        </member>
+        <member name="P:System.SR.PDOCprintPageDescr">
+            <summary>Occurs once for each page to be printed.</summary>
+        </member>
+        <member name="P:System.SR.PDOCprinterSettingsDescr">
+            <summary>Retrieves the settings for the printer the document is currently being printed to.</summary>
+        </member>
+        <member name="P:System.SR.PDOCqueryPageSettingsDescr">
+            <summary>Occurs before each page is printed.  Useful for changing PageSettings for a particular page.</summary>
+        </member>
+        <member name="P:System.SR.PlatformNotSupported_Unix">
+            <summary>System.Drawing.Common is not supported on non-Windows platforms. See https://aka.ms/systemdrawingnonwindows for more information.</summary>
+        </member>
+        <member name="P:System.SR.PrintDocumentDesc">
+            <summary>Defines an object that sends output to a printer.</summary>
+        </member>
+        <member name="P:System.SR.PropertyValueInvalidEntry">
+            <summary>IDictionary parameter contains at least one entry that is not valid. Ensure all values are consistent with the object's properties.</summary>
+        </member>
+        <member name="P:System.SR.PSizeNotCustom">
+            <summary>PaperSize cannot be changed unless the Kind property is set to Custom.</summary>
+        </member>
+        <member name="P:System.SR.ResourceNotFound">
+            <summary>Resource '{1}' cannot be found in class '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.TextParseFailedFormat">
+            <summary>Text "{0}" cannot be parsed. The expected text format is "{1}".</summary>
+        </member>
+        <member name="P:System.SR.TriStateCompareError">
+            <summary>TriState.Default cannot be converted into a Boolean.</summary>
+        </member>
+        <member name="P:System.SR.toStringIcon">
+            <summary>(Icon)</summary>
+        </member>
+        <member name="P:System.SR.toStringNone">
+            <summary>(none)</summary>
+        </member>
+        <member name="P:System.SR.DCTypeInvalid">
+            <summary>GetObjectType on this dc returned an invalid value.</summary>
+        </member>
+        <member name="P:System.SR.InvalidEnumArgument">
+            <summary>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</summary>
+        </member>
+        <member name="P:System.SR.ConvertInvalidPrimitive">
+            <summary>{0} is not a valid value for {1}.</summary>
+        </member>
+        <member name="P:System.SR.BlendObjectMustHaveTwoElements">
+            <summary>Invalid Blend object. It should have at least 2 elements in each of the factors and positions arrays.</summary>
+        </member>
+        <member name="P:System.SR.BlendObjectFirstElementInvalid">
+            <summary>Invalid Blend object. The positions array must have 0.0 as its first element.</summary>
+        </member>
+        <member name="P:System.SR.BlendObjectLastElementInvalid">
+            <summary>Invalid Blend object. The positions array must have 1.0 as its last element.</summary>
+        </member>
+        <member name="P:System.SR.AvailableOnlyOnWMF">
+            <summary>{0} only available on WMF files.</summary>
+        </member>
+        <member name="P:System.SR.CannotCreateGraphics">
+            <summary>Cannot create Graphics from an indexed bitmap.</summary>
+        </member>
+        <member name="P:System.SR.CouldNotOpenDisplay">
+            <summary>Could not open display (X-Server required. Check your DISPLAY environment variable)</summary>
+        </member>
+        <member name="P:System.SR.CouldntFindSpecifiedFile">
+            <summary>Couldn't find specified file.</summary>
+        </member>
+        <member name="P:System.SR.IconInstanceWasDisposed">
+            <summary>Icon instance was disposed.</summary>
+        </member>
+        <member name="P:System.SR.InvalidGraphicsUnit">
+            <summary>Invalid GraphicsUnit</summary>
+        </member>
+        <member name="P:System.SR.InvalidThumbnailSize">
+            <summary>Invalid thumbnail size</summary>
+        </member>
+        <member name="P:System.SR.NoCodecAvailableForFormat">
+            <summary>No codec available for format:{0}</summary>
+        </member>
+        <member name="P:System.SR.NotImplementedUnderX11">
+            <summary>Operation not implemented under X11</summary>
+        </member>
+        <member name="P:System.SR.none">
+            <summary>(none)</summary>
+        </member>
+        <member name="P:System.SR.NoValidIconImageFound">
+            <summary>No valid icon image found</summary>
+        </member>
+        <member name="P:System.SR.NullOrEmptyPath">
+            <summary>Null or empty path.</summary>
+        </member>
+        <member name="P:System.SR.NumberOfPointsAndTypesMustBeSame">
+            <summary>Invalid parameter passed. Number of points and types must be same.</summary>
+        </member>
+        <member name="P:System.SR.ObjectDisposed">
+            <summary>Object has been disposed.</summary>
+        </member>
+        <member name="P:System.SR.ValueLessThenZero">
+            <summary>The value of the {0} property is less than zero.</summary>
+        </member>
+        <member name="P:System.SR.ValueNotOneOfValues">
+            <summary>The value of the {0} property is not one of the {1} values</summary>
+        </member>
+        <member name="P:System.SR.TargetDirectoryDoesNotExist">
+            <summary>The directory {0} of the filename {1} does not exist.</summary>
+        </member>
+        <member name="P:System.SR.SystemDrawingCommon_PlatformNotSupported">
+            <summary>System.Drawing.Common is not supported on this platform.</summary>
+        </member>
+        <member name="T:System.Runtime.InteropServices.LibraryImportAttribute">
+            <summary>
+            Attribute used to indicate a source generator should create a function for marshalling
+            arguments instead of relying on the runtime to generate an equivalent marshalling function at run-time.
+            </summary>
+            <remarks>
+            This attribute is meaningless if the source generator associated with it is not enabled.
+            The current built-in source generator only supports C# and only supplies an implementation when
+            applied to static, partial, non-generic methods.
+            </remarks>
+        </member>
+        <member name="M:System.Runtime.InteropServices.LibraryImportAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.LibraryImportAttribute"/>.
+            </summary>
+            <param name="libraryName">Name of the library containing the import.</param>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.LibraryName">
+            <summary>
+            Gets the name of the library containing the import.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.EntryPoint">
+            <summary>
+            Gets or sets the name of the entry point to be called.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshalling">
+            <summary>
+            Gets or sets how to marshal string arguments to the method.
+            </summary>
+            <remarks>
+            If this field is set to a value other than <see cref="F:System.Runtime.InteropServices.StringMarshalling.Custom" />,
+            <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType" /> must not be specified.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> used to control how string arguments to the method are marshalled.
+            </summary>
+            <remarks>
+            If this field is specified, <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshalling" /> must not be specified
+            or must be set to <see cref="F:System.Runtime.InteropServices.StringMarshalling.Custom" />.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.SetLastError">
+            <summary>
+            Gets or sets whether the callee sets an error (SetLastError on Windows or errno
+            on other platforms) before returning from the attributed method.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.InteropServices.StringMarshalling">
+            <summary>
+            Specifies how strings should be marshalled for generated p/invokes
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Custom">
+            <summary>
+            Indicates the user is suppling a specific marshaller in <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType"/>.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Utf8">
+            <summary>
+            Use the platform-provided UTF-8 marshaller.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Utf16">
+            <summary>
+            Use the platform-provided UTF-16 marshaller.
+            </summary>
+        </member>
+    </members>
+</doc>
