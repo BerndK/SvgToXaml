@@ -6,7 +6,7 @@
         xmlns:viewModels="clr-namespace:SvgToXaml.ViewModels"
         xmlns:textViewer="clr-namespace:SvgToXaml.TextViewer"
         mc:Ignorable="d" 
-        Title="{Binding Filename}" Height="375" Width="300"
+        Title="{Binding Filename}" Height="500" Width="400"
         d:DataContext="{x:Static viewModels:SvgImageViewModel.DesignInstance}">
     <Grid>
         <TabControl TabStripPlacement="Bottom">
@@ -14,7 +14,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="#FF00008A" Margin="2">
                         <Image x:Name="Image" Source="{Binding PreviewSource}" Stretch="Uniform">
@@ -52,6 +52,24 @@
                             <TextBlock Text="Stretch" Foreground="Blue" TextDecorations="Underline" TextAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="ToggleStretchClicked"/>
                             <TextBlock Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" Text="{Binding ElementName=Image, Path=Stretch}"/>
                         </Grid>
+                        <StackPanel Orientation="Vertical">
+                            <ComboBox x:Name="cbIconSize">
+                                <ComboBoxItem Content="16x16" Tag="16"/>
+                                <ComboBoxItem Content="32x32" Tag="32"/>
+                                <ComboBoxItem Content="64x64" Tag="64"/>
+                                <ComboBoxItem Content="128x128" Tag="128"/>
+                                <ComboBoxItem Content="256x256" Tag="256"/>
+                                <ComboBoxItem Content="512x512" Tag="512"  IsSelected="True"/>
+                                <ComboBoxItem Content="1024x1024" Tag="1024"/>
+                            </ComboBox>
+                            <Button
+                                x:Name="btnGenerateIcon"
+                                Padding="3"
+                                Click="btnGenerateIcon_Click"
+                                >
+                                Save to .ICO...
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </TabItem>

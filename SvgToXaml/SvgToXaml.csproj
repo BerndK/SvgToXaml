@@ -51,6 +51,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +77,7 @@
     <Compile Include="DetailWindow.xaml.cs">
       <DependentUpon>DetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MakeIcon\MakeIcon.cs" />
     <Compile Include="Infrastructure\InvertableBooleanToVisibilityConverter.cs" />
     <Compile Include="Infrastructure\HConsoleHelper.cs" />
     <Compile Include="Infrastructure\DispatcherExtensions.cs" />
