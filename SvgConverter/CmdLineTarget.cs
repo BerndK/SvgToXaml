@@ -50,7 +50,7 @@ namespace SvgConverter
             };
 
             File.WriteAllText(outFileName, ConverterLogic.SvgDirToXaml(inputdir, resKeyInfo, null, filterPixelsPerDip, handleSubFolders));
-            Console.WriteLine("xaml written to: {0}", outFileName);
+            Console.WriteLine("xaml written to: {0}", Path.GetFullPath(outFileName));
 
             if (buildhtmlfile)
             {

@@ -436,7 +436,7 @@ namespace SvgConverter
             var clipElement = GetClipElement(drawingElement, out clipRect);
             if (clipElement != null && clipElement.Parent.Name.LocalName == "DrawingGroup")
             {   //add Attribute: ClipGeometry="M0,0 V40 H40 V0 H0 Z" this is the description of a rectangle-like Geometry
-                clipElement.Parent.Add(new XAttribute("ClipGeometry", string.Format(CultureInfo.InvariantCulture, "M{0},{1} V{2} H{3} V{0} H{1} Z", clipRect.Left, clipRect.Top, clipRect.Bottom, clipRect.Right)));
+                clipElement.Parent.Add(new XAttribute("ClipGeometry", string.Format(CultureInfo.InvariantCulture, "M{0},{1} V{2} H{3} V{1} H{0} Z", clipRect.Left, clipRect.Top, clipRect.Bottom, clipRect.Right)));
                 //delete the old Element
                 clipElement.Remove();
             }
